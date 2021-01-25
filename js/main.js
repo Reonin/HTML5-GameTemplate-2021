@@ -5,6 +5,7 @@ import { Enemy } from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
 import { setUpKeys } from './setUpKeys.js';
 import { mapArray } from './mapArray.js';
+import draw from '../draw.js'
 // import { collisionDetection } from './collisionDetection.js';
 
 scaletosmallest(canvasid, ratio);

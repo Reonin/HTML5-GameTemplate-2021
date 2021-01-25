@@ -1,4 +1,3 @@
-
 /** * Parallax background tutorial http://javacoffee.de/?p=866 * */
 // Parallax background
 
@@ -8,55 +7,53 @@
     * @param x <int> X coordinate
     * @param Y </int><int> Y coordinate
     */
-   function Layer(s, x, y) {
-    this.img = new Image();
-    this.img.src = s;
-    this.x = x;
-    this.y = y;
-  }
-  
-  
+function Layer(s, x, y) {
+  this.img = new Image();
+  this.img.src = s;
+  this.x = x;
+  this.y = y;
+}
 
 /**
     * Main ParallaxScrolling class
     * @param ctx <context> Canvas context
     * @param imgdata <array> Array with absolute image paths
     */
-   function ParallaxScrolling(canvas, imgdata) {
-    const self = this;
-    if (typeof imgdata === 'undefined') {
-      imgdata = []; // fill it with paths to images for the parralax
-    }
-    this.canvas = canvas;
-  
-    // Initialize the layers
-    this.layers = new Array(imgdata.length);
-    for ( var i = 0; i < imgdata.length; i++) {
-      this.layers[i] = new Layer(imgdata[i], 0, 0);
-    }
-  
-    // Function: Move all layer except the first one
-    this.Move = function () {
-      for (let i = 1; i < self.layers.length; i++) {
-        if (self.layers[i].x > self.layers[i].img.width) self.layers[i].x = 0;
-        self.layers[i].x += i;
-      }
-    };
-  
-    // Function: Draw all layer in the canvas
-    this.Draw = function () {
-      self.Move();
-      for (let i = 0; i < self.layers.length; i++) {
-        const x1 = (self.layers[i].x - self.layers[i].img.width);
-        self.canvas.drawImage(self.layers[i].img, 0, 0, self.layers[i].img.width, self.layers[i].img.height,
-          self.layers[i].x, 0, self.layers[i].img.width, self.layers[i].img.height);
-        self.canvas.drawImage(self.layers[i].img, 0, 0, self.layers[i].img.width, self.layers[i].img.height,
-          x1, 0, self.layers[i].img.width, self.layers[i].img.height);
-      }
-    };
+function ParallaxScrolling(canvas, imgdata) {
+  const self = this;
+  if (typeof imgdata === 'undefined') {
+    imgdata = []; // fill it with paths to images for the parralax
   }
-  
-function draw() { // Draws objects to the canvas
+  this.canvas = canvas;
+
+  // Initialize the layers
+  this.layers = new Array(imgdata.length);
+  for (let i = 0; i < imgdata.length; i++) {
+    this.layers[i] = new Layer(imgdata[i], 0, 0);
+  }
+
+  // Function: Move all layer except the first one
+  this.Move = function () {
+    for (let i = 1; i < self.layers.length; i++) {
+      if (self.layers[i].x > self.layers[i].img.width) self.layers[i].x = 0;
+      self.layers[i].x += i;
+    }
+  };
+
+  // Function: Draw all layer in the canvas
+  this.Draw = function () {
+    self.Move();
+    for (let i = 0; i < self.layers.length; i++) {
+      const x1 = (self.layers[i].x - self.layers[i].img.width);
+      self.canvas.drawImage(self.layers[i].img, 0, 0, self.layers[i].img.width, self.layers[i].img.height,
+        self.layers[i].x, 0, self.layers[i].img.width, self.layers[i].img.height);
+      self.canvas.drawImage(self.layers[i].img, 0, 0, self.layers[i].img.width, self.layers[i].img.height,
+        x1, 0, self.layers[i].img.width, self.layers[i].img.height);
+    }
+  };
+}
+
+export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
@@ -72,7 +69,7 @@ function draw() { // Draws objects to the canvas
     canvas.fillStyle = '#000'; // Set color to black
     canvas.font = 'bold 40pt Calibri';
     const GAME_NAME_TEXT = 'GAME NAME';
-    gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
+    const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
     canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) - 3, CANVAS_HEIGHT / 3);
     // The next two create a special text effect
     canvas.fillStyle = '#F00';
@@ -84,7 +81,7 @@ function draw() { // Draws objects to the canvas
     canvas.fillStyle = '#F00';
     canvas.font = 'bold 20pt Calibri';
     const SPACEBAR_TEXT = 'Press Space to Continue';
-    spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
+    const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
     canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
   }
   const layer = new Array('images/space-wall.jpg', 'images/planet.png');
