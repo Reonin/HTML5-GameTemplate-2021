@@ -2,7 +2,7 @@ import { scaletosmallest } from './scaletosmallest.js';
 import { Bullet } from './Bullet.js';
 import { Missile } from './Missile.js';
 import { Enemy } from './Enemy.js';
-import { collides } from './collisionBox.js';
+import { handleCollisions } from './handleCollisions.js';
 import { setUpKeys } from './setUpKeys.js';
 import { mapArray } from './mapArray.js';
 // import { collisionDetection } from './collisionDetection.js';
@@ -349,32 +349,7 @@ window.playerMissiles = [];
 
 window.enemies = [];
 
-function handleCollisions() {
-  window.playerBullets.forEach((bullet) => {
-    window.enemies.forEach((enemy) => {
-      if (collides(bullet, enemy)) {
-        enemy.explode();
-        bullet.active = false;
-      }
-    });
-  });
 
-  window.playerMissiles.forEach((Missile) => {
-    window.enemies.forEach((enemy) => {
-      if (collides(Missile, enemy)) {
-        enemy.explode();
-        Missile.active = false;
-      }
-    });
-  });
-
-  window.enemies.forEach((enemy) => {
-    if (collides(enemy, player)) {
-      enemy.explode();
-      player.lifeChange(-10);
-    }
-  });
-}
 
 function controller() {
   // Pause the game
