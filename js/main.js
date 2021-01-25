@@ -1,6 +1,6 @@
-import { scaletosmallest } from './scaletosmallest.js';
-import { Bullet } from './Bullet.js';
-import { Missile } from './Missile.js';
+import scaletosmallest from './scaletosmallest.js';
+import Bullet from './Bullet.js';
+import Missile from './Missile.js';
 import { Enemy } from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
 import { setUpKeys } from './setUpKeys.js';
@@ -346,10 +346,7 @@ const endTextY = 0;
 
 window.playerMissiles = [];
 
-
 window.enemies = [];
-
-
 
 function controller() {
   // Pause the game

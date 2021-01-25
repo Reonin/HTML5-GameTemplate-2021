@@ -1,4 +1,4 @@
-export class Missile {
+class Missile {
   constructor(speed, x, y) {
     I.active = true;
 
@@ -27,6 +27,8 @@ export class Missile {
       I.y += I.mousePosY + I.yVelocity;
 
       I.active = I.active && I.inBounds();
-    }
+    };
   }
 }
+
+export default Missile;
