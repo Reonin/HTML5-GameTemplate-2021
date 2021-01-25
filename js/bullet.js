@@ -13,7 +13,6 @@ export class Bullet {
         I.color = '#000';
       
         I.inBounds = function () {
-            debugger;
           return I.x >= 0 && I.x <= CANVAS_WIDTH
                      && I.y >= 0 && I.y <= CANVAS_HEIGHT;
         };
