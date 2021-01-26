@@ -1,6 +1,5 @@
 export default function scaletosmallest(canvasElement, ratio) {
-  /** By Ryan Giglio */
-  if ((window.innerWidth / ratio) <= window.innerHeight) {
+  if ( ($(window).width() / ratio) <= $(window).width() ) {
     canvasElement.style.width = '100%';
     canvasElement.style.height = 'auto';
   } else {
