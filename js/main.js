@@ -1,17 +1,20 @@
 import scaletosmallest from './scaletosmallest.js';
+import { GameLoopMusic_sound, explosion_sound, shoot_sound } from './initAudio.js';
 import Bullet from './Bullet.js';
 import Missile from './Missile.js';
 import { Enemy } from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
 import { setUpKeys } from './setUpKeys.js';
 import { mapArray } from './mapArray.js';
-import draw from '../draw.js'
+import draw from '../draw.js';
 // import { collisionDetection } from './collisionDetection.js';
 
 scaletosmallest(canvasid, ratio);
 $(window).on('resize', () => {
   scaletosmallest(canvasid, ratio);
 });
+
+// initialize Audio
 
 // Draw tile map
 drawMap(canvas);
