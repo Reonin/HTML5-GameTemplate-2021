@@ -1,3 +1,4 @@
+import { explosion_sound } from './initAudio.js';
 export class Enemy {
   constructor() {
     const I = this || {};

@@ -1,5 +1,5 @@
 import scaletosmallest from './scaletosmallest.js';
-import { GameLoopMusic_sound, explosion_sound, shoot_sound } from './initAudio.js';
+import { GameLoopMusic_sound, explosion_sound, shoot_sound } from './initAudio.js'; // initialize Audio
 import Bullet from './Bullet.js';
 import Missile from './Missile.js';
 import { Enemy } from './Enemy.js';
@@ -13,8 +13,6 @@ scaletosmallest(canvasid, ratio);
 $(window).on('resize', () => {
   scaletosmallest(canvasid, ratio);
 });
-
-// initialize Audio
 
 // Draw tile map
 drawMap(canvas);
@@ -304,36 +302,26 @@ function update() { // Updates location and reaction of objects to the canvas
     }
   }
 }
+setUpKeys();
 
-function gameloop() {
-  controller();
-  if (paused == false) {
+let isPaused = false;
+
+function Start() {
+  if (!isPaused) {
     update();
     draw();
   }
-  window.requestAnimFrame(gameloop);
+
+  window.requestAnimFrame(Start);
 }
 
-var paused = false;
-
-window.requestAnimFrame(gameloop);
-
-setUpKeys();
-
-let notyet = 0;
-function clearTimer() {
-  notyet = 0;
-}
-
-function pauseGame() {
-  if (notyet == 1) {
-    console.log('waiting');
-    return;
+window.onkeydown = function () {
+  if (keydown.p) {
+    isPaused = !isPaused; // flips the pause state
   }
-  notyet = 1;
-  paused = !paused;
-  setTimeout(clearTimer(), 2000);
-}
+};
+
+Start();
 
 // console.log(keydown.esc);
 
@@ -351,11 +339,3 @@ const endTextY = 0;
 window.playerMissiles = [];
 
 window.enemies = [];
-
-function controller() {
-  // Pause the game
-  if (keydown.p) {
-    pauseGame();
-    console.log(paused);
-  }
-}
