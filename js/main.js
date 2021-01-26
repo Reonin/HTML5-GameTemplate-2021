@@ -1,9 +1,8 @@
 import scaletosmallest from './scaletosmallest.js';
-import { GameLoopMusic_sound, explosion_sound, shoot_sound } from './initAudio.js'; // initialize Audio
-import Bullet from './Bullet.js';
-import Missile from './Missile.js';
+import { GameLoopMusic_sound } from './initAudio.js'; // initialize Audio
 import { Enemy } from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
+import Player from './player.js';
 import { setUpKeys } from './setUpKeys.js';
 import { mapArray } from './mapArray.js';
 import draw from '../draw.js';
@@ -145,58 +144,8 @@ function drawMap(canvas) {
   return tileArray;
 }
 
-// Create The player
-window.player = {
-  // color: "#00A",
-  sprite: Sprite('spaceship'),
-  x: 220,
-  y: 680,
-  width: 32,
-  height: 32,
-  life: 100,
-  velX: 0,
-  velY: 0,
-  speed: 4,
-  friction: 0.85,
-  draw() {
-    // canvas.fillStyle = this.color;
-    // canvas.fillRect(this.x, this.y, this.width, this.height);
-    this.sprite.draw(canvas, this.x, this.y);
-  },
-  shoot() {
-    const bulletPosition = this.midpoint();
-    shoot_sound.play();
+window.player = new Player();
 
-    window.playerBullets.push(new Bullet(5, bulletPosition.x, bulletPosition.y));
-  },
-  launch() {
-    const missilePostition = this.midpoint();
-    console.log(Missile.width);
-    window.playerMissiles.push(new Missile(2, missilePostition.x - 500, missilePostition.y));
-  },
-  midpoint() {
-    return {
-      x: this.x + this.width / 2,
-      y: this.y + this.height / 2,
-    };
-  },
-  explode() {
-    this.active = false;
-    explosion_sound.play();
-    GameLoopMusic_sound.fadeOut(0, 2000);
-    window.currentState = window.states.End;
-    // An explosion sound and then end the game
-  },
-  lifeChange(change) {
-    this.life += change; // Adds or subtracts health based on the value added in the function
-
-    if (this.life <= 0) {
-      this.explode();
-    }
-
-    return this.life;
-  },
-};
 window.playerBullets = [];
 
 const context = canvas;
@@ -303,8 +252,13 @@ function update() { // Updates location and reaction of objects to the canvas
   }
 }
 setUpKeys();
-
 let isPaused = false;
+window.onkeydown = () => {
+    if (keydown.p) {
+      isPaused = !isPaused; // flips the pause state
+    }
+  };
+
 
 function Start() {
   if (!isPaused) {
@@ -314,12 +268,6 @@ function Start() {
 
   window.requestAnimFrame(Start);
 }
-
-window.onkeydown = function () {
-  if (keydown.p) {
-    isPaused = !isPaused; // flips the pause state
-  }
-};
 
 Start();
 
