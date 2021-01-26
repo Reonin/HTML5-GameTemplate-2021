@@ -1,3 +1,6 @@
+/**
+ * Creates a Projectile that follows the position of the mouse
+ */
 class Missile {
   constructor(speed, x, y) {
     I.active = true;

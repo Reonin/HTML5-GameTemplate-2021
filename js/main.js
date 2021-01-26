@@ -4,7 +4,7 @@ import { Enemy } from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
 import Player from './player.js';
 import { setUpKeys } from './setUpKeys.js';
-import { mapArray } from './mapArray.js';
+import drawMap from './drawMap.js';
 import draw from '../draw.js';
 // import { collisionDetection } from './collisionDetection.js';
 
@@ -16,7 +16,6 @@ $(window).on('resize', () => {
 // Draw tile map
 drawMap(canvas);
 // Game State
-
 window.states = {
   splash: 0,
   title: 1,
@@ -28,7 +27,9 @@ window.currentState = window.states.title;
 // Game Loop
 // var FPS = 60;
 
-// shim layer with setTimeout fallback
+/**
+ * // shim layer with setTimeout fallback
+ */
 window.requestAnimFrame = (() => window.requestAnimationFrame
            || window.webkitRequestAnimationFrame
            || window.mozRequestAnimationFrame
@@ -53,102 +54,11 @@ function getMousePos(canvas, evt) {
   };
 }
 
-function drawMap(canvas) {
-  const background = canvas;
-  for (let i = 0; i < mapArray.length; i++) {
-    for (let j = 0; j < mapArray[i].length; j++) {
-      if (parseInt(mapArray[i][j]) == 0) {
-        var newTile = {
-          // color: "#00A",
-          tile: Tile('emptyTile'),
-          x: j * 60,
-          y: i * 60,
-          width:	60,
-          height: 60,
-          type: 'floor',
-          draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
-          },
-        };
 
-        tileArray.push(newTile);
-        // console.log(newTile.x);
-        //  <!--canvas.drawImage(image1, x*28, y*28);-->
-      }
-      if (parseInt(mapArray[i][j]) == 1) {
-        var newTile = {
-          // color: "#00A",
-          tile: Tile('redTile'),
-          x: j * 60,
-          y: i * 60,
-          width: 60,
-          height: 60,
-          type: 'wall',
-
-          draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
-          },
-        };
-        tileArray.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
-      }
-      if (parseInt(mapArray[i][j]) == 3) {
-        var newTile = {
-          // color: "#00A",
-          tile: Tile('emptyTile'),
-          x: j * 60,
-          y: i * 60,
-          width: 60,
-          height: 60,
-          type: 'player1spawn',
-
-          draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
-          },
-        };
-        tileArray.push(newTile);
-        player1spawns.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
-      }
-      if (parseInt(mapArray[i][j]) == 2) {
-        var newTile = {
-          // color: "#00A",
-          tile: Tile('emptyTile'),
-          x: j * 60,
-          y: i * 60,
-          width: 60,
-          height: 60,
-          type: 'player2spawn',
-
-          draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
-          },
-        };
-        tileArray.push(newTile);
-        player2spawns.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
-      }
-
-      // background.addChild(tile);-->
-    }
-  }
-  // canvas.addChild(background);-->
-  return tileArray;
-}
 
 window.player = new Player();
-
 window.playerBullets = [];
 
-const context = canvas;
 
 // canvasid.addEventListener('mousemove', (evt) => {
 //   mousePos = getMousePos(canvasid, evt);
@@ -251,6 +161,7 @@ function update() { // Updates location and reaction of objects to the canvas
     }
   }
 }
+
 setUpKeys();
 let isPaused = false;
 window.onkeydown = () => {

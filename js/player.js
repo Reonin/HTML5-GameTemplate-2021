@@ -1,7 +1,9 @@
 import { shoot_sound  } from './initAudio.js';
 import Bullet from './Bullet.js';
 import Missile from './Missile.js';
-// Create The player
+/**
+ * Creates the player character that the user controls
+ */
 export default class Player {
   constructor() {
     {

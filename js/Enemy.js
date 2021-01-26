@@ -1,8 +1,8 @@
 import { explosion_sound } from './initAudio.js';
+
 export class Enemy {
   constructor() {
     const I = this || {};
-
 
     I.active = true;
     I.age = Math.floor(Math.random() * 128);
