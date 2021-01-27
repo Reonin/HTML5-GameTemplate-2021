@@ -1,4 +1,4 @@
-import { explosion_sound } from './initAudio.js';
+import { explosion_sound } from './utils/initAudio.js';
 
 export default class Enemy {
   constructor() {

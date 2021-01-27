@@ -1,8 +1,8 @@
-import { shoot_sound } from './initAudio.js';
-import { explosion_sound } from './initAudio.js';
-import Bullet from './Bullet.js';
-import Missile from './Missile.js';
-import {GameLoopMusic_sound} from './initAudio.js';
+import { shoot_sound } from './utils/initAudio.js';
+import { explosion_sound } from './utils/initAudio.js';
+import Bullet from './projectile/Bullet.js';
+import Missile from './projectile/Missile.js';
+import {GameLoopMusic_sound} from './utils/initAudio.js';
 /**
  * Creates the player character that the user controls
  */

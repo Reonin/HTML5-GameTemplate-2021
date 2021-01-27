@@ -1,10 +1,10 @@
-import scaletosmallest from './scaletosmallest.js';
+import scaletosmallest from './utils/scaletosmallest.js';
 import Player from './player.js';
-import { setUpKeys } from './setUpKeys.js';
+import { setUpKeys } from './utils/setUpKeys.js';
 import drawMap from './drawMap.js';
 import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';
-import { GameLoopMusic_sound } from './initAudio.js'; // initialize Audio
+import { GameLoopMusic_sound } from './utils/initAudio.js'; // initialize Audio
 
 import update from "./update.js";
 // import { collisionDetection } from './collisionDetection.js';

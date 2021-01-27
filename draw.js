@@ -1,4 +1,4 @@
-import { drawTimer } from './js/timer.js';
+import { drawTimer } from './js/utils/timer.js';
 
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');

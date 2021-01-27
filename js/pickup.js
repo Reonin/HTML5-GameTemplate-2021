@@ -1,4 +1,4 @@
-import { pickup_sound } from './initAudio.js';
+import { pickup_sound } from './utils/initAudio.js';
 
 export default class Pickup {
   constructor() {
