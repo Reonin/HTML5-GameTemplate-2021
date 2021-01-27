@@ -6,6 +6,8 @@ import Player from './player.js';
 import { setUpKeys } from './setUpKeys.js';
 import drawMap from './drawMap.js';
 import draw from '../draw.js';
+import ParallaxScrolling from './parallax.js'
+
 // import { collisionDetection } from './collisionDetection.js';
 
 scaletosmallest(canvasid, ratio);
@@ -179,6 +181,8 @@ function Start() {
 
   window.requestAnimFrame(Start);
 }
+const layer = ['images/space-wall.jpg', 'images/planet.png'];
+window.parallax = new ParallaxScrolling(canvas, layer);
 
 Start();
 

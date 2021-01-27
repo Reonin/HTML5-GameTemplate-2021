@@ -1,4 +1,4 @@
-import { shoot_sound  } from './initAudio.js';
+import { shoot_sound } from './initAudio.js';
 import Bullet from './Bullet.js';
 import Missile from './Missile.js';
 /**
@@ -16,7 +16,7 @@ export default class Player {
       this.life = 100;
       this.velX = 0;
       this.velY = 0;
-      this. speed = 4;
+      this.speed = 4;
       this.friction = 0.85;
       this.draw = function () {
         // canvas.fillStyle = this.color;
