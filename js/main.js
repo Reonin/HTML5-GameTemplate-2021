@@ -1,12 +1,13 @@
 import scaletosmallest from './scaletosmallest.js';
 import { GameLoopMusic_sound } from './initAudio.js'; // initialize Audio
-import { Enemy } from './Enemy.js';
+import Enemy from './Enemy.js';
 import { handleCollisions } from './handleCollisions.js';
 import Player from './player.js';
 import { setUpKeys } from './setUpKeys.js';
 import drawMap from './drawMap.js';
 import draw from '../draw.js';
-import ParallaxScrolling from './parallax.js'
+import ParallaxScrolling from './parallax.js';
+import { startTimer } from './timer.js';
 
 // import { collisionDetection } from './collisionDetection.js';
 
@@ -61,6 +62,8 @@ function getMousePos(canvas, evt) {
 window.player = new Player();
 window.playerBullets = [];
 
+window.timer = '3:20';
+startTimer();
 
 // canvasid.addEventListener('mousemove', (evt) => {
 //   mousePos = getMousePos(canvasid, evt);
@@ -144,9 +147,8 @@ function update() { // Updates location and reaction of objects to the canvas
     window.enemies.forEach((enemy) => {
       enemy.update();
     });
-
+    //Garbage collect the enemies out of the array
     window.enemies = window.enemies.filter((enemy) => enemy.active);
-
     if (Math.random() < 0.1) {
       window.enemies.push(new Enemy());
     }

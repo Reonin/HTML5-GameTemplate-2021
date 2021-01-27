@@ -1,6 +1,6 @@
 import { explosion_sound } from './initAudio.js';
 
-export class Enemy {
+export default class Enemy {
   constructor() {
     const I = this || {};
 
@@ -44,6 +44,7 @@ export class Enemy {
       I.age++;
 
       I.active = I.active && I.inBounds();
+    
     };
   }
 }

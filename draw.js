@@ -1,3 +1,5 @@
+import { drawTimer } from './js/timer.js';
+
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -35,6 +37,7 @@ export default function draw() { // Draws objects to the canvas
     window.parallax.Draw(); // draw background
     window.player.draw();
 
+
     tileArray.forEach((tile) => {
       tile.draw();
     });
@@ -61,6 +64,8 @@ export default function draw() { // Draws objects to the canvas
     canvas.strokeRect(20, 20, 100 * 2, 10);
     canvas.fillStyle = '#F00';
     canvas.fillRect(20, 20, player.life * 2, 10);
+
+    drawTimer();
   }
 
   if (currentState === states.End) {
