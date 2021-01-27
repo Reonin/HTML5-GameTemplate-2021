@@ -2,6 +2,7 @@ import { shoot_sound } from './initAudio.js';
 import { explosion_sound } from './initAudio.js';
 import Bullet from './Bullet.js';
 import Missile from './Missile.js';
+import {GameLoopMusic_sound} from './initAudio.js';
 /**
  * Creates the player character that the user controls
  */
@@ -19,7 +20,8 @@ export default class Player {
       this.velY = 0;
       this.speed = 4;
       this.friction = 0.85;
-      this.draw = function () {
+      this.pointScore = 0;
+      this.draw = function () { 
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
         this.sprite.draw(canvas, this.x, this.y);
@@ -44,7 +46,7 @@ export default class Player {
       this.explode = function () {
         this.active = false;
         explosion_sound.play();
-        GameLoopMusic_sound.fadeOut(0, 2000);
+        //GameLoopMusic_sound.fadeOut(0, 2000);
         window.currentState = window.states.End;
         // An explosion sound and then end the game
       };
@@ -57,6 +59,19 @@ export default class Player {
 
         return this.life;
       };
+      this.score = function(change) {
+
+
+        this.pointScore = this.pointScore + change; //Adds or subtracts health based on the value added in the function
+
+        /*if (this.life <= 0) {
+            this.explode();
+        }*/
+
+        return this.pointScore;
+
+
+    };
     }
   }
 }

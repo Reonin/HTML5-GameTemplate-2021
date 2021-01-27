@@ -1,4 +1,4 @@
-export { GameLoopMusic_sound, explosion_sound, shoot_sound };
+export { GameLoopMusic_sound, explosion_sound, shoot_sound, pickup_sound };
 // Sound creation
 const GameLoopMusic_sound = new Howl({
   src: ['sounds/In-Orbit.mp3'],

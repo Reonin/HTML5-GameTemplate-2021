@@ -55,6 +55,12 @@ export default function draw() { // Draws objects to the canvas
       enemy.draw();
     });
 
+    //PowerUp Draw
+    pickups.forEach(function(pickup) {
+      pickup.draw();
+  });
+
+
     // Life Bar top is pink static background
     canvas.strokeRect(20, 20, 100 * 2, 10);
     canvas.fillStyle = '#8B8989';
