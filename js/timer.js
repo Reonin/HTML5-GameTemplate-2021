@@ -18,7 +18,7 @@ function checkSecond(sec) {
 }
 
 export function drawTimer() {
-  canvas.fillStyle = '#000'; // Set color to black
+  canvas.fillStyle = '#fff'; // Set color to black
   canvas.font = 'bold 40pt Calibri';
   const GAME_NAME_TEXT = window.timer;
   const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
