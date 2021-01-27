@@ -62,8 +62,8 @@ function getMousePos(canvas, evt) {
 window.player = new Player();
 window.playerBullets = [];
 
-window.timer = '3:20';
-startTimer();
+window.timer = '5:10';
+
 
 // canvasid.addEventListener('mousemove', (evt) => {
 //   mousePos = getMousePos(canvasid, evt);
@@ -84,6 +84,7 @@ function update() { // Updates location and reaction of objects to the canvas
   if (window.currentState === window.states.title) {
     if (keydown.space) {
       window.currentState = window.states.Game;
+      startTimer();
     }
   }
 
