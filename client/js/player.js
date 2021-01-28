@@ -88,6 +88,7 @@ this.explode();
 
       this.movement = function (left, right, up, down) {
         // debugger;
+        
         this.isMoving = false;
         if (alias == 'player1') {
           left = keydown.left;
@@ -115,7 +116,7 @@ this.explode();
           if (this.velX > -this.speed) {
             this.velX--;
             this.isMoving = true;
-            window.bufferHoriz+= 1;
+            if(this.velX !== 0)window.bufferHoriz+= window.panVal;
           }
         }
 
@@ -123,7 +124,7 @@ this.explode();
           if (this.velX < this.speed) {
             this.velX++;
             this.isMoving = true;
-            window.bufferHoriz-= 1;
+           if(this.velX !== 0) window.bufferHoriz-= window.panVal;
           }
         }
 
@@ -131,7 +132,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
-            window.bufferVert+= 5;
+            window.bufferVert+= window.panVal;
           }
         }
 
@@ -139,7 +140,7 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
-            window.bufferVert-= 5;
+            window.bufferVert-= window.panVal;
           }
         }
 

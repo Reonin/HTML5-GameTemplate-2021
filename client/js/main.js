@@ -122,3 +122,4 @@ window.enemies = [];
 window.pickups = [];
 window.bufferHoriz = 0;
 window.bufferVert = 0;
+window.panVal = 5;

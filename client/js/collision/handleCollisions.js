@@ -41,18 +41,23 @@ export default function handleCollisions() {
         if (collides(tile, player)) {
           // console.log(tile);
           if (player.velX < 0) {
+            
+             window.bufferHoriz-= window.panVal;
             if (player.x > tile.x) {
               // console.log("left stop");
               player.x += player.speed;
               player.velX = 0;
+              
             }
           }
 
           if (player.velX > 0) {
+             window.bufferHoriz+= window.panVal;
             if (player.x < tile.x) {
               // console.log("right stop");
               player.x -= player.speed;
               player.velX = 0;
+            
             }
           }
 
