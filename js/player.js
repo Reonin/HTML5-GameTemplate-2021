@@ -25,6 +25,7 @@ export default class Player {
       this.name = name;
       this.aka = alias;
       this.color = color;
+      this.isMoving = true;
       this.draw = function () {
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -75,12 +76,17 @@ export default class Player {
 
       this.movement = function (left, right, up, down) {
         // debugger;
+        this.isMoving = false;
         if (alias == 'player1') {
           left = keydown.left;
           right = keydown.right;
           up = keydown.up;
           down = keydown.down;
         }
+        // if(alias == 'player1' && keyup.left ){
+        //   this.isMoving = false;
+        // }
+
         if (alias == 'player2') {
           left = keydown.a;
           right = keydown.d;
@@ -96,24 +102,28 @@ export default class Player {
         if (left) {
           if (this.velX > -this.speed) {
             this.velX--;
+            this.isMoving = true;
           }
         }
 
         if (right) {
           if (this.velX < this.speed) {
             this.velX++;
+            this.isMoving = true;
           }
         }
 
         if (up) {
           if (this.velY > -this.speed) {
             this.velY--;
+            this.isMoving = true;
           }
         }
 
         if (down) {
           if (this.velY < this.speed) {
             this.velY++;
+            this.isMoving = true;
           }
         }
 

@@ -34,7 +34,7 @@ export default function draw() { // Draws objects to the canvas
   }
 
   if (currentState === states.Game) {
-    window.parallax.Draw(); // draw background
+    
     window.playerArray.forEach((p) => {
       p.draw();
     });
@@ -59,6 +59,14 @@ export default function draw() { // Draws objects to the canvas
     // PowerUp Draw
     pickups.forEach((pickup) => {
       pickup.draw();
+    });
+    window.parallax.Draw(); // draw background
+
+    window.playerArray.forEach((p) => {
+      if(p.isMoving == true){
+        p.draw();
+      }
+   
     });
 
     drawPlayerUI();

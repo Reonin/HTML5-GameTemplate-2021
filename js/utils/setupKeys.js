@@ -1,6 +1,7 @@
 // Keyboard Map
 export function setUpKeys() {
     window.keydown = {};
+    window.keyup = {};
   
     function keyName(event) {
       return jQuery.hotkeys.specialKeys[event.which]

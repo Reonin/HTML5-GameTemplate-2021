@@ -85,7 +85,7 @@ function Start() {
 
   window.requestAnimFrame(Start);
 }
-const layer = ['images/space-wall.jpg', 'images/planet.png'];
+const layer = ['images/blackOverlay.png', 'images/blackOverlay.png'];
 window.parallax = new ParallaxScrolling(canvas, layer);
 
 Start();
