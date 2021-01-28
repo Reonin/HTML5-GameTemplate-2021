@@ -3,6 +3,7 @@
  */
 class Missile {
   constructor(speed, x, y) {
+    const I = this;
     I.active = true;
 
     I.xVelocity = 0;

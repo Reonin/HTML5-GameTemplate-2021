@@ -21,44 +21,15 @@ export default function update() { // Updates location and reaction of objects t
   }
 
   if (window.currentState === window.states.Game) {
-    // window.player Movement Controls
-    if (keydown.left) {
-      if (window.player.velX > -window.player.speed) {
-        window.player.velX--;
-      }
-    }
-
-    if (keydown.right) {
-      if (window.player.velX < window.player.speed) {
-        window.player.velX++;
-      }
-    }
-
-    if (keydown.up) {
-      if (window.player.velY > -window.player.speed) {
-        window.player.velY--;
-      }
-    }
-
-    if (keydown.down) {
-      if (window.player.velY < window.player.speed) {
-        window.player.velY++;
-      }
-    }
-
-    window.player.velX *= window.player.friction;
-    window.player.x += window.player.velX;
-    window.player.velY *= window.player.friction;
-    window.player.y += window.player.velY;
-    // prevents character from going past canvas
-    window.player.x = window.player.x.clamp(0, CANVAS_WIDTH - window.player.width);
-    // prevents character from going past canvas
-    window.player.y = window.player.y.clamp(0, CANVAS_HEIGHT - window.player.height);
+    // Player Movement Controls
+    window.playerArray.forEach((p) => {
+      p.movement();
+    });
 
     // window.player actions
-    if (keydown.space) {
-      window.player.shoot();
-    }
+    // if (keydown.space) {
+    //   window.player.shoot();
+    // }
 
     window.playerBullets.forEach((bullet) => {
       bullet.update();
@@ -76,15 +47,15 @@ export default function update() { // Updates location and reaction of objects t
 
     playerMissiles = playerMissiles.filter((Missile) => Missile.active);
 
-    // Enemy Update logic
-    window.enemies.forEach((enemy) => {
-      enemy.update();
-    });
-    // Garbage collect the enemies out of the array
-    window.enemies = window.enemies.filter((enemy) => enemy.active);
-    if (Math.random() < 0.05) {
-      window.enemies.push(new Enemy());
-    }
+    // // Enemy Update logic
+    // window.enemies.forEach((enemy) => {
+    //   enemy.update();
+    // });
+    // // Garbage collect the enemies out of the array
+    // window.enemies = window.enemies.filter((enemy) => enemy.active);
+    // if (Math.random() < 0.05) {
+    //   window.enemies.push(new Enemy());
+    // }
 
     // Powerup Update logic
     window.pickups.forEach((pickup) => {

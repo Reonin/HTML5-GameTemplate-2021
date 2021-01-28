@@ -6,7 +6,7 @@ import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';
 import { GameLoopMusic_sound } from './utils/initAudio.js'; // initialize Audio
 
-import update from "./update.js";
+import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
 
 scaletosmallest(canvasid, ratio);
@@ -55,7 +55,10 @@ function getMousePos(canvas, evt) {
   };
 }
 
-window.player = new Player();
+window.player = new Player('spaceship', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 100, 680);
+window.player2 = new Player('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 200, 680);
+window.player3 = new Player('redShip', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 300, 680);
+
 window.playerBullets = [];
 
 window.timer = '5:10';
@@ -65,7 +68,6 @@ window.timer = '5:10';
 //   const message = `Mouse position: ${mousePos.x},${mousePos.y}`;
 //   writeMessage(canvas, message);
 // }, false);
-
 
 setUpKeys();
 let isPaused = false;
@@ -101,6 +103,7 @@ const splashTextY = 0;
 const endTextX = CANVAS_WIDTH / 3;
 const endTextY = 0;
 
+window.playerArray = [window.player, window.player2, window.player3];
 window.playerMissiles = [];
 
 window.enemies = [];

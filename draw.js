@@ -1,4 +1,5 @@
 import { drawTimer } from './js/utils/timer.js';
+import drawPlayerUI from './js/utils/drawPlayerUI.js';
 
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
@@ -32,15 +33,15 @@ export default function draw() { // Draws objects to the canvas
     canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
   }
 
-
   if (currentState === states.Game) {
     window.parallax.Draw(); // draw background
-    window.player.draw();
-
-
-    tileArray.forEach((tile) => {
-      tile.draw();
+    window.playerArray.forEach((p) => {
+      p.draw();
     });
+
+    // tileArray.forEach((tile) => {
+    //   tile.draw();
+    // });
 
     window.playerBullets.forEach((bullet) => {
       bullet.draw();
@@ -50,26 +51,17 @@ export default function draw() { // Draws objects to the canvas
       missle.draw();
     });
 
-    // Enemy Draw
-    enemies.forEach((enemy) => {
-      enemy.draw();
+    // // Enemy Draw
+    // enemies.forEach((enemy) => {
+    //   enemy.draw();
+    // });
+
+    // PowerUp Draw
+    pickups.forEach((pickup) => {
+      pickup.draw();
     });
 
-    //PowerUp Draw
-    pickups.forEach(function(pickup) {
-      pickup.draw();
-  });
-
-
-    // Life Bar top is pink static background
-    canvas.strokeRect(20, 20, 100 * 2, 10);
-    canvas.fillStyle = '#8B8989';
-    canvas.fillRect(20, 20, 100 * 2, 10);
-
-    // Second bar is red dynamic one
-    canvas.strokeRect(20, 20, 100 * 2, 10);
-    canvas.fillStyle = '#F00';
-    canvas.fillRect(20, 20, player.life * 2, 10);
+    drawPlayerUI();
 
     drawTimer();
   }

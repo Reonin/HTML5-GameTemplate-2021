@@ -1,18 +1,18 @@
-import { shoot_sound } from './utils/initAudio.js';
-import { explosion_sound } from './utils/initAudio.js';
+import { shoot_sound, explosion_sound, GameLoopMusic_sound } from './utils/initAudio.js';
+
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
-import {GameLoopMusic_sound} from './utils/initAudio.js';
+
 /**
  * Creates the player character that the user controls
  */
 export default class Player {
-  constructor() {
+  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY) {
     {
       // color: "#00A",
-      this.sprite = Sprite('spaceship');
-      this.x = 220;
-      this.y = 680;
+      this.sprite = Sprite(spriteimg);
+      this.x = startingX;
+      this.y = startingY;
       this.width = 32;
       this.height = 32;
       this.life = 100;
@@ -21,7 +21,11 @@ export default class Player {
       this.speed = 4;
       this.friction = 0.85;
       this.pointScore = 0;
-      this.draw = function () { 
+      this.order = order;
+      this.name = name;
+      this.aka = alias;
+      this.color = color;
+      this.draw = function () {
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
         this.sprite.draw(canvas, this.x, this.y);
@@ -46,7 +50,7 @@ export default class Player {
       this.explode = function () {
         this.active = false;
         explosion_sound.play();
-        //GameLoopMusic_sound.fadeOut(0, 2000);
+        // GameLoopMusic_sound.fadeOut(0, 2000);
         window.currentState = window.states.End;
         // An explosion sound and then end the game
       };
@@ -59,19 +63,70 @@ export default class Player {
 
         return this.life;
       };
-      this.score = function(change) {
+      this.score = function (change) {
+        this.pointScore += change; // Adds or subtracts health based on the value added in the function
 
-
-        this.pointScore = this.pointScore + change; //Adds or subtracts health based on the value added in the function
-
-        /*if (this.life <= 0) {
+        /* if (this.life <= 0) {
             this.explode();
-        }*/
+        } */
 
         return this.pointScore;
+      };
 
+      this.movement = function (left, right, up, down) {
+        // debugger;
+        if (alias == 'player1') {
+          left = keydown.left;
+          right = keydown.right;
+          up = keydown.up;
+          down = keydown.down;
+        }
+        if (alias == 'player2') {
+          left = keydown.a;
+          right = keydown.d;
+          up = keydown.w;
+          down = keydown.s;
+        }
+        if (alias == 'player3') {
+          left = keydown.j;
+          right = keydown.l;
+          up = keydown.i;
+          down = keydown.k;
+        }
+        if (left) {
+          if (this.velX > -this.speed) {
+            this.velX--;
+          }
+        }
 
-    };
+        if (right) {
+          if (this.velX < this.speed) {
+            this.velX++;
+          }
+        }
+
+        if (up) {
+          if (this.velY > -this.speed) {
+            this.velY--;
+          }
+        }
+
+        if (down) {
+          if (this.velY < this.speed) {
+            this.velY++;
+          }
+        }
+
+        this.velX *= this.friction;
+        this.x += this.velX;
+
+        this.velY *= this.friction;
+        this.y += this.velY;
+
+        this.x = this.x.clamp(0, CANVAS_WIDTH - this.width); // prevents character from going past canvas
+
+        this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
+      };
     }
   }
 }
