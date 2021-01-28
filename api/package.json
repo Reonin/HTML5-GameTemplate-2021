@@ -1,0 +1,20 @@
+{
+    "name": "api",
+    "version": "0.0.0",
+    "private": true,
+    "scripts": {
+        "start": "node app.js"
+    },
+    "keywords": [
+        "jwks-rsa",
+        "jwt",
+        "rs256",
+        "express"
+    ],
+    "dependencies": {
+        "express": "^4.16.4",
+        "mysql2": "^2.1.0",
+        "sequelize": "^6.3.3",
+        "ws": "7.4.2"
+    }
+}
