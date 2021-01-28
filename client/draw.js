@@ -8,7 +8,7 @@ export default function draw() { // Draws objects to the canvas
   if (currentState === states.splash) {
     canvas.fillStyle = '#000'; // Set color to black
     canvas.font = '25pt Calibri';
-    const SPLASH_SCREEN_TEXT = 'Team Splash Screen';
+    const SPLASH_SCREEN_TEXT = 'The Full Palette';
     splashTextX = canvas.measureText(SPLASH_SCREEN_TEXT).width;
     canvas.fillText(SPLASH_SCREEN_TEXT, (CANVAS_WIDTH / 2) - (splashTextX / 2), splashTextY);
   }
@@ -34,40 +34,24 @@ export default function draw() { // Draws objects to the canvas
   }
 
   if (currentState === states.Game) {
-    
-    window.playerArray.forEach((p) => {
-      p.draw();
-    });
-
-    tileArray.forEach((tile) => {
-      tile.draw();
-    });
-
-    window.playerBullets.forEach((bullet) => {
-      bullet.draw();
-    });
-
-    playerMissiles.forEach((missle) => {
-      missle.draw();
-    });
-
-    // // Enemy Draw
-    // enemies.forEach((enemy) => {
-    //   enemy.draw();
-    // });
-
-    // PowerUp Draw
-    pickups.forEach((pickup) => {
-      pickup.draw();
-    });
-    window.parallax.Draw(); // draw background
-
-    window.playerArray.forEach((p) => {
-      if(p.isMoving == true){
+    if(window.cameraFollow === false){
+      window.playerArray.forEach((p) => {
         p.draw();
-      }
-   
-    });
+      });
+  
+      tileArray.forEach((tile) => {
+        tile.draw();
+      });
+  
+      window.parallax.Draw(); // draw background
+  
+      window.playerArray.forEach((p) => {
+        if (p.isMoving == true) {
+          p.draw();
+        }
+      });
+    }
+    
 
     drawPlayerUI();
 
