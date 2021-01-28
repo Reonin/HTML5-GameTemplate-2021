@@ -115,6 +115,7 @@ this.explode();
           if (this.velX > -this.speed) {
             this.velX--;
             this.isMoving = true;
+            window.bufferHoriz+= 1;
           }
         }
 
@@ -122,6 +123,7 @@ this.explode();
           if (this.velX < this.speed) {
             this.velX++;
             this.isMoving = true;
+            window.bufferHoriz-= 1;
           }
         }
 
@@ -129,6 +131,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
+            window.bufferVert+= 5;
           }
         }
 
@@ -136,6 +139,7 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
+            window.bufferVert-= 5;
           }
         }
 

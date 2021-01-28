@@ -53,13 +53,26 @@ export default function draw() { // Draws objects to the canvas
     }
     else{
       //window.playerArray.forEach((p) => {
+        canvas.translate(window.bufferHoriz, window.bufferVert);
+       canvas.scale(2, 2);
+
+       playerArray[0].draw();
 
         tileArray.forEach((tile) => {
           tile.draw();
         });
   
-        playerArray[0].drawView();
+        window.parallax.Draw(); // draw background
 
+        window.playerArray.forEach((p) => {
+          if (p.isMoving == true) {
+            p.draw();
+          }
+        });
+     // debugger;
+
+       canvas.scale(0.5, 0.5);
+       canvas.translate(-window.bufferHoriz, -window.bufferVert);
         
      // });
     }
