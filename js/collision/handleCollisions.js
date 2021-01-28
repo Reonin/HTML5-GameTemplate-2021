@@ -1,6 +1,6 @@
 import { collides } from './collisionBox.js';
 
-export function handleCollisions() {
+export default function handleCollisions() {
   window.playerBullets.forEach((bullet) => {
     window.enemies.forEach((enemy) => {
       if (collides(bullet, enemy)) {

@@ -1,4 +1,4 @@
-import { mapArray } from './mapArray.js';
+import mapArray from './mapArray.js';
 
 export default function drawMap(canvas) {
   const background = canvas;

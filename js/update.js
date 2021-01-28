@@ -1,6 +1,6 @@
 import Enemy from './Enemy.js';
 import Pickup from './pickup.js';
-import { handleCollisions } from './collision/handleCollisions.js';
+import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
 
 export default function update() { // Updates location and reaction of objects to the canvas
