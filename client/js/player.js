@@ -26,6 +26,10 @@ export default class Player {
       this.aka = alias;
       this.color = color;
       this.isMoving = true;
+      this.lastX = 0;
+      this.lastY = 0;
+      this.movediffX = () =>{return this.lastX - this.x};
+      this.movediffY = () =>{return this.lastY - this.y};
       this.draw = function () {
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -143,6 +147,8 @@ this.explode();
             window.bufferVert-= window.panVal;
           }
         }
+        this.lastX = this.x;
+        this.lastY = this.y;
 
         this.velX *= this.friction;
         this.x += this.velX;
@@ -153,6 +159,8 @@ this.explode();
         this.x = this.x.clamp(0, CANVAS_WIDTH - this.width); // prevents character from going past canvas
 
         this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
+     
+        
       };
     }
   }

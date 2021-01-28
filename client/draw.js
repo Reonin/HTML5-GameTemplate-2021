@@ -53,8 +53,15 @@ export default function draw() { // Draws objects to the canvas
     }
     else{
       //window.playerArray.forEach((p) => {
+        if(Math.abs(player.movediffX()) < 3){
+          console.log(player.movediffX());
+          window.panVal = 0;
+        }else{
+          window.panVal = 9;
+        }
+        
         canvas.translate(window.bufferHoriz, window.bufferVert);
-       canvas.scale(2, 2);
+        canvas.scale(2, 2);
 
        playerArray[0].draw();
 
@@ -72,6 +79,8 @@ export default function draw() { // Draws objects to the canvas
      // debugger;
 
        canvas.scale(0.5, 0.5);
+     
+       
        canvas.translate(-window.bufferHoriz, -window.bufferVert);
         
      // });

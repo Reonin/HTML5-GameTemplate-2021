@@ -42,7 +42,7 @@ export default function handleCollisions() {
           // console.log(tile);
           if (player.velX < 0) {
             
-             window.bufferHoriz-= window.panVal;
+             //window.bufferHoriz = 0;
             if (player.x > tile.x) {
               // console.log("left stop");
               player.x += player.speed;
@@ -52,7 +52,7 @@ export default function handleCollisions() {
           }
 
           if (player.velX > 0) {
-             window.bufferHoriz+= window.panVal;
+            // window.bufferHoriz = 0;
             if (player.x < tile.x) {
               // console.log("right stop");
               player.x -= player.speed;
