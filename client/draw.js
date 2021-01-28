@@ -16,7 +16,7 @@ export default function draw() { // Draws objects to the canvas
   if (currentState === states.title) {
     canvas.fillStyle = '#000'; // Set color to black
     canvas.font = 'bold 40pt Calibri';
-    const GAME_NAME_TEXT = 'GAME NAME';
+    const GAME_NAME_TEXT = 'Brush it Off';
     const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
     canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) - 3, CANVAS_HEIGHT / 3);
     // The next two create a special text effect
