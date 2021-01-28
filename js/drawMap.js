@@ -43,44 +43,28 @@ export default function drawMap(canvas) {
         tileArray.push(newTile);
         // canvas.drawImage(image2, x*28, y*28);-->
       }
-      if (parseInt(mapArray[i][j]) == 3) {
-        var newTile = {
-          // color: "#00A",
-          tile: Tile('emptyTile'),
-          x: j * 60,
-          y: i * 60,
-          width: 60,
-          height: 60,
-          type: 'player1spawn',
-
-          draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
-          },
-        };
-        tileArray.push(newTile);
-        player1spawns.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
-      }
+ 
       if (parseInt(mapArray[i][j]) == 2) {
         var newTile = {
           // color: "#00A",
-          tile: Tile('emptyTile'),
+          tile: Tile('powerup'),
           x: j * 60,
           y: i * 60,
           width: 60,
           height: 60,
-          type: 'player2spawn',
-
+          type: 'pickup',
+          active: true,
           draw() {
             // canvas.fillStyle = this.color;
             // canvas.fillRect(this.x, this.y, this.width, this.height);
-            this.tile.draw(canvas, this.x, this.y, 60, 60);
+            if(this.active){
+              this.tile.draw(canvas, this.x, this.y, 60, 60);
+            }
+
           },
         };
         tileArray.push(newTile);
-        player2spawns.push(newTile);
+        //player2spawns.push(newTile);
         // canvas.drawImage(image2, x*28, y*28);-->
       }
 

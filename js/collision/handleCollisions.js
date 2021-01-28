@@ -74,5 +74,16 @@ export default function handleCollisions() {
         }
       });
     }
+        else if(tile.type == 'pickup'){
+
+          window.playerArray.forEach((player) => {
+            if (collides(tile, player)) {
+              tile.active = false;
+             //hides pickups from the render
+            };
+          
+          })
+        }
+
   });
 }
