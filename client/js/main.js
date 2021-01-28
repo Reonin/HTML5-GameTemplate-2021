@@ -24,6 +24,7 @@ window.states = {
   End: 3,
 };
 window.currentState = window.states.title;
+window.cameraFollow = true;
 
 // Game Loop
 // var FPS = 60;
