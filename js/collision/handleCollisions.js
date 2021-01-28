@@ -33,4 +33,46 @@ export function handleCollisions() {
       player.lifeChange(30);
     }
   });
+
+  // tile
+  tileArray.forEach((tile) => {
+    if (tile.type == 'wall') {
+      window.playerArray.forEach((player) => {
+        if (collides(tile, player)) {
+          // console.log(tile);
+          if (player.velX < 0) {
+            if (player.x > tile.x) {
+              // console.log("left stop");
+              player.x += player.speed;
+              player.velX = 0;
+            }
+          }
+
+          if (player.velX > 0) {
+            if (player.x < tile.x) {
+              // console.log("right stop");
+              player.x -= player.speed;
+              player.velX = 0;
+            }
+          }
+
+          if (player.velY < 0) {
+            if (player.y > tile.y) {
+              // console.log("up stop");
+              player.y += player.speed;
+              player.velY = 0;
+            }
+          }
+
+          if (player.velY > 0) {
+            if (player.y < tile.y) {
+              // console.log("down stop");
+              player.y -= player.speed;
+              player.velY = 0;
+            }
+          }
+        }
+      });
+    }
+  });
 }

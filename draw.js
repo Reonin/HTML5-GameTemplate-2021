@@ -39,9 +39,9 @@ export default function draw() { // Draws objects to the canvas
       p.draw();
     });
 
-    // tileArray.forEach((tile) => {
-    //   tile.draw();
-    // });
+    tileArray.forEach((tile) => {
+      tile.draw();
+    });
 
     window.playerBullets.forEach((bullet) => {
       bullet.draw();
