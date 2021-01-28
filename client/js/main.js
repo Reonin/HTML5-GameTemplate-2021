@@ -4,6 +4,7 @@ import { setUpKeys } from './utils/setUpKeys.js';
 import drawMap from './drawMap.js';
 import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';
+import Camera from './camera/camera.js';
 import { GameLoopMusic_sound } from './utils/initAudio.js'; // initialize Audio
 
 import update from './update.js';
@@ -25,6 +26,15 @@ window.states = {
 };
 window.currentState = window.states.title;
 window.cameraFollow = false;
+
+const viewPortW = 480;
+const viewPortH = 270;
+// Set the right viewport size for the camera
+var vWidth = Math.min(viewPortW, CANVAS_WIDTH);
+var vHeight = Math.min(viewPortH, CANVAS_HEIGHT);
+// Setup the camera
+window.camera = new Camera(0, 0, vWidth, vHeight, viewPortW, viewPortH);
+
 
 // Game Loop
 // var FPS = 60;
@@ -105,6 +115,7 @@ const endTextX = CANVAS_WIDTH / 3;
 const endTextY = 0;
 
 window.playerArray = [window.player, window.player2, window.player3];
+window.camera.follow(window.playerArray[0], vWidth / 2, vHeight / 2);
 window.playerMissiles = [];
 
 window.enemies = [];

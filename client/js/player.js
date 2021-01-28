@@ -31,6 +31,18 @@ export default class Player {
         // canvas.fillRect(this.x, this.y, this.width, this.height);
         this.sprite.draw(canvas, this.x, this.y);
       };
+      this.drawView = function () {
+        var xView = window.camera.xView;
+        var yView = window.camera.yView;
+        console.log("here")
+        canvas.save();
+        canvas.fillStyle = "yellow";
+        // before draw we need to convert player world's position to canvas position			
+        canvas.fillRect((this.x - this.width / 2) - xView, (this.y - this.height / 2) - yView, this.width, this.height);
+        canvas.restore();
+
+        //this.sprite.draw(canvas, window.camera.xView, window.camera.yView);
+      };
       this.shoot = function () {
         const bulletPosition = this.midpoint();
         shoot_sound.play();
@@ -68,8 +80,8 @@ export default class Player {
         this.pointScore += change; // Adds or subtracts health based on the value added in the function
 
         /* if (this.life <= 0) {
-            this.explode();
-        } */
+this.explode();
+} */
 
         return this.pointScore;
       };

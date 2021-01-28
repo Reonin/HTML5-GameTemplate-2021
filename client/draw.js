@@ -34,24 +34,35 @@ export default function draw() { // Draws objects to the canvas
   }
 
   if (currentState === states.Game) {
-    if(window.cameraFollow === false){
+    if (window.cameraFollow === false) {
       window.playerArray.forEach((p) => {
         p.draw();
       });
-  
+
       tileArray.forEach((tile) => {
         tile.draw();
       });
-  
+
       window.parallax.Draw(); // draw background
-  
+
       window.playerArray.forEach((p) => {
         if (p.isMoving == true) {
           p.draw();
         }
       });
     }
-    
+    else{
+      //window.playerArray.forEach((p) => {
+
+        tileArray.forEach((tile) => {
+          tile.draw();
+        });
+  
+        playerArray[0].drawView();
+
+        
+     // });
+    }
 
     drawPlayerUI();
 

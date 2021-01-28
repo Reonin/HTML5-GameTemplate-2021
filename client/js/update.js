@@ -26,26 +26,30 @@ export default function update() { // Updates location and reaction of objects t
       p.movement();
     });
 
+
+
+    window.camera.update();
+
     // window.player actions
     // if (keydown.space) {
     //   window.player.shoot();
     // }
 
-    window.playerBullets.forEach((bullet) => {
-      bullet.update();
-    });
+    // window.playerBullets.forEach((bullet) => {
+    //   bullet.update();
+    // });
 
-    window.playerBullets = window.playerBullets.filter((bullet) => bullet.active);
+    // window.playerBullets = window.playerBullets.filter((bullet) => bullet.active);
 
-    if (keydown.v) {
-      window.player.launch();
-    }
+    // if (keydown.v) {
+    //   window.player.launch();
+    // }
 
-    playerMissiles.forEach((Missile) => {
-      Missile.update();
-    });
+    // playerMissiles.forEach((Missile) => {
+    //   Missile.update();
+    // });
 
-    playerMissiles = playerMissiles.filter((Missile) => Missile.active);
+    // playerMissiles = playerMissiles.filter((Missile) => Missile.active);
 
     // // Enemy Update logic
     // window.enemies.forEach((enemy) => {

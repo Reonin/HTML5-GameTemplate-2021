@@ -7,6 +7,7 @@ export default class Rectangle {
     this.right = this.left + this.width;
     this.bottom = this.top + this.height;
     this.set = function (left, top, /* optional */ width, /* optional */ height) {
+        // debugger;
       this.left = left;
       this.top = top;
       this.width = width || this.width;
