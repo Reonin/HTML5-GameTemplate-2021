@@ -168,11 +168,13 @@ this.explode();
           x : this.x,
           y: this.y
         };
-
-        this.traveltrail.push({x:this.x, y:this.y});
-        if(this.traveltrail.length >= 20){
-          this.traveltrail.shift();
+        if(Math.random() > 0.85){
+          this.traveltrail.push({x:this.x, y:this.y});
+          if(this.traveltrail.length >= 20){
+            this.traveltrail.shift();
+          }
         }
+       
         //console.log(`The websocket ${websocket.url}`)
         sendData(JSON.stringify(playerPos));
       };
