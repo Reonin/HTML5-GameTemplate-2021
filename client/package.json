@@ -1,0 +1,11 @@
+{
+    "name": "client",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "start": "node ws.js"
+    },
+    "dependencies": {
+        "http-server": "0.12.3"
+    }
+}
