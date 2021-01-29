@@ -28,6 +28,7 @@ export default class Player {
       this.isMoving = true;
       this.websocket = websocket;
       this.isIt = true;
+      this.isImmune = false;
       this.lastX = 0;
       this.lastY = 0;
       this.movediffX = () =>{return this.lastX - this.x};

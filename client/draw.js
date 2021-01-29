@@ -70,14 +70,12 @@ export default function draw() { // Draws objects to the canvas
       } else {
         // window.playerArray.forEach((p) => {
         if (Math.abs(player.movediffX()) < 3) {
-          console.log(player.movediffX());
           window.panVal[0] = 0;
         } else {
           window.panVal[0] = 9;
         }
 
         if (Math.abs(player.movediffY()) < 3) {
-          console.log(player.movediffY());
           window.panVal[1] = 0;
         } else {
           window.panVal[1] = 9;

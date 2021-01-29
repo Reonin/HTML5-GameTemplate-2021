@@ -13,10 +13,10 @@ import update from './update.js';
 window.socket = new WebSocket('ws://localhost:3000');
 //parses the player object data
 window.socket.onmessage = function (event) {
-  console.debug('WebSocket message received:', event);
+ // console.debug('WebSocket message received:', event);
   var playerData = JSON.parse(event.data); //TODO ensure this isn't a string
   const playersMap = new Map(Object.entries(playerData)); //then creates a map from it
-  console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
+ // console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
 };
 
 scaletosmallest(canvasid, ratio);
@@ -69,7 +69,7 @@ function getMousePos(canvas, evt) {
 }
 
 window.player = new Player('spaceship', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 100, 140, socket);
-window.player2 = new OtherPlayer('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 120, 140, socket);
+window.player2 = new OtherPlayer('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 140, 140, socket);
 window.player3 = new OtherPlayer('redShip', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 300, 680, socket);
 // Extend PLayer class to OtherPLayer that receives X/Y data from server
 

@@ -1,18 +1,15 @@
 import { collides } from './collisionBox.js';
+import transferTag from '../gameMechanic.js';
 
 export default function handleCollisions() {
-
   if (collides(playerArray[0], playerArray[1])) {
+    transferTag(playerArray[0], playerArray[1]);
    
-    console.log("P1 touches P2");
   }
 
   if (collides(playerArray[0], playerArray[2])) {
-   
-    console.log("P1 touches P3");
+    console.log('P1 touches P3');
   }
-  
-
 
   // Pickups Collision
   pickups.forEach((pickup) => {
@@ -29,13 +26,11 @@ export default function handleCollisions() {
         if (collides(tile, player)) {
           // console.log(tile);
           if (player.velX < 0) {
-            
-             //window.bufferHoriz = 0;
+            // window.bufferHoriz = 0;
             if (player.x > tile.x) {
               // console.log("left stop");
               player.x += player.speed;
               player.velX = 0;
-              
             }
           }
 
@@ -45,7 +40,6 @@ export default function handleCollisions() {
               // console.log("right stop");
               player.x -= player.speed;
               player.velX = 0;
-            
             }
           }
 
@@ -66,17 +60,13 @@ export default function handleCollisions() {
           }
         }
       });
-    }
-        else if(tile.type == 'pickup'){
-
-          window.playerArray.forEach((player) => {
-            if (collides(tile, player)) {
-              tile.active = false;
-             //hides pickups from the render
-            };
-          
-          })
+    } else if (tile.type == 'pickup') {
+      window.playerArray.forEach((player) => {
+        if (collides(tile, player)) {
+          tile.active = false;
+          // hides pickups from the render
         }
-
+      });
+    }
   });
 }
