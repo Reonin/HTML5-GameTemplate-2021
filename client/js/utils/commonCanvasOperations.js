@@ -1,9 +1,9 @@
-export function writeMessage(message) {
+export function writeMessage(message, y = 25, clear = true) {
   const context = canvasid.getContext('2d');
-  context.clearRect(0, 0, canvasid.width, canvasid.height);
+  if (clear)context.clearRect(0, 0, canvasid.width, canvasid.height);
   context.font = '18pt Calibri';
   context.fillStyle = 'white';
-  context.fillText(message, 10, 25);
+  context.fillText(message, 10, y);
   // console.log(message);
 }
 

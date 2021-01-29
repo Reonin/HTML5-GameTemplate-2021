@@ -1,6 +1,6 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
-import {writeMessage, drawImageRotated} from './js/utils/commonCanvasOperations.js';
+import { writeMessage, drawImageRotated} from './js/utils/commonCanvasOperations.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
@@ -40,8 +40,12 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.LOBBY:
+      
       writeMessage("WAITING IN THE LOBBY FOR OTHER PLAYERS TO CONNECT...");
       drawImageRotated(lobbyIcon, CANVAS_WIDTH/2, 500, Math.random() * 5);
+      if(keydown.space){
+        writeMessage("Player 1 Ready!", 50, false);
+       }
       //canvas.drawImage(lobbyIcon, 500 , 275, lobbyIcon.width, lobbyIcon.height);
  
       break;
