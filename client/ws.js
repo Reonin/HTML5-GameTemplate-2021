@@ -9,12 +9,12 @@ export default function sendData(msgBlob){
     //     y: y
     //   };
 
-    console.log(`socket is ${window.socket.url}`);
+    //console.log(`socket is ${window.socket.url}`);
     return new Promise(function(resolve, reject) { 
         
     //   window.socket.onopen = function(event) {
-    //     console.log(`The websocket msg: ${JSON.stringify(msgBlob)}`);
-        window.socket.send(JSON.stringify(msgBlob));
+        //console.log(`The websocket msg: ${JSON.stringify(msgBlob)}`);
+        window.socket.send(msgBlob);
           resolve('Message sent successfully');
         //   window.socket.close()
     //   };

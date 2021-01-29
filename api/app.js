@@ -2,42 +2,47 @@ const express = require('express');
 const ws = require('ws');
 const db = require("./models");
 const app = express();
-const Player = db.player;
+//const Player = db.player;
+const Player = require('./controller/players.controller.js');
 var webSockets = {}
 
-db.sequelize.sync({ force: true }).then(() => {
-    console.log('Drop and Resync Db');
-    initial();
-  });
+// db.sequelize.sync({ force: true }).then(() => {
+//     console.log('Drop and Resync Db');
+//     initial();
+//   });
 
-  function initial() {
-    Player.create({
-        player: "player1",
-        x: 0,
-        y: 0
-    })
-    Player.create({
-        player: "player2",
-        x: 0,
-        y: 0
-    })
-    Player.create({
-        player: "player3",
-        x: 0,
-        y: 0
-    })
-    Player.create({
-        player: "player4",
-        x: 0,
-        y: 0
-    })
-  }
+//   function initial() {
+//     Player.create({
+//         player: "player1",
+//         x: 0,
+//         y: 0
+//     })
+//     Player.create({
+//         player: "player2",
+//         x: 0,
+//         y: 0
+//     })
+//     Player.create({
+//         player: "player3",
+//         x: 0,
+//         y: 0
+//     })
+//     Player.create({
+//         player: "player4",
+//         x: 0,
+//         y: 0
+//     })
+//   }
+
+
+
 // Set up a headless websocket server that prints any
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
   socket.on('message', message => {//console.log(message);
-    socket.send('hello!')
+    Player.updatePlayers(message);
+    socket.send(Player.getPlayersObjects());
   }
 )});
 

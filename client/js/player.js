@@ -162,8 +162,8 @@ this.explode();
         this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
         var playerPos = {
           playerName : this.name,
-          playerX : this.x,
-          playerY: this.y
+          x : this.x,
+          y: this.y
         };
         //console.log(`The websocket ${websocket.url}`)
         sendData(JSON.stringify(playerPos));

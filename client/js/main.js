@@ -13,6 +13,9 @@ window.socket = new WebSocket('ws://localhost:3000');
 
 window.socket.onmessage = function (event) {
   console.debug('WebSocket message received:', event);
+  var playerData = JSON.parse(event.data);
+  const playersMap = new Map(Object.entries(playerData));
+  console.log(playersMap.get('Player 1'));
 };
 
 scaletosmallest(canvasid, ratio);
