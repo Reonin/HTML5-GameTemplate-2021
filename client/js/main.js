@@ -120,5 +120,5 @@ window.enemies = [];
 window.pickups = [];
 window.bufferHoriz = 0;
 window.bufferVert = 0;
-window.panVal = 9;
+window.panVal = [9, 9];
 window.cameraFollow = true;

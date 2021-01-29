@@ -120,7 +120,7 @@ this.explode();
           if (this.velX > -this.speed) {
             this.velX--;
             this.isMoving = true;
-            if(this.velX !== 0)window.bufferHoriz+= window.panVal;
+            if(this.velX !== 0)window.bufferHoriz+= window.panVal[0];
           }
         }
 
@@ -128,7 +128,7 @@ this.explode();
           if (this.velX < this.speed) {
             this.velX++;
             this.isMoving = true;
-           if(this.velX !== 0) window.bufferHoriz-= window.panVal;
+           if(this.velX !== 0) window.bufferHoriz-= window.panVal[0];
           }
         }
 
@@ -136,7 +136,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
-            window.bufferVert+= window.panVal;
+            window.bufferVert+= window.panVal[1];
           }
         }
 
@@ -144,7 +144,7 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
-            window.bufferVert-= window.panVal;
+            window.bufferVert-= window.panVal[1];
           }
         }
         this.lastX = this.x;

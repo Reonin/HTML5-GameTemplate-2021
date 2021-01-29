@@ -50,40 +50,45 @@ export default function draw() { // Draws objects to the canvas
           p.draw();
         }
       });
-    }
-    else{
-      //window.playerArray.forEach((p) => {
-        if(Math.abs(player.movediffX()) < 3){
-          console.log(player.movediffX());
-          window.panVal = 0;
-        }else{
-          window.panVal = 9;
+    } else {
+      // window.playerArray.forEach((p) => {
+      if (Math.abs(player.movediffX()) < 3) {
+        console.log(player.movediffX());
+        window.panVal[0] = 0;
+      } else {
+        window.panVal[0] = 9;
+      }
+
+      if (Math.abs(player.movediffY()) < 3) {
+        console.log(player.movediffY());
+        window.panVal[1] = 0;
+      } else {
+        window.panVal[1] = 9;
+      }
+
+      canvas.translate(window.bufferHoriz, window.bufferVert);
+      canvas.scale(2, 2);
+
+      playerArray[0].draw();
+
+      tileArray.forEach((tile) => {
+        tile.draw();
+      });
+
+      window.parallax.Draw(); // draw background
+
+      window.playerArray.forEach((p) => {
+        if (p.isMoving == true) {
+          p.draw();
         }
-        
-        canvas.translate(window.bufferHoriz, window.bufferVert);
-        canvas.scale(2, 2);
+      });
+      // debugger;
 
-       playerArray[0].draw();
+      canvas.scale(0.5, 0.5);
 
-        tileArray.forEach((tile) => {
-          tile.draw();
-        });
-  
-        window.parallax.Draw(); // draw background
+      canvas.translate(-window.bufferHoriz, -window.bufferVert);
 
-        window.playerArray.forEach((p) => {
-          if (p.isMoving == true) {
-            p.draw();
-          }
-        });
-     // debugger;
-
-       canvas.scale(0.5, 0.5);
-     
-       
-       canvas.translate(-window.bufferHoriz, -window.bufferVert);
-        
-     // });
+      // });
     }
 
     drawPlayerUI();
