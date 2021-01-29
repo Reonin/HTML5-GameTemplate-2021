@@ -94,9 +94,9 @@ this.explode();
         return this.pointScore;
       };
 
-      this.movement = function (left, right, up, down) {
+      this.movement = function () {
         // debugger;
-        
+        let left, right, up, down;
         this.isMoving = false;
         if (alias == 'player1') {
           left = keydown.left;
@@ -124,7 +124,8 @@ this.explode();
           if (this.velX > -this.speed) {
             this.velX--;
             this.isMoving = true;
-            if(this.velX !== 0)window.bufferHoriz+= window.panVal[0];
+            //if(this.velX !== 0)
+            window.bufferHoriz+= window.panVal[0];
           }
         }
 
@@ -132,7 +133,8 @@ this.explode();
           if (this.velX < this.speed) {
             this.velX++;
             this.isMoving = true;
-           if(this.velX !== 0) window.bufferHoriz-= window.panVal[0];
+           //if(this.velX !== 0) 
+           window.bufferHoriz-= window.panVal[0];
           }
         }
 

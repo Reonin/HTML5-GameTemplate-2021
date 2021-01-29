@@ -34,6 +34,12 @@ export default function update() { // Updates location and reaction of objects t
       // Player Movement Controls
       window.playerArray.forEach((p) => {
         p.movement();
+
+        //AI
+        try{
+          p.checkAI();
+        }
+        catch(e){}
       });
 
       window.camera.update();
@@ -48,7 +54,7 @@ export default function update() { // Updates location and reaction of objects t
       if (Math.random() < 0.0001) {
         window.pickups.push(new Pickup());
       }
-
+      
       // Handle Collision
       handleCollisions();
       break;
