@@ -2,12 +2,12 @@ import { shoot_sound, explosion_sound, GameLoopMusic_sound } from './utils/initA
 
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
-
+import sendData from '../ws.js';
 /**
  * Creates the player character that the user controls
  */
 export default class Player {
-  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY) {
+  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket) {
     {
       // color: "#00A",
       this.sprite = Sprite(spriteimg);
@@ -26,6 +26,7 @@ export default class Player {
       this.aka = alias;
       this.color = color;
       this.isMoving = true;
+      this.websocket = websocket;
       this.draw = function () {
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -153,6 +154,13 @@ this.explode();
         this.x = this.x.clamp(0, CANVAS_WIDTH - this.width); // prevents character from going past canvas
 
         this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
+        var playerPos = {
+          playerName : this.name,
+          playerX : this.x,
+          playerY: this.y
+        };
+        //console.log(`The websocket ${websocket.url}`)
+        sendData(JSON.stringify(playerPos));
       };
     }
   }
