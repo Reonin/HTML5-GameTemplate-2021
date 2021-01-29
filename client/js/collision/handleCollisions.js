@@ -1,35 +1,17 @@
 import { collides } from './collisionBox.js';
 
 export default function handleCollisions() {
-  // window.playerBullets.forEach((bullet) => {
-  //   window.enemies.forEach((enemy) => {
-  //     if (collides(bullet, enemy)) {
-  //       enemy.explode();
-  //       bullet.active = false;
-  //     }
-  //   });
-  // });
 
-  // window.playerMissiles.forEach((Missile) => {
-  //   window.enemies.forEach((enemy) => {
-  //     if (collides(Missile, enemy)) {
-  //       enemy.explode();
-  //       Missile.active = false;
-  //     }
-  //   });
-  // });
+  if (collides(playerArray[0], playerArray[1])) {
+   
+    console.log("P1 touches P2");
+  }
 
-  // window.enemies.forEach((enemy) => {
-  //   if (collides(enemy, player)) {
-  //     enemy.explode();
-  //     player.lifeChange(-10);
-  //   }
-  // });
-  window.playerArray.forEach((player) => {
-    // if (collides(player, player)) {
-    //   console.log("TEST");
-    // }
-  })
+  if (collides(playerArray[0], playerArray[2])) {
+   
+    console.log("P1 touches P3");
+  }
+  
 
 
   // Pickups Collision

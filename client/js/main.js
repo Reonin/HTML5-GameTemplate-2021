@@ -69,7 +69,7 @@ function getMousePos(canvas, evt) {
 }
 
 window.player = new Player('spaceship', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 100, 140, socket);
-window.player2 = new OtherPlayer('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 200, 680, socket);
+window.player2 = new OtherPlayer('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 120, 140, socket);
 window.player3 = new OtherPlayer('redShip', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 300, 680, socket);
 // Extend PLayer class to OtherPLayer that receives X/Y data from server
 
