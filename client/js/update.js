@@ -17,13 +17,15 @@ export default function update() { // Updates location and reaction of objects t
       break;
     case window.states.TITLE:
       if (keydown.space) {
-        window.currentState = window.states.GAME;
+        window.currentState = window.states.LOBBY;
         startTimer();
       }
       break;
 
     case window.states.LOBBY:
-      
+      if (keydown.space && window.allPlayersReady()) {
+       window.currentState = window.states.GAME;
+       }
       break;
 
     case window.states.GAME:

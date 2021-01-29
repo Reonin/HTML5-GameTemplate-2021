@@ -1,5 +1,9 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
+import {writeMessage, drawImageRotated} from './js/utils/commonCanvasOperations.js';
+
+const lobbyIcon = new Image();
+lobbyIcon.src = 'images/lobbyIcon.png';
 
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
@@ -12,7 +16,7 @@ export default function draw() { // Draws objects to the canvas
       const SPLASH_SCREEN_TEXT = 'The Full Palette';
       splashTextX = canvas.measureText(SPLASH_SCREEN_TEXT).width;
       canvas.fillText(SPLASH_SCREEN_TEXT, (CANVAS_WIDTH / 2) - (splashTextX / 2), splashTextY);
-      
+
       break;
     case window.states.TITLE:
       canvas.fillStyle = '#000'; // Set color to black
@@ -36,7 +40,10 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.LOBBY:
-
+      writeMessage("WAITING IN THE LOBBY FOR OTHER PLAYERS TO CONNECT...");
+      drawImageRotated(lobbyIcon, CANVAS_WIDTH/2, 500, Math.random() * 5);
+      //canvas.drawImage(lobbyIcon, 500 , 275, lobbyIcon.width, lobbyIcon.height);
+ 
       break;
 
     case window.states.GAME:

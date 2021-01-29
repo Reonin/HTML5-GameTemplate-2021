@@ -54,14 +54,7 @@ window.requestAnimFrame = (() => window.requestAnimationFrame
              window.setTimeout(callback, 1000 / 60);
            })();
 // Mouse Coordinate Positioning
-function writeMessage(canvas, message) {
-  const context = canvasid.getContext('2d');
-  context.clearRect(0, 0, canvasid.width, canvasid.height);
-  context.font = '18pt Calibri';
-  context.fillStyle = 'black';
-  context.fillText(message, 10, 25);
-  // console.log(message);
-}
+
 
 function getMousePos(canvas, evt) {
   const rect = canvasid.getBoundingClientRect();
@@ -130,3 +123,12 @@ window.bufferHoriz = 0;
 window.bufferVert = 0;
 window.panVal = [9, 9];
 window.cameraFollow = true;
+
+window.allPlayersReady = () => {
+  // check websocket message of other players
+  if (false) {
+    return true;
+  }
+
+  return false;
+};
