@@ -26,19 +26,19 @@ export default function positionCheck(me) {
 		// vertical position
 		if(me.y > whoseIt.y) {
             //me.y++;
-            me.AImovement("up")
+            me.AImovement("down")
 		} else if(me.y < whoseIt.y) {
             //me.y--;
-            me.AImovement("down")
+            me.AImovement("up")
 		}
 		
 		// horizontal position
 		if(me.x > whoseIt.x) {
             // me.x++;
-            me.AImovement("left")
+            me.AImovement("right")
 		} else if(me.x < whoseIt.x) {
             //me.x--;
-            me.AImovement("right")
+            me.AImovement("left")
 		}
 	}
 }

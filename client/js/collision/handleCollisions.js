@@ -11,6 +11,10 @@ export default function handleCollisions() {
     console.log('P1 touches P3');
   }
 
+  if (collides(playerArray[1], playerArray[2])) {
+    console.log('P2 touches P3');
+  }
+
   // Pickups Collision
   pickups.forEach((pickup) => {
     if (collides(pickup, player)) {
