@@ -1,15 +1,25 @@
-const socket = new WebSocket('ws://localhost:3000');
 
-export default function sendData(player, x, y){
+
+export default function sendData(msgBlob){
     
-    var msg = {
-        type: "message",
-        player: player,
-        x:   x,
-        y: y
-      };
+    // var msg = {
+    //     type: "message",
+    //     player: player,
+    //     x:   x,
+    //     y: y
+    //   };
 
-      socket.onopen = function(event) {
-          socket.send(JSON.stringify(msg));
-      }
+    console.log(`socket is ${window.socket.url}`);
+    return new Promise(function(resolve, reject) { 
+        
+    //   window.socket.onopen = function(event) {
+    //     console.log(`The websocket msg: ${JSON.stringify(msgBlob)}`);
+        window.socket.send(JSON.stringify(msgBlob));
+          resolve('Message sent successfully');
+        //   window.socket.close()
+    //   };
+      window.socket.onerror = function(err) {
+        reject(err);
+    };
+    });
 }

@@ -31,16 +31,14 @@ window.states = {
   End: 3,
 };
 window.currentState = window.states.title;
-window.cameraFollow = true;
 
 const viewPortW = 480;
 const viewPortH = 270;
 // Set the right viewport size for the camera
-var vWidth = Math.min(viewPortW, CANVAS_WIDTH);
-var vHeight = Math.min(viewPortH, CANVAS_HEIGHT);
+const vWidth = Math.min(viewPortW, CANVAS_WIDTH);
+const vHeight = Math.min(viewPortH, CANVAS_HEIGHT);
 // Setup the camera
 window.camera = new Camera(0, 0, vWidth, vHeight, viewPortW, viewPortH);
-
 
 // Game Loop
 // var FPS = 60;
@@ -129,4 +127,5 @@ window.enemies = [];
 window.pickups = [];
 window.bufferHoriz = 0;
 window.bufferVert = 0;
-window.panVal = 5;
+window.panVal = [9, 9];
+window.cameraFollow = true;

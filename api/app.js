@@ -3,6 +3,7 @@ const ws = require('ws');
 const db = require("./models");
 const app = express();
 const Player = db.player;
+var webSockets = {}
 
 db.sequelize.sync({ force: true }).then(() => {
     console.log('Drop and Resync Db');
@@ -35,8 +36,11 @@ db.sequelize.sync({ force: true }).then(() => {
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
-  socket.on('message', message => console.log(message));
-});
+  socket.on('message', message => {//console.log(message);
+    socket.send('hello!')
+  }
+)});
+
 
 // `server` is a vanilla Node.js HTTP server, so use
 // the same ws upgrade process described here:
@@ -45,5 +49,7 @@ const server = app.listen(3000);
 server.on('upgrade', (request, socket, head) => {
   wsServer.handleUpgrade(request, socket, head, socket => {
     wsServer.emit('connection', socket, request);
+    
   });
+  
 });

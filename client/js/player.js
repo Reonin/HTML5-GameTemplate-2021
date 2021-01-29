@@ -27,6 +27,10 @@ export default class Player {
       this.color = color;
       this.isMoving = true;
       this.websocket = websocket;
+      this.lastX = 0;
+      this.lastY = 0;
+      this.movediffX = () =>{return this.lastX - this.x};
+      this.movediffY = () =>{return this.lastY - this.y};
       this.draw = function () {
         // canvas.fillStyle = this.color;
         // canvas.fillRect(this.x, this.y, this.width, this.height);
@@ -117,7 +121,7 @@ this.explode();
           if (this.velX > -this.speed) {
             this.velX--;
             this.isMoving = true;
-            if(this.velX !== 0)window.bufferHoriz+= window.panVal;
+            if(this.velX !== 0)window.bufferHoriz+= window.panVal[0];
           }
         }
 
@@ -125,7 +129,7 @@ this.explode();
           if (this.velX < this.speed) {
             this.velX++;
             this.isMoving = true;
-           if(this.velX !== 0) window.bufferHoriz-= window.panVal;
+           if(this.velX !== 0) window.bufferHoriz-= window.panVal[0];
           }
         }
 
@@ -133,7 +137,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
-            window.bufferVert+= window.panVal;
+            window.bufferVert+= window.panVal[1];
           }
         }
 
@@ -141,9 +145,11 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
-            window.bufferVert-= window.panVal;
+            window.bufferVert-= window.panVal[1];
           }
         }
+        this.lastX = this.x;
+        this.lastY = this.y;
 
         this.velX *= this.friction;
         this.x += this.velX;
