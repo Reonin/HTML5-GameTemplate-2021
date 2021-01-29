@@ -10,12 +10,12 @@ import { GameLoopMusic_sound } from './utils/initAudio.js'; // initialize Audio
 import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
 window.socket = new WebSocket('ws://localhost:3000');
-
+//parses the player object data
 window.socket.onmessage = function (event) {
   console.debug('WebSocket message received:', event);
-  var playerData = JSON.parse(event.data);
-  const playersMap = new Map(Object.entries(playerData));
-  console.log(playersMap.get('Player 1'));
+  var playerData = JSON.parse(event.data); //TODO ensure this isn't a string
+  const playersMap = new Map(Object.entries(playerData)); //then creates a map from it
+  console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
 };
 
 scaletosmallest(canvasid, ratio);
