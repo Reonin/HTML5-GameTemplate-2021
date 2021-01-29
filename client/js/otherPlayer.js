@@ -6,6 +6,8 @@ import Player from './player.js';
 export default class OtherPlayer extends Player {
     constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket){
         super(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket)
+        
+        this.isIt = false;
     }
 
 }

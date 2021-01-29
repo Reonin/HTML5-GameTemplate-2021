@@ -27,6 +27,7 @@ export default class Player {
       this.color = color;
       this.isMoving = true;
       this.websocket = websocket;
+      this.isIt = true;
       this.lastX = 0;
       this.lastY = 0;
       this.movediffX = () =>{return this.lastX - this.x};

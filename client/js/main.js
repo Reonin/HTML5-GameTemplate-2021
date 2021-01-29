@@ -130,7 +130,7 @@ window.cameraFollow = true;
 
 window.allPlayersReady = () => {
   // check websocket message of other players
-  if (false) {
+  if (true) {
     return true;
   }
 

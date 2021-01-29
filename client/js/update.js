@@ -2,6 +2,7 @@ import Enemy from './Enemy.js';
 import Pickup from './pickup.js';
 import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
+import trackScore from './utils/scoreKeeper.js';
 
 export default function update() { // Updates location and reaction of objects to the canvas
 
@@ -19,6 +20,7 @@ export default function update() { // Updates location and reaction of objects t
       if (keydown.space) {
         window.currentState = window.states.LOBBY;
         startTimer();
+        trackScore();
       }
       break;
 
@@ -29,7 +31,6 @@ export default function update() { // Updates location and reaction of objects t
       break;
 
     case window.states.GAME:
-
       // Player Movement Controls
       window.playerArray.forEach((p) => {
         p.movement();
