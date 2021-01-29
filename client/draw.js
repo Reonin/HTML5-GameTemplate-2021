@@ -1,6 +1,7 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
 import { writeMessage, drawImageRotated} from './js/utils/commonCanvasOperations.js';
+import drawTrail from './js/drawTrails.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
@@ -91,16 +92,17 @@ export default function draw() { // Draws objects to the canvas
         });
 
         window.parallax.Draw(); // draw background
-
+        drawTrail();
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
             p.draw();
           }
         });
-
+        
         canvas.scale(0.5, 0.5);
         canvas.translate(-window.bufferHoriz, -window.bufferVert);
       }
+     
       drawPlayerUI();
       drawTimer();
       break;

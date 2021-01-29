@@ -29,6 +29,7 @@ export default class Player {
       this.websocket = websocket;
       this.isIt = true;
       this.isImmune = false;
+      this.traveltrail = [];
       this.lastX = 0;
       this.lastY = 0;
       this.movediffX = () =>{return this.lastX - this.x};
@@ -167,6 +168,11 @@ this.explode();
           x : this.x,
           y: this.y
         };
+
+        this.traveltrail.push({x:this.x, y:this.y});
+        if(this.traveltrail.length >= 20){
+          this.traveltrail.shift();
+        }
         //console.log(`The websocket ${websocket.url}`)
         sendData(JSON.stringify(playerPos));
       };
