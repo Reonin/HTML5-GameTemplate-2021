@@ -39,7 +39,7 @@ function changePlayerSpeed(tagger, tagged){
 
 function restoreSpeed(){
   window.playerArray.forEach(p => {
-    p.speed = 4;
+    p.isIt ? p.speed = 6 : p.speed = 4; //make sure you update camera buffer to factor in the speed
   })
 }
 
