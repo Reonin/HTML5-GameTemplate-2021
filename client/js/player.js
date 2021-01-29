@@ -168,7 +168,7 @@ this.explode();
           x : this.x,
           y: this.y
         };
-        if(Math.random() > 0.85){
+        if(Math.random() > 0.80){
           this.traveltrail.push({x:this.x, y:this.y});
           if(this.traveltrail.length >= 20){
             this.traveltrail.shift();
@@ -176,7 +176,7 @@ this.explode();
         }
        
         //console.log(`The websocket ${websocket.url}`)
-        sendData(JSON.stringify(playerPos));
+       // sendData(JSON.stringify(playerPos));
       };
     }
   }

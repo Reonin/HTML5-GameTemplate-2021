@@ -62,7 +62,7 @@ export default function draw() { // Draws objects to the canvas
         });
 
         window.parallax.Draw(); // draw background
-
+        drawTrail();
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
             p.draw();
