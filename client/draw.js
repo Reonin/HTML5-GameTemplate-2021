@@ -5,7 +5,7 @@ export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
   canvas.clearRect(0, 0, CANVAS_WIDTH, CANVAS_HEIGHT);
 
-  if (currentState === states.splash) {
+  if (window.currentState === window.states.SPLASH) {
     canvas.fillStyle = '#000'; // Set color to black
     canvas.font = '25pt Calibri';
     const SPLASH_SCREEN_TEXT = 'The Full Palette';
@@ -13,7 +13,7 @@ export default function draw() { // Draws objects to the canvas
     canvas.fillText(SPLASH_SCREEN_TEXT, (CANVAS_WIDTH / 2) - (splashTextX / 2), splashTextY);
   }
 
-  if (currentState === states.title) {
+  if (window.currentState === window.states.TITLE) {
     canvas.fillStyle = '#000'; // Set color to black
     canvas.font = 'bold 40pt Calibri';
     const GAME_NAME_TEXT = 'Brush it Off';
@@ -33,7 +33,7 @@ export default function draw() { // Draws objects to the canvas
     canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
   }
 
-  if (currentState === states.Game) {
+  if (window.currentState === window.states.GAME) {
     if (window.cameraFollow === false) {
       window.playerArray.forEach((p) => {
         p.draw();
@@ -96,7 +96,7 @@ export default function draw() { // Draws objects to the canvas
     drawTimer();
   }
 
-  if (currentState === states.End) {
+  if (window.currentState === window.states.END) {
     canvas.fillStyle = '#F00'; // Set color to red
     canvas.font = '25pt Calibri';
 

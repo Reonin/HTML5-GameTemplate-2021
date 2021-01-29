@@ -11,9 +11,8 @@ import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
 window.socket = new WebSocket('ws://localhost:3000');
 
-
-window.socket.onmessage = function(event) {
-  console.debug("WebSocket message received:", event);
+window.socket.onmessage = function (event) {
+  console.debug('WebSocket message received:', event);
 };
 
 scaletosmallest(canvasid, ratio);
@@ -23,14 +22,16 @@ $(window).on('resize', () => {
 
 // Draw tile map
 drawMap(canvas);
-// Game State
-window.states = {
-  splash: 0,
-  title: 1,
-  Game: 2,
-  End: 3,
-};
-window.currentState = window.states.title;
+
+window.states = Object.freeze({
+  SPLASH: Symbol(),
+  TITLE: Symbol(),
+  LOBBY: Symbol(),
+  GAME: Symbol(),
+  END: Symbol(),
+});
+
+window.currentState = window.states.TITLE;
 
 const viewPortW = 480;
 const viewPortH = 270;
@@ -73,6 +74,7 @@ function getMousePos(canvas, evt) {
 window.player = new Player('spaceship', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 100, 100, socket);
 window.player2 = new Player('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 200, 680, socket);
 window.player3 = new Player('redShip', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 300, 680, socket);
+// Extend PLayer class to OtherPLayer that receives X/Y data from server
 
 window.playerBullets = [];
 
@@ -93,7 +95,6 @@ window.onkeydown = () => {
 };
 
 function Start() {
-  
   if (!isPaused) {
     update();
     draw();

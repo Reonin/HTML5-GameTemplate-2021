@@ -69,7 +69,7 @@ export default class Player {
         this.active = false;
         explosion_sound.play();
         // GameLoopMusic_sound.fadeOut(0, 2000);
-        window.currentState = window.states.End;
+        window.currentState = window.states.END;
         // An explosion sound and then end the game
       };
       this.lifeChange = function (change) {

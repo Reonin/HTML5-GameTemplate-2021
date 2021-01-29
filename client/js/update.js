@@ -4,23 +4,23 @@ import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
 
 export default function update() { // Updates location and reaction of objects to the canvas
-  if (window.currentState === window.states.splash) {
+  if (window.currentState === window.states.SPLASH) {
     // splashTextX += 1;
     splashTextY += 1;
 
     if (splashTextY >= 300) {
-      window.currentState = window.states.title;
+      window.currentState = window.states.TITLE;
     }
   }
 
-  if (window.currentState === window.states.title) {
+  if (window.currentState === window.states.TITLE) {
     if (keydown.space) {
-      window.currentState = window.states.Game;
+      window.currentState = window.states.GAME;
       startTimer();
     }
   }
 
-  if (window.currentState === window.states.Game) {
+  if (window.currentState === window.states.GAME) {
     // Player Movement Controls
     window.playerArray.forEach((p) => {
       p.movement();
@@ -76,7 +76,7 @@ export default function update() { // Updates location and reaction of objects t
     handleCollisions();
   }
 
-  if (window.currentState === window.states.End) {
+  if (window.currentState === window.states.END) {
     endTextY += 1;
 
     if (endTextY >= 300) {
