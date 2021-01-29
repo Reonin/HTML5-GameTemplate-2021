@@ -28,3 +28,9 @@ export function drawTimer() {
     40,
   );
 }
+
+export function countdownTimer(doTheThing, doItWhen = 5000){
+  setTimeout(function() {
+    doTheThing();
+}, doItWhen);
+}
