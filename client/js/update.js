@@ -4,83 +4,58 @@ import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
 
 export default function update() { // Updates location and reaction of objects to the canvas
-  if (window.currentState === window.states.SPLASH) {
-    // splashTextX += 1;
-    splashTextY += 1;
-
-    if (splashTextY >= 300) {
-      window.currentState = window.states.TITLE;
-    }
-  }
-
-  if (window.currentState === window.states.TITLE) {
-    if (keydown.space) {
-      window.currentState = window.states.GAME;
-      startTimer();
-    }
-  }
-
-  if (window.currentState === window.states.GAME) {
-    // Player Movement Controls
-    window.playerArray.forEach((p) => {
-      p.movement();
-    });
 
 
+  switch (window.currentState) {
+    case window.states.SPLASH:
+      // splashTextX += 1;
+      splashTextY += 1;
 
-    window.camera.update();
+      if (splashTextY >= 300) {
+        window.currentState = window.states.TITLE;
+      }
+      break;
+    case window.states.TITLE:
+      if (keydown.space) {
+        window.currentState = window.states.GAME;
+        startTimer();
+      }
+      break;
 
-    // window.player actions
-    // if (keydown.space) {
-    //   window.player.shoot();
-    // }
+    case window.states.LOBBY:
+      
+      break;
 
-    // window.playerBullets.forEach((bullet) => {
-    //   bullet.update();
-    // });
+    case window.states.GAME:
 
-    // window.playerBullets = window.playerBullets.filter((bullet) => bullet.active);
+      // Player Movement Controls
+      window.playerArray.forEach((p) => {
+        p.movement();
+      });
 
-    // if (keydown.v) {
-    //   window.player.launch();
-    // }
+      window.camera.update();
 
-    // playerMissiles.forEach((Missile) => {
-    //   Missile.update();
-    // });
+      // Powerup Update logic
+      window.pickups.forEach((pickup) => {
+        pickup.update();
+      });
 
-    // playerMissiles = playerMissiles.filter((Missile) => Missile.active);
+      window.pickups = window.pickups.filter((pickup) => pickup.active);
 
-    // // Enemy Update logic
-    // window.enemies.forEach((enemy) => {
-    //   enemy.update();
-    // });
-    // // Garbage collect the enemies out of the array
-    // window.enemies = window.enemies.filter((enemy) => enemy.active);
-    // if (Math.random() < 0.05) {
-    //   window.enemies.push(new Enemy());
-    // }
+      if (Math.random() < 0.0001) {
+        window.pickups.push(new Pickup());
+      }
 
-    // Powerup Update logic
-    window.pickups.forEach((pickup) => {
-      pickup.update();
-    });
+      // Handle Collision
+      handleCollisions();
+      break;
 
-    window.pickups = window.pickups.filter((pickup) => pickup.active);
+    case window.states.END:
+      endTextY += 1;
 
-    if (Math.random() < 0.0001) {
-      window.pickups.push(new Pickup());
-    }
-
-    // Handle Collision
-    handleCollisions();
-  }
-
-  if (window.currentState === window.states.END) {
-    endTextY += 1;
-
-    if (endTextY >= 300) {
-      endTextY = 300;
-    }
+      if (endTextY >= 300) {
+        endTextY = 300;
+      }
+      break;
   }
 }
