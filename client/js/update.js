@@ -7,6 +7,7 @@ import sendData from '../ws.js';
 import Player from './player.js';
 
 
+
 export default async function update() { // Updates location and reaction of objects to the canvas
 
   switch (window.currentState) {
@@ -37,16 +38,29 @@ export default async function update() { // Updates location and reaction of obj
         // }
         // sendData(startData);
         window.localPlayerSet = true;
-        await window.player.setStartData().then(response =>{
-       
+        await window.player.setStartData().then(player =>{
+          console.log(`Promise returned: ${player}`);
           //sleep(5000)
-          console.log(`Player x is now ${window.player.x}`)});
+          var playerObj = JSON.parse(player);
+          window.player.x = playerObj.x;
+          window.player.y = playerObj.y;
+          console.log(`Player x is now ${window.player.x}`)}).catch(err =>{
+            console.log(`Error in lobby start`);
+          });
           
         
       }
+
+      if(window.localPlayerSet == true){
+        window.socket.onmessage = function (message) {
+          console.log(`Message in localplayerset: ${JSON.stringify(message.data)}`);
+          var playerObj = JSON.parse(message.data);
+          console.log(`All players set true: ${playerObj.startGame}`);
+          window.allPlayersSet = true;
+      }
+    }
       
-      
-      if (keydown.space && window.allPlayersReady()) {
+      if (window.allPlayersSet == true) {
        window.currentState = window.states.GAME;
        }
       break;

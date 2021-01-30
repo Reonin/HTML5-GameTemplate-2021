@@ -16,6 +16,7 @@ export default class Player {
       this.socket = window.socket;
       // color: "#00A",
       this.sprite = Sprite(spriteimg);
+      this.playerSet = false;
       this.x = startingX;
       this.y = startingY;
       this.width = 32;
@@ -213,9 +214,16 @@ export default class Player {
       window.socket.onmessage = function (message) {
         console.log(`Message in player: ${JSON.stringify(message.data)}`);
         var playerObj = JSON.parse(message.data);
-        this.x = playerObj.x;
-        this.y = playerObj.y;
-        console.log(`X is now: ${this.x}`);
+        if(window.player.isSet == false){
+          window.player.x = playerObj.x;
+          window.player.y = playerObj.y;
+          console.log(`X is now: ${window.player.x}`);
+          window.player.isSet == true;
+        }else{
+          window.allPlayersSet = playerObj.startGame;
+        }
+
+        resolve(JSON.stringify(playerObj));
       }
       window.socket.onerror = function(err){
         reject(err);
