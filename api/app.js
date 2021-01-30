@@ -14,15 +14,11 @@ const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
   // var connection = socket.accept('any-protocol', socket.origin);
   // clients.push(connection);
-  socket.on('message', message => {//
+  socket.on('message', message => {//socker is responding to the message it receives, so only will reply to that specific message. If we want to reply to all message listeners on client it must be done outside this message listener using socket.send
     messageObj = JSON.parse(message)
     console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(message.type == "playerMovement"){
       Player.updatePlayers(message);
-      
-      wsServer.clients.forEach(client => {
-        socket.send(Player.getPlayersObjects());
-    });
     }
     else if(messageObj.type == "gameStart"){
       console.log('Start game');
@@ -39,6 +35,9 @@ wsServer.on('connection', socket => {
   }
 )});
 
+wsServer.clients.forEach(client => {
+  socket.send(Player.getPlayersObjects());
+});
 
 // `server` is a vanilla Node.js HTTP server, so use
 // the same ws upgrade process described here:
