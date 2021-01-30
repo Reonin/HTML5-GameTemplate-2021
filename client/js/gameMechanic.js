@@ -66,7 +66,7 @@ function hudRenderTagged(state) {
 
 export function colorWheelRoulette(whichPlayer){
 
- let spin = Math.floor(Math.random() * 4);
+ let spin = Math.floor(Math.random() * 5);
   switch (spin) {
     case 0:
       //REVEALING RED
@@ -109,6 +109,17 @@ export function colorWheelRoulette(whichPlayer){
         window.powerMsg = null;
       }, 15000);
       break;
+    case 4:
+      //Multiplyin' Magenta
+      whichPlayer.pointMultiplier = 2;
+      window.powerMsg = "MAGENTA";
+      setTimeout(() => {
+        whichPlayer.pointMultiplier = 1;
+        window.powerMsg = null;
+      }, 15000);
+      break;
+
+      
     
   }
 

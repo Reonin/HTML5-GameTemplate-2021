@@ -35,6 +35,7 @@ export default class Player {
       this.isIt = true;
       this.isImmune = false;
       this.trailCap = 20;
+      this.pointMultiplier = 1;
       this.traveltrail = [];
       this.lastX = 0;
       this.lastY = 0;
@@ -91,7 +92,7 @@ export default class Player {
         return this.life;
       };
       this.score = function (change) {
-        this.pointScore += change; // Adds or subtracts health based on the value added in the function
+        this.pointScore += change * this.pointMultiplier; // Adds or subtracts health based on the value added in the function
 
         /* if (this.life <= 0) {
 this.explode();

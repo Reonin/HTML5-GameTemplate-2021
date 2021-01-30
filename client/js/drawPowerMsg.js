@@ -28,5 +28,13 @@ export default function drawPowerMsg(){
         const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
         canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 6);
     }
+    else if(window.powerMsg === "MAGENTA"){
+        canvas.fillStyle = '#FF00FF';
+        canvas.font = 'bold 40pt Calibri';
+        const SPACEBAR_TEXT = "Multiplyin' Magenta";
+        const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
+        canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 6);
+    }
+    
 }
 
