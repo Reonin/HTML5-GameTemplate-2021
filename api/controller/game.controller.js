@@ -41,3 +41,7 @@ exports.startGame = () => {
         
     }
 }
+
+exports.getPlayerData = () => {
+    return players;
+}

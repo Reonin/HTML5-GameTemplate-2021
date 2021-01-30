@@ -93,10 +93,10 @@ export default class OtherPlayer extends Player {
       // console.log(`The websocket ${websocket.url}`)
       // sendData(JSON.stringify(playerPos));
     };
-    const msg = {
-      type: 'sendPlayerData',
-    };
-    sendData(msg);
+    // const msg = {
+    //   type: 'sendPlayerData',
+    // };
+    // sendData(msg);
     this.movement = function () {
       return new Promise((resolve, reject) => {
         window.socket.onmessage = function (message) {
@@ -111,12 +111,14 @@ export default class OtherPlayer extends Player {
             window.allPlayersSet = playerObj.startGame;
           }
 
-          if (playerObj.playerName == 'Player 2' && window.player.name == playerObj.playerName) { // this player is launched as player 2
+          if (playerObj.playerName == 'Player 2' && window.player.name == playerObj.playerName) { // this player is launched as player 2 
             this.x = playerObj.x;
             this.y = playerObj.y;
+            console.log(`Player 2 x: ${this.x}\nPlayer 2 y: ${this.y}`)
           } else if (playerObj.playerName == 'Player 3' && window.player.name == playerObj.playerName) { // this player is launched as player 3
             this.x = playerObj.x;
             this.y = playerObj.y;
+            console.log(`Player 3 x: ${this.x}\nPlayer 3 y: ${this.y}`)
           }
 
           resolve(JSON.stringify(playerObj));

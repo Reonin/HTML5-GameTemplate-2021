@@ -186,23 +186,7 @@ export default class Player {
         y: this.y,
       };
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
-
-      this.setStartData = function () {
-        const startData = {
-          type: 'gameStart',
-        };
-        sendData(startData);
-        window.socket.onmessage = function (message) {
-          console.log(`Message in player: ${JSON.stringify(message.data)}`);
-          const playerObj = JSON.parse(message.data);
-          window.player.x = playerObj.x;
-          window.player.y = playerObj.y;
-          console.log(`X is now: ${window.player.x}`);
-        };
-        // console.log(`The websocket ${websocket.url}`)
-        // sendData(JSON.stringify(playerPos));
-      };
-    };
+      
     this.setStartData = function () {
       const startData = {
         type: 'gameStart',
@@ -214,6 +198,7 @@ export default class Player {
           console.log(`Message in player: ${JSON.stringify(message.data)}`);
           const playerObj = JSON.parse(message.data);
           if (window.player.isSet == false) {
+            console.log(`Player name is: ${playerObj.playerName}`);
             window.player.name = playerObj.playerName;
             window.player.x = playerObj.x;
             window.player.y = playerObj.y;
