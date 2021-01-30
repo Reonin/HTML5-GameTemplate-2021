@@ -6,51 +6,33 @@ const app = express();
 const Player = require('./controller/players.controller.js');
 const Game = require('./controller/game.controller.js');
 var webSockets = {}
-
-// db.sequelize.sync({ force: true }).then(() => {
-//     console.log('Drop and Resync Db');
-//     initial();
-//   });
-
-//   function initial() {
-//     Player.create({
-//         player: "player1",
-//         x: 0,
-//         y: 0
-//     })
-//     Player.create({
-//         player: "player2",
-//         x: 0,
-//         y: 0
-//     })
-//     Player.create({
-//         player: "player3",
-//         x: 0,
-//         y: 0
-//     })
-//     Player.create({
-//         player: "player4",
-//         x: 0,
-//         y: 0
-//     })
-//   }
-
-
+var clients = [];
 
 // Set up a headless websocket server that prints any
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
+  // var connection = socket.accept('any-protocol', socket.origin);
+  // clients.push(connection);
   socket.on('message', message => {//
     messageObj = JSON.parse(message)
     console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(message.type == "playerMovement"){
       Player.updatePlayers(message);
-      socket.send(Player.getPlayersObjects());
+      
+      wsServer.clients.forEach(client => {
+        socket.send(Player.getPlayersObjects());
+    });
     }
     else if(messageObj.type == "gameStart"){
-      console.log('Start game')
-      playerObj = Game.startGame()
+      console.log('Start game');
+      playerObj = Game.setPlayers();
+      playerObj.startGame = Game.startGame();
+      if(playerObj.startGame == true){
+        wsServer.clients.forEach(client => {
+          client.send(JSON.stringify(playerObj));
+      });
+      }
       socket.send(JSON.stringify(playerObj));
       console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
     }
