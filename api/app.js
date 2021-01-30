@@ -17,12 +17,14 @@ wsServer.on('connection', socket => {
   socket.on('message', message => {//socker is responding to the message it receives, so only will reply to that specific message. If we want to reply to all message listeners on client it must be done outside this message listener using socket.send
     messageObj = JSON.parse(message)
     console.log(`WebSocket message received ${message} and ${messageObj.type}`);
-    if(message.type == "playerMovement"){
+    if(messageObj.type == "playerMovement"){
+      //console.log(`In player movement if statement`)
       Player.updatePlayers(message);
       wsServer.clients.forEach(client => {
+        console.log(`Player movement sending back ${message}`);
         client.send(Player.getPlayersObjects());
       });
-      
+      // socket.send(Player.getPlayersObjects());
     }
     else if(messageObj.type == "gameStart"){
       console.log('Start game');
@@ -30,6 +32,7 @@ wsServer.on('connection', socket => {
       playerObj.startGame = Game.startGame();
       if(playerObj.startGame == true){
         wsServer.clients.forEach(client => {
+          console.log(`Sending start game to all clients`)
           client.send(JSON.stringify(playerObj));
       });
       }

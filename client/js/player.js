@@ -189,21 +189,31 @@ export default class Player {
 
       this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
       const playerPos = {
+        type: "playerMovement",
         playerName: this.name,
         x: this.x,
         y: this.y,
       };
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
-    
-  }
+      sendData(playerPos);
+      this.setValues('playerMovement');
+  //     window.socket.onmessage = function (message) {
+        
+  // }
+}
   this.setStartData = function () {
     const startData = {
       type: 'gameStart',
     };
     sendData(startData);
+    return this.setValues('setStartData');
+    
+  };
 
+  this.setValues =  function (type) {
     return new Promise((resolve, reject) => {
       window.socket.onmessage = function (message) {
+        if(type === 'setStartData'){
         console.log(`Message in player: ${JSON.stringify(message.data)}`);
         const playerObj = JSON.parse(message.data);
         if (window.player.isSet == false) {
@@ -218,11 +228,37 @@ export default class Player {
         }
 
         resolve(JSON.stringify(playerObj));
-      };
+      
       window.socket.onerror = function (err) {
         reject(err);
       };
+      }
+      else if(type == 'playerMovement'){
+        console.log(`Message received in player movement ${message.data}`);
+        const playerObj = JSON.parse(message.data);
+        window.playerArray.forEach(p => {
+          playerObj.forEach(wsPlayer =>{
+            if(wsPlayer.playerName == 'Player 1'){
+              p.x =  wsPlayer.x
+              p.y = wsPlayer.y;
+              console.log(`Player 1 start x is ${p.x}`);
+            }
+            else if(wsPlayer.playerName == 'Player 2'){
+              p.x = wsPlayer.x
+              p.y = wsPlayer.y;
+              console.log(`Player 2 start x is ${p.x}`);
+            }
+            else if(wsPlayer.playerName == 'Player 3'){
+              p = wsPlayer.x
+              p = wsPlayer.y;
+              console.log(`Player 3 start x is ${p.x}`);
+            }
+          })
+      })
+      }
+      
+      }
     });
-  };
+  }
 }
 }

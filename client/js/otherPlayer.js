@@ -100,17 +100,18 @@ export default class OtherPlayer extends Player {
     this.movement = function () {
       return new Promise((resolve, reject) => {
         window.socket.onmessage = function (message) {
-          console.log(`Message in player: ${JSON.stringify(message.data)}`);
-          const playerObj = JSON.parse(message.data);
-          if (window.player.isSet == false) {
-            window.player.x = playerObj.x;
-            window.player.y = playerObj.y;
-            console.log(`X is now: ${window.player.x}`);
-            window.player.isSet == true;
-          } else {
-            window.allPlayersSet = playerObj.startGame;
-          }
-
+          console.log(`Message in player: ${message.data}`);
+          const playerObj = message.data;
+          // if (window.player.isSet == false) {
+          //   window.player.x = playerObj.x;
+          //   window.player.y = playerObj.y;
+          //   console.log(`X is now: ${window.player.x}`);
+          //   window.player.isSet == true;
+          // } else {
+          //   window.allPlayersSet = playerObj.startGame;
+          // }
+          console.log(`Player object is ${playerObj}`);
+          console.log(`Player name is ${playerObj.playerName}\nWindow player name is ${window.player.name}`);
           if (playerObj.playerName == 'Player 2' && window.player.name == playerObj.playerName) { // this player is launched as player 2 
             this.x = playerObj.x;
             this.y = playerObj.y;
