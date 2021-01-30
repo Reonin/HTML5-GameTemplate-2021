@@ -80,7 +80,7 @@ export default function draw() { // Draws objects to the canvas
           tile.draw();
         });
 
-        window.parallax.Draw(); // draw background
+        //window.parallax.Draw(); // draw background
         drawTrail();
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
