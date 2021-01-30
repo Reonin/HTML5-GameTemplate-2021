@@ -67,7 +67,7 @@ function getMousePos(canvas, evt) {
   };
 }
 
-window.player = new Player('spaceship', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 967, 516, socket);
+window.player = new Player('Brush2', 'Player 1', 'player1', 1, '#D3D3D3', 'reload1()', 967, 516, socket);
 window.player2 = new OtherPlayer('pixel_spaceship', 'Player 2', 'player2', 2, '#0000FF', 'reload2()', 877, 445, socket);
 window.player3 = new OtherPlayer('redShip', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 1098, 445, socket);
 // Extend PLayer class to OtherPLayer that receives X/Y data from server
