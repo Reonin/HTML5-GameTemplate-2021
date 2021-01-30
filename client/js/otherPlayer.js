@@ -1,5 +1,6 @@
 import Player from './player.js';
 import positionCheck from './AI.js'
+import sendData from '../ws.js';
 /**
  * Creates the enemy Players character that move around a game map
  */
@@ -93,8 +94,15 @@ export default class OtherPlayer extends Player {
             }
            
             //console.log(`The websocket ${websocket.url}`)
-           // sendData(JSON.stringify(playerPos));
+           //sendData(JSON.stringify(playerPos));
           };
+          var msg = {
+            type: "sendPlayerData"
+          }
+          sendData(msg);
+          this.movement = function(){
+
+          }
         
     }
 
