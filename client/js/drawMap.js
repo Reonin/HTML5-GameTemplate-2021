@@ -27,7 +27,7 @@ export default function drawMap(canvas) {
       else if (parseInt(mapArray[i][j]) == 1) {
         var newTile = {
           // color: "#00A",
-          tile: Tile('redTile'),
+          tile: Tile('WallReference_07'),
           x: j * 60,
           y: i * 60,
           width: 60,
