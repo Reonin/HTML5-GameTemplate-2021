@@ -60,7 +60,7 @@ export default async function update() { // Updates location and reaction of obj
       }
     }
       //fast pass to game
-      //window.currentState = window.states.GAME;
+      // window.currentState = window.states.GAME;
       if (window.allPlayersSet == true) {
        window.currentState = window.states.GAME;
        }
