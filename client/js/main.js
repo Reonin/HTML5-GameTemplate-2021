@@ -13,7 +13,7 @@ import update from './update.js';
 window.socket = new WebSocket('ws://localhost:3000');
 //parses the player object data
 window.socket.onmessage = function (event) {
- // console.debug('WebSocket message received:', event);
+  console.debug('WebSocket message received:', event);
   var playerData = JSON.parse(event.data); //TODO ensure this isn't a string
   const playersMap = new Map(Object.entries(playerData)); //then creates a map from it
  // console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
@@ -127,6 +127,7 @@ window.bufferHoriz = -1000;
 window.bufferVert = -500;
 window.panVal = [9, 9];
 window.cameraFollow = true;
+window.localPlayerSet = false;
 window.whoAmI = "";
 window.allPlayersReady = () => {
   // check websocket message of other players
