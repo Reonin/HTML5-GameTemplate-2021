@@ -3,9 +3,11 @@ import Pickup from './pickup.js';
 import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
 import trackScore from './utils/scoreKeeper.js';
+import sendData from '../ws.js';
+import Player from './player.js';
 
-export default function update() { // Updates location and reaction of objects to the canvas
 
+export default async function update() { // Updates location and reaction of objects to the canvas
 
   switch (window.currentState) {
     case window.states.SPLASH:
@@ -19,12 +21,30 @@ export default function update() { // Updates location and reaction of objects t
     case window.states.TITLE:
       if (keydown.space) {
         window.currentState = window.states.LOBBY;
+        
         startTimer();
         trackScore();
       }
       break;
 
     case window.states.LOBBY:
+      //console.log('Lobby');
+      
+      if(window.localPlayerSet == false){
+        // var startData = {
+        //   type : "gameStart"
+        // }
+        // sendData(startData);
+        window.localPlayerSet = true;
+        await window.player.setStartData().then(response =>{
+       
+          //sleep(5000)
+          console.log(`Player x is now ${window.player.x}`)});
+          
+        
+      }
+      
+      
       if (keydown.space && window.allPlayersReady()) {
        window.currentState = window.states.GAME;
        }
@@ -66,5 +86,11 @@ export default function update() { // Updates location and reaction of objects t
         endTextY = 300;
       }
       break;
+  }
+}
+function sleep(miliseconds) {
+  var currentTime = new Date().getTime();
+
+  while (currentTime + miliseconds >= new Date().getTime()) {
   }
 }

@@ -14,7 +14,9 @@ export default function sendData(msgBlob){
         
     //   window.socket.onopen = function(event) {
         //console.log(`The websocket msg: ${JSON.stringify(msgBlob)}`);
-        window.socket.send(msgBlob);
+
+        window.socket.send(JSON.stringify(msgBlob));
+        //console.log(`Message sent: ${JSON.stringify(msgBlob)}`)
           resolve('Message sent successfully');
         //   window.socket.close()
     //   };
