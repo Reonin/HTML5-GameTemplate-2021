@@ -19,10 +19,10 @@ wsServer.on('connection', socket => {
     console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(message.type == "playerMovement"){
       Player.updatePlayers(message);
-
-        wsServer.clients.forEach(client => {
-          client.send(Player.getPlayersObjects());
-        });
+      wsServer.clients.forEach(client => {
+        client.send(Player.getPlayersObjects());
+      });
+      
     }
     else if(messageObj.type == "gameStart"){
       console.log('Start game');
@@ -39,6 +39,12 @@ wsServer.on('connection', socket => {
   }
 )});
 
+<<<<<<< HEAD
+=======
+wsServer.clients.forEach(client => {
+  client.send(Player.getPlayersObjects());
+});
+>>>>>>> 757ac261375bdf95a5e16751c5c058014a7470d9
 
 // `server` is a vanilla Node.js HTTP server, so use
 // the same ws upgrade process described here:

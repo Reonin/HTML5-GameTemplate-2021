@@ -102,10 +102,15 @@ export default class Player {
         this.trailMechanics();
       }, 250);
 
+      var oldPuddleRemoval = setInterval(() => {
+        this.traveltrail.shift();
+      }, 1000);
+
       setTimeout(() => {
         console.log('TURN OFF trail');
         this.activePuddle = false;
         clearTimeout(puddleInterval);
+        //clearTimeout(oldPuddleRemoval);
       }, 15000);
     };
     this.trailMechanics = function () {
@@ -114,7 +119,10 @@ export default class Player {
         this.traveltrail.shift();
       }
     };
-
+    this.updateStartingXY = function(newX, newY){
+      this.startingX = newX;
+      this.startingY = newY;
+    }
     this.movement = function () {
       // debugger;
       let left; let right; let up; let
@@ -186,7 +194,6 @@ export default class Player {
         y: this.y,
       };
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
-      
     this.setStartData = function () {
       const startData = {
         type: 'gameStart',
@@ -200,8 +207,8 @@ export default class Player {
           if (window.player.isSet == false) {
             console.log(`Player name is: ${playerObj.playerName}`);
             window.player.name = playerObj.playerName;
-            window.player.x = playerObj.x;
-            window.player.y = playerObj.y;
+            window.player.startingX = playerObj.x;
+            window.player.startingY = playerObj.y;
             console.log(`X is now: ${window.player.x}`);
             window.player.isSet == true;
           } else {
@@ -216,4 +223,5 @@ export default class Player {
       });
     };
   }
+}
 }
