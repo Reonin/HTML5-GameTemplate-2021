@@ -18,12 +18,12 @@ export default function handleCollisions() {
   }
 
   // Pickups Collision
-  pickups.forEach((pickup) => {
-    if (collides(pickup, player)) {
-      pickup.explode();
-      player.lifeChange(30);
-    }
-  });
+  // pickups.forEach((pickup) => {
+  //   if (collides(pickup, player)) {
+  //     pickup.explode();
+  //     player.lifeChange(30);
+  //   }
+  // });
 
   // tile
   tileArray.forEach((tile) => {

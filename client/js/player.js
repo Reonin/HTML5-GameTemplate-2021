@@ -1,4 +1,4 @@
-import { shoot_sound, explosion_sound } from './utils/initAudio.js';
+import { shoot_sound, explosion_sound, walk_sound } from './utils/initAudio.js';
 
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
@@ -194,6 +194,11 @@ export default class Player {
         x: this.x,
         y: this.y,
       };
+
+      if(Math.random() > 0.99){
+        //walk_sound.play();
+      }
+
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
       sendData(playerPos);
       this.setValues('playerMovement');

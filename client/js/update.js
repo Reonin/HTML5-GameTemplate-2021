@@ -5,6 +5,7 @@ import { startTimer } from './utils/timer.js';
 import { trackScore, tallyPointTotal } from './utils/scoreKeeper.js';
 import sendData from '../ws.js';
 import Player from './player.js';
+import { globalPickupRefresher } from './gameMechanic.js';
 
 export default async function update() { // Updates location and reaction of objects to the canvas
   switch (window.currentState) {
@@ -83,6 +84,7 @@ export default async function update() { // Updates location and reaction of obj
             
           })
           window.currentState = window.states.GAME;
+          globalPickupRefresher();
       }
         
       }

@@ -1,8 +1,9 @@
 import { countdownTimer } from './utils/timer.js';
+import { tag_sound } from './utils/initAudio.js';
 
 export function transferTag(player, otherPlayer) {
   if (player.isIt === true && otherPlayer.isImmune === false) {
-    //console.log('P1 Tagged P2');
+    // console.log('P1 Tagged P2');
     player.isIt = false;
     otherPlayer.isIt = true;
     if (Object.is(window.player, player)) {
@@ -11,8 +12,9 @@ export function transferTag(player, otherPlayer) {
     player.score(100);
     thingsForBoth(player, otherPlayer);
     changePlayerSpeed(player, otherPlayer);
+    tag_sound.play();
   } else if (otherPlayer.isIt === true && player.isImmune === false) {
-    //console.log('P2 Tagged P1');
+    // console.log('P2 Tagged P1');
     otherPlayer.isIt = false;
     player.isIt = true;
     if (Object.is(window.player, player)) {
@@ -21,7 +23,9 @@ export function transferTag(player, otherPlayer) {
     otherPlayer.score(100);
     thingsForBoth(player, otherPlayer);
     changePlayerSpeed(otherPlayer, player);
+    tag_sound.play();
   }
+ 
 }
 
 function thingsForBoth(player, otherPlayer) {
@@ -64,65 +68,70 @@ function hudRenderTagged(state) {
 }
 
 
-export function colorWheelRoulette(whichPlayer){
+export function globalPickupRefresher(){
+  
+  tileArray.forEach((tile) => {
+    if (tile.type == 'pickup') {
+    tile.active = true;
+    }
+  });
+  //Every minute refresh the pickups on the map
+  countdownTimer(globalPickupRefresher, 60000);
+}
 
- let spin = Math.floor(Math.random() * 5);
+
+export function colorWheelRoulette(whichPlayer) {
+  const spin = Math.floor(Math.random() * 5);
   switch (spin) {
     case 0:
-      //REVEALING RED
+      // REVEALING RED
       window.cameraFollow = false;
-      window.powerMsg = "RED";
+      window.powerMsg = 'RED';
       setTimeout(() => {
         window.cameraFollow = true;
         window.powerMsg = null;
       }, 15000);
       break;
     case 1:
-      //Teleportin Teal
+      // Teleportin Teal
       whichPlayer.x = 988;
-      whichPlayer.y = 480 ;
-      window.powerMsg = "TEAL";
+      whichPlayer.y = 480;
+      window.powerMsg = 'TEAL';
       setTimeout(() => {
         window.powerMsg = null;
       }, 15000);
       break;
     case 2:
-      //Dashin' Dandelion
+      // Dashin' Dandelion
       whichPlayer.speed *= 2;
-      window.powerMsg = "DANDELION";
+      window.powerMsg = 'DANDELION';
       setTimeout(() => {
         whichPlayer.isIt ? whichPlayer.speed = 6 : whichPlayer.speed = 4;
         window.powerMsg = null;
       }, 15000);
       break;
     case 3:
-      //Lengthy Lavender
-      window.playerArray.forEach(p => {
+      // Lengthy Lavender
+      window.playerArray.forEach((p) => {
         p.trailCap = 50;
-      })
+      });
 
-      window.powerMsg = "LAVENDER";
+      window.powerMsg = 'LAVENDER';
       setTimeout(() => {
-        window.playerArray.forEach(p => {
+        window.playerArray.forEach((p) => {
           p.trailCap = 20;
-        })
+        });
         window.powerMsg = null;
       }, 15000);
       break;
     case 4:
-      //Multiplyin' Magenta
+      // Multiplyin' Magenta
       whichPlayer.pointMultiplier = 2;
-      window.powerMsg = "MAGENTA";
+      window.powerMsg = 'MAGENTA';
       setTimeout(() => {
         whichPlayer.pointMultiplier = 1;
         window.powerMsg = null;
       }, 15000);
       break;
-
-      
-    
   }
-
-
-
 }
