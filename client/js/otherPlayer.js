@@ -111,10 +111,10 @@ export default class OtherPlayer extends Player {
             window.allPlayersSet = playerObj.startGame;
           }
 
-          if (message.playerName == 'Player 2' && false == true) { // this player is launched as player 2
+          if (playerObj.playerName == 'Player 2' && window.player.name == playerObj.playerName) { // this player is launched as player 2
             this.x = playerObj.x;
             this.y = playerObj.y;
-          } else if (message.playerName == 'Player 3' && false == true) { // this player is launched as player 3
+          } else if (playerObj.playerName == 'Player 3' && window.player.name == playerObj.playerName) { // this player is launched as player 3
             this.x = playerObj.x;
             this.y = playerObj.y;
           }
