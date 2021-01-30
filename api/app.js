@@ -4,6 +4,7 @@ const db = require("./models");
 const app = express();
 //const Player = db.player;
 const Player = require('./controller/players.controller.js');
+const Game = require('./controller/game.controller.js');
 var webSockets = {}
 
 // db.sequelize.sync({ force: true }).then(() => {
@@ -40,9 +41,19 @@ var webSockets = {}
 // events that come in.
 const wsServer = new ws.Server({ noServer: true });
 wsServer.on('connection', socket => {
-  socket.on('message', message => {//console.log(message);
-    Player.updatePlayers(message);
-    socket.send(Player.getPlayersObjects());
+  socket.on('message', message => {//
+    messageObj = JSON.parse(message)
+    console.log(`WebSocket message received ${message} and ${messageObj.type}`);
+    if(message.type == "playerMovement"){
+      Player.updatePlayers(message);
+      socket.send(Player.getPlayersObjects());
+    }
+    else if(messageObj.type == "gameStart"){
+      console.log('Start game')
+      playerObj = Game.startGame()
+      socket.send(JSON.stringify(playerObj));
+      console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
+    }
   }
 )});
 

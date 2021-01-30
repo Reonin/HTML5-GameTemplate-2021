@@ -3,12 +3,17 @@ import { shoot_sound, explosion_sound, GameLoopMusic_sound } from './utils/initA
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
 import sendData from '../ws.js';
+
 /**
  * Creates the player character that the user controls
  */
 export default class Player {
-  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket) {
+  
+
+  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket) 
     {
+      
+      this.socket = window.socket;
       // color: "#00A",
       this.sprite = Sprite(spriteimg);
       this.x = startingX;
@@ -176,10 +181,41 @@ this.explode();
             this.traveltrail.shift();
           }
         }
-       
+       this.setStartData = function(){
+      var startData = {
+        type : "gameStart"
+      }
+      sendData(startData);
+      window.socket.onmessage = function (message) {
+        console.log(`Message in player: ${JSON.stringify(message.data)}`);
+        var playerObj = JSON.parse(message.data);
+        window.player.x = playerObj.x;
+        window.player.y = playerObj.y;
+        console.log(`X is now: ${window.player.x}`);
+      }
         //console.log(`The websocket ${websocket.url}`)
        // sendData(JSON.stringify(playerPos));
       };
+      
+    }
+    this.setStartData = function(){
+      var startData = {
+        type : "gameStart"
+      }
+      sendData(startData);
+
+      return new Promise((resolve, reject) => {
+      window.socket.onmessage = function (message) {
+        console.log(`Message in player: ${JSON.stringify(message.data)}`);
+        var playerObj = JSON.parse(message.data);
+        this.x = playerObj.x;
+        this.y = playerObj.y;
+        console.log(`X is now: ${this.x}`);
+      }
+      window.socket.onerror = function(err){
+        reject(err);
+      }
+    });
     }
   }
 }

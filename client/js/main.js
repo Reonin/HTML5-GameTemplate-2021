@@ -128,10 +128,11 @@ window.bufferVert = -500;
 window.panVal = [9, 9];
 window.cameraFollow = true;
 window.localPlayerSet = false;
+window.tagState = null;
 window.whoAmI = "";
 window.allPlayersReady = () => {
   // check websocket message of other players
-  if (false) {
+  if (true) {
     window.whoAmI = "P1"
     return true;
   }
