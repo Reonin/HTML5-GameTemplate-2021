@@ -36,16 +36,12 @@ wsServer.on('connection', socket => {
       socket.send(JSON.stringify(playerObj));
       console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
     }
+    else if(messageObj.type == "getStartData"){
+      var players = Game.getPlayerStartData();
+      socket.send(JSON.stringify(players));
+    }
   }
 )});
-
-<<<<<<< HEAD
-=======
-wsServer.clients.forEach(client => {
-  client.send(Player.getPlayersObjects());
-});
->>>>>>> 757ac261375bdf95a5e16751c5c058014a7470d9
-
 // `server` is a vanilla Node.js HTTP server, so use
 // the same ws upgrade process described here:
 // https://www.npmjs.com/package/ws#multiple-servers-sharing-a-single-https-server

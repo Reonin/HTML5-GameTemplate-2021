@@ -194,34 +194,35 @@ export default class Player {
         y: this.y,
       };
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
-    this.setStartData = function () {
-      const startData = {
-        type: 'gameStart',
-      };
-      sendData(startData);
-
-      return new Promise((resolve, reject) => {
-        window.socket.onmessage = function (message) {
-          console.log(`Message in player: ${JSON.stringify(message.data)}`);
-          const playerObj = JSON.parse(message.data);
-          if (window.player.isSet == false) {
-            console.log(`Player name is: ${playerObj.playerName}`);
-            window.player.name = playerObj.playerName;
-            window.player.startingX = playerObj.x;
-            window.player.startingY = playerObj.y;
-            console.log(`X is now: ${window.player.x}`);
-            window.player.isSet == true;
-          } else {
-            window.allPlayersSet = playerObj.startGame;
-          }
-
-          resolve(JSON.stringify(playerObj));
-        };
-        window.socket.onerror = function (err) {
-          reject(err);
-        };
-      });
-    };
+    
   }
+  this.setStartData = function () {
+    const startData = {
+      type: 'gameStart',
+    };
+    sendData(startData);
+
+    return new Promise((resolve, reject) => {
+      window.socket.onmessage = function (message) {
+        console.log(`Message in player: ${JSON.stringify(message.data)}`);
+        const playerObj = JSON.parse(message.data);
+        if (window.player.isSet == false) {
+          console.log(`Player name is: ${playerObj.playerName}`);
+          window.player.name = playerObj.playerName;
+          window.player.startingX = playerObj.x;
+          window.player.startingY = playerObj.y;
+          console.log(`X is now: ${window.player.x}`);
+          window.player.isSet == true;
+        } else {
+          window.allPlayersSet = playerObj.startGame;
+        }
+
+        resolve(JSON.stringify(playerObj));
+      };
+      window.socket.onerror = function (err) {
+        reject(err);
+      };
+    });
+  };
 }
 }

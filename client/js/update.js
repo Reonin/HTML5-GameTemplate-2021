@@ -56,13 +56,35 @@ export default async function update() { // Updates location and reaction of obj
         };
       }
       // fast pass to game
-      window.currentState = window.states.GAME;
+      //window.currentState = window.states.GAME;
       if (window.allPlayersSet == true) {
-        window.playerArray.forEach(p => {
-         // p.updateStartingXY();
-        })
-
-        window.currentState = window.states.GAME;
+        var msg = {
+          type : "getStartData"
+        }
+        sendData(msg);
+        window.socket.onmessage = function (message){
+          const playerObj = JSON.parse(message.data);
+          window.playerArray.forEach(p => {
+            playerObj.forEach(wsPlayer =>{
+              if(wsPlayer.playerName == 'Player 1'){
+                p.updateStartingXY(wsPlayer.x, wsPlayer.y);
+                console.log(`Player 1 start x is ${p.startingX}`);
+              }
+              else if(wsPlayer.playerName == 'Player 2'){
+                p.updateStartingXY(wsPlayer.x, wsPlayer.y);
+                console.log(`Player 2 start x is ${p.startingX}`);
+              }
+              else if(wsPlayer.playerName == 'Player 3'){
+                p.updateStartingXY(wsPlayer.x, wsPlayer.y);
+                console.log(`Player 3 start x is ${p.startingX}`);
+              }
+            })
+            
+            
+          })
+          window.currentState = window.states.GAME;
+      }
+        
       }
       break;
 

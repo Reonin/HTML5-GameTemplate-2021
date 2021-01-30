@@ -42,6 +42,6 @@ exports.startGame = () => {
     }
 }
 
-exports.getPlayerData = () => {
+exports.getPlayerStartData = () => {
     return players;
 }
