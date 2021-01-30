@@ -1,6 +1,6 @@
 import { countdownTimer } from './utils/timer.js';
 
-export default function transferTag(player, otherPlayer) {
+export function transferTag(player, otherPlayer) {
   if (player.isIt === true && otherPlayer.isImmune === false) {
     console.log('P1 Tagged P2');
     player.isIt = false;
@@ -61,4 +61,68 @@ function hudRenderTagged(state) {
       window.tagState = null;
     }, 5000);
   }
+}
+
+
+export function colorWheelRoulette(whichPlayer){
+
+ let spin = Math.floor(Math.random() * 5);
+  switch (spin) {
+    case 0:
+      //REVEALING RED
+      window.cameraFollow = false;
+      window.powerMsg = "RED";
+      setTimeout(() => {
+        window.cameraFollow = true;
+        window.powerMsg = null;
+      }, 15000);
+      break;
+    case 1:
+      //Teleportin Teal
+      whichPlayer.x = 988;
+      whichPlayer.y = 480 ;
+      window.powerMsg = "TEAL";
+      setTimeout(() => {
+        window.powerMsg = null;
+      }, 15000);
+      break;
+    case 2:
+      //Dashin' Dandelion
+      whichPlayer.speed *= 2;
+      window.powerMsg = "DANDELION";
+      setTimeout(() => {
+        whichPlayer.isIt ? whichPlayer.speed = 6 : whichPlayer.speed = 4;
+        window.powerMsg = null;
+      }, 15000);
+      break;
+    case 3:
+      //Lengthy Lavender
+      window.playerArray.forEach(p => {
+        p.trailCap = 50;
+      })
+
+      window.powerMsg = "LAVENDER";
+      setTimeout(() => {
+        window.playerArray.forEach(p => {
+          p.trailCap = 20;
+        })
+        window.powerMsg = null;
+      }, 15000);
+      break;
+    case 4:
+      //Multiplyin' Magenta
+      whichPlayer.pointMultiplier = 2;
+      window.powerMsg = "MAGENTA";
+      setTimeout(() => {
+        whichPlayer.pointMultiplier = 1;
+        window.powerMsg = null;
+      }, 15000);
+      break;
+
+      
+    
+  }
+
+
+
 }

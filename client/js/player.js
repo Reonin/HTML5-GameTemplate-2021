@@ -1,4 +1,4 @@
-import { shoot_sound, explosion_sound, GameLoopMusic_sound } from './utils/initAudio.js';
+import { shoot_sound, explosion_sound } from './utils/initAudio.js';
 
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
@@ -35,6 +35,9 @@ export default class Player {
       this.websocket = websocket;
       this.isIt = true;
       this.isImmune = false;
+      this.activePuddle = false;
+      this.trailCap = 20;
+      this.pointMultiplier = 1;
       this.traveltrail = [];
       this.lastX = 0;
       this.lastY = 0;
@@ -91,13 +94,17 @@ export default class Player {
         return this.life;
       };
       this.score = function (change) {
-        this.pointScore += change; // Adds or subtracts health based on the value added in the function
-
-        /* if (this.life <= 0) {
-this.explode();
-} */
-
+        this.pointScore += change * this.pointMultiplier; // Adds or subtracts health based on the value added in the function
         return this.pointScore;
+      };
+      this.puddleTimer = function(){
+
+        this.traveltrail = [];
+       // this.trailCap = 20;
+        setTimeout(() => {
+          console.log("TURN OFF trail");
+          this.activePuddle = false;
+        }, 15000);
       };
 
       this.movement = function () {
@@ -110,9 +117,7 @@ this.explode();
           up = keydown.up;
           down = keydown.down;
         }
-        // if(alias == 'player1' && keyup.left ){
-        //   this.isMoving = false;
-        // }
+    
 
         if (alias == 'player2') {
           left = keydown.a;
@@ -131,7 +136,7 @@ this.explode();
             this.velX--;
             this.isMoving = true;
             //if(this.velX !== 0)
-            window.bufferHoriz+= window.panVal[0];
+      
           }
         }
 
@@ -140,7 +145,7 @@ this.explode();
             this.velX++;
             this.isMoving = true;
            //if(this.velX !== 0) 
-           window.bufferHoriz-= window.panVal[0];
+          
           }
         }
 
@@ -148,7 +153,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
-            window.bufferVert+= window.panVal[1];
+          
           }
         }
 
@@ -156,7 +161,7 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
-            window.bufferVert-= window.panVal[1];
+         
           }
         }
         this.lastX = this.x;
@@ -178,7 +183,7 @@ this.explode();
         };
         if(Math.random() > 0.80){
           this.traveltrail.push({x:this.x, y:this.y});
-          if(this.traveltrail.length >= 20){
+          if(this.traveltrail.length >= this.trailCap){
             this.traveltrail.shift();
           }
         }

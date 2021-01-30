@@ -6,7 +6,6 @@ import drawMap from './drawMap.js';
 import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';
 import Camera from './camera/camera.js';
-import { GameLoopMusic_sound } from './utils/initAudio.js'; // initialize Audio
 
 import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
@@ -123,8 +122,8 @@ window.playerMissiles = [];
 
 window.enemies = [];
 window.pickups = [];
-window.bufferHoriz = -1000;
-window.bufferVert = -500;
+
+
 window.panVal = [9, 9];
 window.cameraFollow = true;
 window.localPlayerSet = false;

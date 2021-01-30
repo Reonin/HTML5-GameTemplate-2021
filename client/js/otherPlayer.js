@@ -40,7 +40,7 @@ export default class OtherPlayer extends Player {
                 this.velX--;
                 this.isMoving = true;
                 //if(this.velX !== 0)
-                window.bufferHoriz+= window.panVal[0];
+              
               }
             }
     
@@ -49,7 +49,7 @@ export default class OtherPlayer extends Player {
                 this.velX++;
                 this.isMoving = true;
                //if(this.velX !== 0) 
-               window.bufferHoriz-= window.panVal[0];
+               
               }
             }
     
@@ -57,7 +57,7 @@ export default class OtherPlayer extends Player {
               if (this.velY > -this.speed) {
                 this.velY--;
                 this.isMoving = true;
-                window.bufferVert+= window.panVal[1];
+               
               }
             }
     
@@ -65,7 +65,7 @@ export default class OtherPlayer extends Player {
               if (this.velY < this.speed) {
                 this.velY++;
                 this.isMoving = true;
-                window.bufferVert-= window.panVal[1];
+               
               }
             }
             this.lastX = this.x;
