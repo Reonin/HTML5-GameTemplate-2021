@@ -8,11 +8,13 @@ export default function handleCollisions() {
   }
 
   if (collides(playerArray[0], playerArray[2])) {
-    console.log('P1 touches P3');
+    //console.log('P1 touches P3');
+    transferTag(playerArray[0], playerArray[2]);
   }
 
   if (collides(playerArray[1], playerArray[2])) {
-    console.log('P2 touches P3');
+    //console.log('P2 touches P3');
+    transferTag(playerArray[1], playerArray[2]);
   }
 
   // Pickups Collision
