@@ -34,6 +34,7 @@ export default class Player {
       this.websocket = websocket;
       this.isIt = true;
       this.isImmune = false;
+      this.trailCap = 20;
       this.traveltrail = [];
       this.lastX = 0;
       this.lastY = 0;
@@ -175,7 +176,7 @@ this.explode();
         };
         if(Math.random() > 0.80){
           this.traveltrail.push({x:this.x, y:this.y});
-          if(this.traveltrail.length >= 20){
+          if(this.traveltrail.length >= this.trailCap){
             this.traveltrail.shift();
           }
         }

@@ -1,5 +1,5 @@
 import { collides } from './collisionBox.js';
-import transferTag from '../gameMechanic.js';
+import { transferTag, colorWheelRoulette } from '../gameMechanic.js';
 
 export default function handleCollisions() {
   if (collides(playerArray[0], playerArray[1])) {
@@ -69,8 +69,13 @@ export default function handleCollisions() {
     } else if (tile.type == 'pickup') {
       window.playerArray.forEach((player) => {
         if (collides(tile, player)) {
-          tile.active = false;
+         if(tile.active){
           // hides pickups from the render
+          tile.active = false;
+          colorWheelRoulette(player);
+         
+         }
+         
         }
       });
     }

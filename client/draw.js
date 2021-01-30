@@ -2,6 +2,8 @@ import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
 import { writeMessage, drawImageRotated } from './js/utils/commonCanvasOperations.js';
 import drawTrail from './js/drawTrails.js';
+import drawTagMsg from './js/drawTagMsg.js';
+import drawPowerMsg from './js/drawPowerMsg.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
@@ -92,19 +94,8 @@ export default function draw() { // Draws objects to the canvas
 
       drawPlayerUI();
       drawTimer();
-      if (window.tagState === 'tagger') {
-        canvas.fillStyle = '#F00';
-        canvas.font = 'bold 40pt Calibri';
-        const SPACEBAR_TEXT = 'YOU JUST TAGGED';
-        const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
-        canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
-      } else if (window.tagState === 'tagged') {
-        canvas.fillStyle = '#F00';
-        canvas.font = 'bold 40pt Calibri';
-        const SPACEBAR_TEXT = 'YOU GOT TAGGED';
-        const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
-        canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
-      }
+      drawPowerMsg();
+      drawTagMsg();
       break;
 
     case window.states.END:
