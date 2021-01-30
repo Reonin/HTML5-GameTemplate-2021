@@ -47,7 +47,7 @@ export default function drawMap(canvas) {
       if (parseInt(mapArray[i][j]) == 2) {
         var newTile = {
           // color: "#00A",
-          tile: Tile('powerup'),
+          tile: Tile('paintbucket'),
           x: j * 60,
           y: i * 60,
           width: 60,
