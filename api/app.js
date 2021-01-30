@@ -19,6 +19,10 @@ wsServer.on('connection', socket => {
     console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(message.type == "playerMovement"){
       Player.updatePlayers(message);
+      wsServer.clients.forEach(client => {
+        client.send(Player.getPlayersObjects());
+      });
+      
     }
     else if(messageObj.type == "gameStart"){
       console.log('Start game');
@@ -36,7 +40,7 @@ wsServer.on('connection', socket => {
 )});
 
 wsServer.clients.forEach(client => {
-  socket.send(Player.getPlayersObjects());
+  client.send(Player.getPlayersObjects());
 });
 
 // `server` is a vanilla Node.js HTTP server, so use
