@@ -79,5 +79,17 @@ export default function handleCollisions() {
         }
       });
     }
+    else if (tile.type == 'puddle') {
+      window.playerArray.forEach((player) => {
+        if (collides(tile, player)) {
+         if(tile.active && player.activePuddle == false){
+          player.activePuddle = true;
+          player.puddleTimer();
+         }
+         
+        }
+      });
+    }
+
   });
 }

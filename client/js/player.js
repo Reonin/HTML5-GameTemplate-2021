@@ -34,6 +34,7 @@ export default class Player {
       this.websocket = websocket;
       this.isIt = true;
       this.isImmune = false;
+      this.activePuddle = false;
       this.trailCap = 20;
       this.pointMultiplier = 1;
       this.traveltrail = [];
@@ -94,6 +95,15 @@ export default class Player {
       this.score = function (change) {
         this.pointScore += change * this.pointMultiplier; // Adds or subtracts health based on the value added in the function
         return this.pointScore;
+      };
+      this.puddleTimer = function(){
+
+        this.traveltrail = [];
+       // this.trailCap = 20;
+        setTimeout(() => {
+          console.log("TURN OFF trail");
+          this.activePuddle = false;
+        }, 15000);
       };
 
       this.movement = function () {
