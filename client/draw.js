@@ -1,6 +1,6 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
-import { writeMessage, drawImageRotated} from './js/utils/commonCanvasOperations.js';
+import { writeMessage, drawImageRotated } from './js/utils/commonCanvasOperations.js';
 import drawTrail from './js/drawTrails.js';
 
 const lobbyIcon = new Image();
@@ -41,14 +41,14 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.LOBBY:
-      
-      writeMessage("WAITING IN THE LOBBY FOR OTHER PLAYERS TO CONNECT...");
-      drawImageRotated(lobbyIcon, CANVAS_WIDTH/2, 500, Math.random() * 5);
-      if(keydown.space){
-        writeMessage("Player 1 Ready!", 50, false);
-       }
-      //canvas.drawImage(lobbyIcon, 500 , 275, lobbyIcon.width, lobbyIcon.height);
- 
+
+      writeMessage('WAITING IN THE LOBBY FOR OTHER PLAYERS TO CONNECT...');
+      drawImageRotated(lobbyIcon, CANVAS_WIDTH / 2, 500, Math.random() * 5);
+      if (keydown.space) {
+        writeMessage('Player 1 Ready!', 50, false);
+      }
+      // canvas.drawImage(lobbyIcon, 500 , 275, lobbyIcon.width, lobbyIcon.height);
+
       break;
 
     case window.states.GAME:
@@ -69,20 +69,7 @@ export default function draw() { // Draws objects to the canvas
           }
         });
       } else {
-        // window.playerArray.forEach((p) => {
-        if (Math.abs(player.movediffX()) < 3) {
-          window.panVal[0] = 0;
-        } else {
-          window.panVal[0] = 9;
-        }
-
-        if (Math.abs(player.movediffY()) < 3) {
-          window.panVal[1] = 0;
-        } else {
-          window.panVal[1] = 9;
-        }
-
-        canvas.translate(window.bufferHoriz, window.bufferVert);
+        canvas.translate(-window.player.x, -window.player.y);
         canvas.scale(2, 2);
 
         playerArray[0].draw();
@@ -98,20 +85,20 @@ export default function draw() { // Draws objects to the canvas
             p.draw();
           }
         });
-        
+
         canvas.scale(0.5, 0.5);
-        canvas.translate(-window.bufferHoriz, -window.bufferVert);
+        canvas.translate(window.player.x, window.player.y);
       }
-     
+
       drawPlayerUI();
       drawTimer();
-      if(window.tagState === "tagger"){
+      if (window.tagState === 'tagger') {
         canvas.fillStyle = '#F00';
         canvas.font = 'bold 40pt Calibri';
         const SPACEBAR_TEXT = 'YOU JUST TAGGED';
         const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
         canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
-      }else if(window.tagState === "tagged"){
+      } else if (window.tagState === 'tagged') {
         canvas.fillStyle = '#F00';
         canvas.font = 'bold 40pt Calibri';
         const SPACEBAR_TEXT = 'YOU GOT TAGGED';

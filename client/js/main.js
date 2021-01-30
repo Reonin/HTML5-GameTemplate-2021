@@ -123,8 +123,8 @@ window.playerMissiles = [];
 
 window.enemies = [];
 window.pickups = [];
-window.bufferHoriz = -1000;
-window.bufferVert = -500;
+
+
 window.panVal = [9, 9];
 window.cameraFollow = true;
 window.tagState = null;

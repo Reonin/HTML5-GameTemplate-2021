@@ -104,9 +104,7 @@ this.explode();
           up = keydown.up;
           down = keydown.down;
         }
-        // if(alias == 'player1' && keyup.left ){
-        //   this.isMoving = false;
-        // }
+    
 
         if (alias == 'player2') {
           left = keydown.a;
@@ -125,7 +123,7 @@ this.explode();
             this.velX--;
             this.isMoving = true;
             //if(this.velX !== 0)
-            window.bufferHoriz+= window.panVal[0];
+      
           }
         }
 
@@ -134,7 +132,7 @@ this.explode();
             this.velX++;
             this.isMoving = true;
            //if(this.velX !== 0) 
-           window.bufferHoriz-= window.panVal[0];
+          
           }
         }
 
@@ -142,7 +140,7 @@ this.explode();
           if (this.velY > -this.speed) {
             this.velY--;
             this.isMoving = true;
-            window.bufferVert+= window.panVal[1];
+          
           }
         }
 
@@ -150,7 +148,7 @@ this.explode();
           if (this.velY < this.speed) {
             this.velY++;
             this.isMoving = true;
-            window.bufferVert-= window.panVal[1];
+         
           }
         }
         this.lastX = this.x;
