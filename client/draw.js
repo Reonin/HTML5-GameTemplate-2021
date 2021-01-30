@@ -54,7 +54,9 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.GAME:
+      
       if (window.cameraFollow === false) {
+        window.parallax.Draw(); // draw background
         window.playerArray.forEach((p) => {
           p.draw();
         });
@@ -63,7 +65,7 @@ export default function draw() { // Draws objects to the canvas
           tile.draw();
         });
 
-        window.parallax.Draw(); // draw background
+        
         drawTrail();
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
@@ -73,14 +75,14 @@ export default function draw() { // Draws objects to the canvas
       } else {
         canvas.translate(-window.player.x, -window.player.y);
         canvas.scale(2, 2);
-
+        window.parallax.Draw(); // draw background
         playerArray[0].draw();
 
         tileArray.forEach((tile) => {
           tile.draw();
         });
 
-        //window.parallax.Draw(); // draw background
+        
         drawTrail();
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {

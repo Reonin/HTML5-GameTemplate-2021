@@ -98,7 +98,7 @@ function Start() {
 
   window.requestAnimFrame(Start);
 }
-const layer = ['images/blackOverlay.png', 'images/blackOverlay.png'];
+const layer = ['images/Floor.png'];
 window.parallax = new ParallaxScrolling(canvas, layer);
 
 Start();

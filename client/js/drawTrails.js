@@ -1,5 +1,5 @@
-const trailPatternG = Sprite('greenTile');
-const trailPatternB = Sprite('blueTile');
+const trailPatternG = Sprite('greenCircle');
+const trailPatternB = Sprite('blueCircle');
 
 export default function drawTrail(){
     window.playerArray.forEach(p => {
