@@ -101,20 +101,20 @@ export default function draw() { // Draws objects to the canvas
     case window.states.END:
       canvas.fillStyle = '#F00'; // Set color to red
       canvas.font = '25pt Calibri';
-
       const GameOVER_TEXT = 'Game Over';
-      endTextX = canvas.measureText(GameOVER_TEXT).width; // Centers the text based on length
+      window.endTextX = canvas.measureText(GameOVER_TEXT).width; // Centers the text based on length
+      
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
-      canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY - 90);
+      canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
       canvas.fillStyle = '#000'; // Set color to black
       canvas.font = '20pt Calibri';
-      endTextX = canvas.measureText('First Firstnameson').width;
-      canvas.fillText('First Firstnameson', (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY - 45);
+      window.endTextX = canvas.measureText('First Firstnameson').width;
+      canvas.fillText('First Firstnameson', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
       canvas.fillStyle = '#000'; // Set color to black
       canvas.font = '20pt Calibri';
-      canvas.fillText('Second Secondton', (CANVAS_WIDTH / 2) - (endTextX / 2), endTextY);
+      canvas.fillText('Second Secondton', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY);
       break;
   }
 }

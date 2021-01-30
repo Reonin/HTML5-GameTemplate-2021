@@ -86,7 +86,7 @@ setUpKeys();
 let isPaused = false;
 window.onkeydown = () => {
   if (keydown.p) {
-    isPaused = !isPaused; // flips the pause state
+   // isPaused = !isPaused; // flips the pause state
   }
 };
 

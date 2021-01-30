@@ -1,4 +1,4 @@
-export default function trackScore(){
+export function trackScore(){
     window.playerArray.forEach(p => {
         if(p.isIt){
             return
@@ -9,4 +9,12 @@ export default function trackScore(){
        
     });
     setTimeout(trackScore, 1000);
+}
+
+export function tallyPointTotal(){
+
+    setTimeout(() => {
+        window.currentState = window.states.END;
+    }, 300000);
+
 }

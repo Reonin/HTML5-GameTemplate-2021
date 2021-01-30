@@ -2,7 +2,7 @@ import Enemy from './Enemy.js';
 import Pickup from './pickup.js';
 import handleCollisions from './collision/handleCollisions.js';
 import { startTimer } from './utils/timer.js';
-import trackScore from './utils/scoreKeeper.js';
+import {trackScore, tallyPointTotal} from './utils/scoreKeeper.js';
 import sendData from '../ws.js';
 import Player from './player.js';
 
@@ -24,6 +24,7 @@ export default async function update() { // Updates location and reaction of obj
         
         startTimer();
         trackScore();
+        tallyPointTotal();
       }
       break;
 
@@ -80,10 +81,10 @@ export default async function update() { // Updates location and reaction of obj
       break;
 
     case window.states.END:
-      endTextY += 1;
+      window.endTextY += 1;
 
-      if (endTextY >= 300) {
-        endTextY = 300;
+      if (window.endTextY >= 300) {
+        window.endTextY = 300;
       }
       break;
   }
