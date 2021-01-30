@@ -215,6 +215,7 @@ export default class Player {
         console.log(`Message in player: ${JSON.stringify(message.data)}`);
         var playerObj = JSON.parse(message.data);
         if(window.player.isSet == false){
+          window.player.name = playerObj.playerName;
           window.player.x = playerObj.x;
           window.player.y = playerObj.y;
           console.log(`X is now: ${window.player.x}`);

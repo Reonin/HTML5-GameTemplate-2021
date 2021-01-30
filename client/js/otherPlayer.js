@@ -101,7 +101,25 @@ export default class OtherPlayer extends Player {
           }
           sendData(msg);
           this.movement = function(){
-
+            return new Promise((resolve, reject) => {
+              window.socket.onmessage = function (message) {
+                console.log(`Message in player: ${JSON.stringify(message.data)}`);
+                var playerObj = JSON.parse(message.data);
+                if(window.player.isSet == false){
+                  window.player.x = playerObj.x;
+                  window.player.y = playerObj.y;
+                  console.log(`X is now: ${window.player.x}`);
+                  window.player.isSet == true;
+                }else{
+                  window.allPlayersSet = playerObj.startGame;
+                }
+        
+                resolve(JSON.stringify(playerObj));
+              }
+              window.socket.onerror = function(err){
+                reject(err);
+              }
+            });
           }
         
     }
