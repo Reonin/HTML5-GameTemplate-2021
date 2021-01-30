@@ -37,7 +37,7 @@ export default function update() { // Updates location and reaction of objects t
 
         //AI
         try{
-          p.checkAI();
+          //p.checkAI();
         }
         catch(e){}
       });

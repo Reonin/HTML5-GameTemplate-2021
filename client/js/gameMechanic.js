@@ -5,6 +5,9 @@ export default function transferTag(player, otherPlayer) {
     console.log('P1 Tagged P2');
     player.isIt = false;
     otherPlayer.isIt = true;
+    if(Object.is(window.player, otherPlayer){
+      hudRenderTagged();
+    }
     player.score(100);
     thingsForBoth(player,otherPlayer);
     changePlayerSpeed(player,otherPlayer);
@@ -43,3 +46,6 @@ function restoreSpeed(){
   })
 }
 
+function hudRenderTagged(){
+  
+}
