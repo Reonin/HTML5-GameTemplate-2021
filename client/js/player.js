@@ -1,4 +1,4 @@
-import { shoot_sound, explosion_sound, GameLoopMusic_sound } from './utils/initAudio.js';
+import { shoot_sound, explosion_sound } from './utils/initAudio.js';
 
 import Bullet from './projectile/Bullet.js';
 import Missile from './projectile/Missile.js';
@@ -93,11 +93,6 @@ export default class Player {
       };
       this.score = function (change) {
         this.pointScore += change * this.pointMultiplier; // Adds or subtracts health based on the value added in the function
-
-        /* if (this.life <= 0) {
-this.explode();
-} */
-
         return this.pointScore;
       };
 

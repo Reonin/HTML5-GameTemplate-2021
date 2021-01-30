@@ -24,7 +24,7 @@ export default function drawMap(canvas) {
         // console.log(newTile.x);
         //  <!--canvas.drawImage(image1, x*28, y*28);-->
       }
-      if (parseInt(mapArray[i][j]) == 1) {
+      else if (parseInt(mapArray[i][j]) == 1) {
         var newTile = {
           // color: "#00A",
           tile: Tile('redTile'),
@@ -43,10 +43,8 @@ export default function drawMap(canvas) {
         tileArray.push(newTile);
         // canvas.drawImage(image2, x*28, y*28);-->
       }
- 
-      if (parseInt(mapArray[i][j]) == 2) {
+    else if (parseInt(mapArray[i][j]) == 2) {
         var newTile = {
-          // color: "#00A",
           tile: Tile('paintbucket'),
           x: j * 60,
           y: i * 60,
@@ -55,8 +53,6 @@ export default function drawMap(canvas) {
           type: 'pickup',
           active: true,
           draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
             if(this.active){
               this.tile.draw(canvas, this.x, this.y, 60, 60);
             }
@@ -64,11 +60,54 @@ export default function drawMap(canvas) {
           },
         };
         tileArray.push(newTile);
-        //player2spawns.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
+      } 
+      else if (parseInt(mapArray[i][j]) == 3) {
+        var newTile = {
+          tile: Tile('PuddleReference_45'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'puddle',
+          active: true,
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
+      }
+      else if (parseInt(mapArray[i][j]) == 4) {
+        var newTile = {
+          tile: Tile('PuddleReference_31'),
+          secondaryTile: Tile('PuddleReference_14'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'puddle',
+          active: true,
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
+      }
+      else if (parseInt(mapArray[i][j]) == 5) {
+        var newTile = {
+          tile: Tile('PuddleReference_14'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'puddle',
+          active: true,
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
       }
 
-      // background.addChild(tile);-->
     }
   }
   // canvas.addChild(background);-->
