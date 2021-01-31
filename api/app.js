@@ -22,7 +22,7 @@ wsServer.on('connection', socket => {
       Player.updatePlayers(message);
       wsServer.clients.forEach(client => {
         //console.log(`Player movement sending back ${message}`);
-        console.log(`Player data is ${JSON.stringify(Game.getPlayerData())}`);
+        //console.log(`Player data is ${JSON.stringify(Game.getPlayerData())}`);
         client.send(JSON.stringify(Game.getPlayerData()));
       });
       // socket.send(Player.getPlayersObjects());
@@ -37,12 +37,22 @@ wsServer.on('connection', socket => {
           client.send(JSON.stringify(playerObj));
       });
       }
-      socket.send(JSON.stringify(playerObj));
+      var allPlayerDataForStart = playerObj + Game.getPlayerData();
+      console.log(`All player data: ${allPlayerDataForStart}`);
+      socket.send(JSON.stringify(allPlayerDataForStart));
       console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
     }
-    else if(messageObj.type == "getStartData"){
+    else if(messageObj.type == "getStartData" || messageObj.type == "getPlayerData"){
       var players = Game.getPlayerData();
       socket.send(JSON.stringify(players));
+    }
+    else if(messageObj.type == 'gameStartFirstOpponent'){
+      var player = Game.getFirstOpponent();
+      socket.send(player);
+    }
+    else if(messageObj.type == 'gameStartSecondOpponent'){
+      var player = Game.getSecondOpponent();
+      socket.send(player);
     }
   }
 )});
