@@ -16,7 +16,7 @@ wsServer.on('connection', socket => {
   // clients.push(connection);
   socket.on('message', message => {//socker is responding to the message it receives, so only will reply to that specific message. If we want to reply to all message listeners on client it must be done outside this message listener using socket.send
     messageObj = JSON.parse(message)
-    console.log(`WebSocket message received ${message} and ${messageObj.type}`);
+    //console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(messageObj.type == "playerMovement"){
       //console.log(`In player movement if statement`)
       Player.updatePlayers(message);

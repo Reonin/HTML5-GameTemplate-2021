@@ -70,8 +70,11 @@ export default async function update() { // Updates location and reaction of obj
         window.socket.onmessage = function (message) {
           console.log(`Message in localplayerset: ${JSON.stringify(message.data)}`);
           const playerObj = JSON.parse(message.data);
-          console.log(`All players set true: ${playerObj.startGame}`);
-          window.allPlayersSet = true;
+          
+          if(playerObj.startGame == true){
+            console.log(`All players set true: ${playerObj.startGame}`);
+            window.allPlayersSet = true;
+          }
         };
       }
       /** *

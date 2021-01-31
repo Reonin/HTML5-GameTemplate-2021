@@ -100,7 +100,7 @@ export default class OtherPlayer extends Player {
     this.movement = function () {
       return new Promise((resolve, reject) => {
         window.socket.onmessage = function (message) {
-          console.log(`Message in player: ${message.data}`);
+          //console.log(`Message in player: ${message.data}`);
           const playerObj = message.data;
           // if (window.player.isSet == false) {
           //   window.player.x = playerObj.x;
@@ -114,25 +114,12 @@ export default class OtherPlayer extends Player {
           // console.log(`Player name is ${playerObj.playerName}\nWindow player name is ${window.player.name}`);
 
           const objectifiedPlayerObj = JSON.parse(playerObj);
-<<<<<<< HEAD
-          //objectifiedPlayerObj["Player 1"];
-          //objectifiedPlayerObj["Player 2"];
-          //objectifiedPlayerObj["Player 3"];
-
-          objectifiedPlayerObj.forEach(po => {
-            console.log(`${JSON.stringify(po)}`)
-            debugger;
-            if(po.playerName == 'Player 1' && window.playerArray[0].name == "Player 1" ){
-              const P1 = window.playerArray.find(p => p.name == "Player 1");
-              P1.isIt = po.isIt; 
-=======
           // objectifiedPlayerObj["Player 1"];
           // objectifiedPlayerObj["Player 2"];
           // objectifiedPlayerObj["Player 3"];
->>>>>>> 7658aae8bd8d22e5b7296b45d8e9d8b38d759cb2
 
           objectifiedPlayerObj.forEach((po) => {
-            console.log(`${JSON.stringify(po)}`);
+           // console.log(`${JSON.stringify(po)}`);
             // debugger;
             if (po.playerName == 'Player 1' && window.playerArray[0].name == 'Player 1') {
               const P1 = window.playerArray.find((p) => p.name == 'Player 1');

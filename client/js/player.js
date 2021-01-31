@@ -202,7 +202,7 @@ export default class Player {
       if (Math.random() > 0.99) {
         // walk_sound.play();
       }
-      debugger;
+      //debugger;
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
       sendData(playerPos);
       this.setValues('playerMovement');
@@ -251,8 +251,6 @@ export default class Player {
               window.playerArray[0].startingY = playerObj.y;
               // console.log(`X is now: ${window.playerArray[0].x}`);
               window.player.isSet[0] = true;
-            } else {
-              window.allPlayersSet = playerObj.startGame;
             }
 
             resolve(JSON.stringify(playerObj));
@@ -265,9 +263,7 @@ export default class Player {
               window.playerArray[1].startingX = playerObj.x;
               window.playerArray[1].startingY = playerObj.y;
               window.player.isSet[1] = true;
-            } else {
-              window.allPlayersSet = playerObj.startGame;
-            }
+            } 
 
             resolve(JSON.stringify(playerObj));
           } else if (type === 'setSecondOpponentData') {
@@ -280,6 +276,7 @@ export default class Player {
               window.playerArray[2].startingY = playerObj.y;
               window.player.isSet[2] = true;
             } else {
+              console.log(`Player object start game 1 ${playerObj.startGame}`)
               window.allPlayersSet = playerObj.startGame;
             }
 
