@@ -202,7 +202,7 @@ export default class Player {
       if (Math.random() > 0.99) {
         // walk_sound.play();
       }
-
+      debugger;
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
       sendData(playerPos);
       this.setValues('playerMovement');
@@ -219,6 +219,7 @@ export default class Player {
     };
 
     this.setFirstOpponentStartData = function () {
+      console.log(`Who am i is: ${window.playerArray[0].name}`);
       const startData = {
         type: 'gameStartFirstOpponent',
         whoAmI: window.playerArray[0].name,
