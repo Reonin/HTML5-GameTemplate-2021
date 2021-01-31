@@ -75,6 +75,7 @@ module.exports = {
     },
 
     getFirstOpponent: function(data){
+        
         for(var i = 0; i <players.length; i++){
             var player = players[i]
             if(data.whoAmI == 'Player 1' && player.playerName == 'Player 2'){

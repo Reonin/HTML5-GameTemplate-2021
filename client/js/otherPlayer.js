@@ -120,7 +120,7 @@ export default class OtherPlayer extends Player {
 
           objectifiedPlayerObj.forEach(po => {
             console.log(`${JSON.stringify(po)}`)
-            debugger;
+            //debugger;
             if(po.playerName == 'Player 1' && window.playerArray[0].name == "Player 1" ){
               const P1 = window.playerArray.find(p => p.name == "Player 1");
               P1.isIt = po.isIt; 

@@ -48,11 +48,11 @@ wsServer.on('connection', socket => {
     }
     else if(messageObj.type == 'gameStartFirstOpponent'){
       var player = Game.getFirstOpponent(messageObj);
-      socket.send(player);
+      socket.send(JSON.stringify(player));
     }
     else if(messageObj.type == 'gameStartSecondOpponent'){
       var player = Game.getSecondOpponent(messageObj);
-      socket.send(player);
+      socket.send(JSON.stringify(player));
     }
   }
 )});
