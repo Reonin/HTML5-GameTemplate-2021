@@ -236,6 +236,18 @@ export default class Player {
           window.player.startingY = playerObj.y;
           console.log(`X is now: ${window.player.x}`);
           window.player.isSet == true;
+
+          //OtherPlayers #1 Set
+          window.playerArray[1].name = playerObj.firstOtherPlayerName;
+          window.playerArray[1].startingX = playerObj.firstOtherPlayerX;
+          window.playerArray[1].startingY = playerObj.firstOtherPlayerY;
+         
+          //Otherplay #2
+          window.playerArray[1].name = playerObj.secondOtherPlayerName;
+          window.playerArray[1].startingX = playerObj.secondOtherPlayerX;
+          window.playerArray[1].startingY = playerObj.secondOtherPlayerY;
+
+
         } else {
           window.allPlayersSet = playerObj.startGame;
         }
