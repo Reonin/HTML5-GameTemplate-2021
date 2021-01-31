@@ -12,6 +12,7 @@ export default class Player {
     this.socket = window.socket;
     // color: "#00A",
     this.sprite = Sprite(spriteimg);
+    this.hiddensprite = Sprite("WallReference_07");
     this.playerSet = false;
     this.x = startingX;
     this.y = startingY;
@@ -37,13 +38,19 @@ export default class Player {
     this.traveltrail = [];
     this.lastX = 0;
     this.lastY = 0;
-    this.movediffX = () => this.lastX - this.x;
-    this.movediffY = () => this.lastY - this.y;
+    this.movediffX = () => Math.abs(this.lastX - this.x);
+    this.movediffY = () => Math.abs(this.lastY - this.y);
     this.debounceEvent = (callback, time = 2000, interval) => (...args) => clearTimeout(interval, interval = setTimeout(() => callback(...args), time));
     this.draw = function () {
       // canvas.fillStyle = this.color;
       // canvas.fillRect(this.x, this.y, this.width, this.height);
-      this.sprite.draw(canvas, this.x, this.y);
+      if(this.movediffX() < 1 && this.movediffY() < 1){
+        this.hiddensprite.draw(canvas, this.x, this.y);
+      } 
+      else{
+        this.sprite.draw(canvas, this.x, this.y);
+      }
+     
     };
     this.drawView = function () {
       const { xView } = window.camera;
@@ -124,7 +131,7 @@ export default class Player {
       this.startingY = newY;
     }
     this.movement = function () {
-      // debugger;
+      
       let left; let right; let up; let
         down;
       this.isMoving = false;
