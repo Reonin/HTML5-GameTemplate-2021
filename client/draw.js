@@ -88,6 +88,7 @@ export default function draw() { // Draws objects to the canvas
       drawTimer();
       drawPowerMsg();
       drawTagMsg();
+      overlayInstructions();
       break;
 
     case window.states.END:

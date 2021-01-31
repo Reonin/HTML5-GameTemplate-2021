@@ -6,6 +6,7 @@ import drawMap from './drawMap.js';
 import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';
 import Camera from './camera/camera.js';
+import overlayInstructions from './drawInstructions.js'
 
 import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
@@ -85,6 +86,13 @@ setUpKeys();
 const isPaused = false;
 window.onkeydown = () => {
   if (keydown.p) {
+    // isPaused = !isPaused; // flips the pause state
+  }
+};
+
+window.onkeydown = () => {
+  if (keydown.shift) {
+    console.log("INSTRUCTIONS")
     // isPaused = !isPaused; // flips the pause state
   }
 };
