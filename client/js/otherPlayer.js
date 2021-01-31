@@ -5,8 +5,8 @@ import sendData from '../ws.js';
  * Creates the enemy Players character that move around a game map
  */
 export default class OtherPlayer extends Player {
-  constructor(spriteimg, order, color, reload, startingX, startingY, websocket) {
-    super(spriteimg, order, color, reload, startingX, startingY, websocket);
+  constructor(spriteimg, order, color, reload, startingX, startingY, websocket, alias) {
+    super(spriteimg, order, color, reload, startingX, startingY, websocket,alias);
 
     this.isIt = false;
     this.checkAI = () => positionCheck(this);
@@ -97,7 +97,9 @@ export default class OtherPlayer extends Player {
     //   type: 'sendPlayerData',
     // };
     // sendData(msg);
-    this.movement = function () {
+    this.remoteMovement = function () {
+
+      
       return new Promise((resolve, reject) => {
         window.socket.onmessage = function (message) {
           //console.log(`Message in player: ${message.data}`);
@@ -163,6 +165,10 @@ export default class OtherPlayer extends Player {
           reject(err);
         };
       });
+    
+    
+    
+    
     };
   }
 }

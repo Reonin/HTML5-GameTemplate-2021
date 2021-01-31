@@ -66,14 +66,14 @@ function getMousePos(canvas, evt) {
   };
 }
 
-window.player = new Player('Brush2', 1, '#D3D3D3', 'reload1()', 967, 516, socket);
-window.player2 = new OtherPlayer('brush4', 2, '#0000FF', 'reload2()', 877, 445, socket);
-window.player3 = new OtherPlayer('Brush5', 3, '#FF0000', 'reload3()', 1098, 445, socket);
+window.player = new Player('Brush2', 1, '#D3D3D3', 'reload1()', 967, 516, socket, "Player 1");
+window.player2 = new OtherPlayer('brush4', 2, '#0000FF', 'reload2()', 877, 445, socket, "Player 2");
+window.player3 = new OtherPlayer('Brush5', 3, '#FF0000', 'reload3()', 1098, 445, socket, "Player 3");
 // Extend PLayer class to OtherPLayer that receives X/Y data from server
 
 // window.playerBullets = [];
 
-window.timer = '5:10';
+window.timer = '5:01';
 
 // canvasid.addEventListener('mousemove', (evt) => {
 //   mousePos = getMousePos(canvasid, evt);
@@ -124,7 +124,7 @@ window.pickups = [];
 window.player.isSet = [false,false,false];
 
 window.panVal = [9, 9];
-window.cameraFollow = true;
+window.cameraFollow = false;
 window.localPlayerSet = false;
 window.allPlayersSet = false;
 window.tagState = null;

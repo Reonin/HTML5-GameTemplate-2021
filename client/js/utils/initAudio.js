@@ -4,7 +4,7 @@ const GameLoopMusic_sound = new Howl({
   src: ['sounds/lets not be bored .mp3'],
   autoplay: true,
   loop: true,
-  volume: 0.0,
+  volume: 0.2,
 });
 
 const explosion_sound = new Howl({

@@ -82,8 +82,9 @@ export default async function update() { // Updates location and reaction of obj
        *
        *
        * */
-      // window.currentState = window.states.GAME;
-      // trackScore();
+      window.currentState = window.states.GAME;
+      trackScore();
+      globalPickupRefresher();
       /** * */
 
       if (window.allPlayersSet == true) {
@@ -118,6 +119,9 @@ export default async function update() { // Updates location and reaction of obj
       window.playerArray.forEach((p) => {
         p.movement();
 
+        if(p.remoteMovement){
+          p.remoteMovement();
+        }
         // AI
         try {
           // p.checkAI();

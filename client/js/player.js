@@ -8,7 +8,7 @@ import sendData from '../ws.js';
  * Creates the player character that the user controls
  */
 export default class Player {
-  constructor(spriteimg, order, color, reload, startingX, startingY, websocket) {
+  constructor(spriteimg, order, color, reload, startingX, startingY, websocket, alias) {
     this.socket = window.socket;
     // color: "#00A",
     this.sprite = Sprite(spriteimg);
@@ -27,6 +27,8 @@ export default class Player {
     this.order = order;
     this.name = '';
     this.aka = '';
+    this.alias = alias;
+    this.revealed = false;
     this.color = color;
     this.isMoving = true;
     this.websocket = websocket;
@@ -44,7 +46,7 @@ export default class Player {
     this.draw = function () {
       // canvas.fillStyle = this.color;
       // canvas.fillRect(this.x, this.y, this.width, this.height);
-      if (this.movediffX() < 1 && this.movediffY() < 1) {
+      if (this.movediffX() < 1 && this.movediffY() < 1 && this.revealed === false) {
         this.hiddensprite.draw(canvas, this.x, this.y);
       } else {
         this.sprite.draw(canvas, this.x, this.y);
@@ -133,23 +135,24 @@ export default class Player {
         down;
       this.isMoving = false;
 
+      if (alias == 'Player 1') {
       left = keydown.left;
       right = keydown.right;
       up = keydown.up;
       down = keydown.down;
-
-      // if (alias == 'player2') {
-      //   left = keydown.a;
-      //   right = keydown.d;
-      //   up = keydown.w;
-      //   down = keydown.s;
-      // }
-      // if (alias == 'player3') {
-      //   left = keydown.j;
-      //   right = keydown.l;
-      //   up = keydown.i;
-      //   down = keydown.k;
-      // }
+      }
+      if (alias == 'Player 2') {
+        left = keydown.a;
+        right = keydown.d;
+        up = keydown.w;
+        down = keydown.s;
+      }
+      if (alias == 'Player 3') {
+        left = keydown.j;
+        right = keydown.l;
+        up = keydown.i;
+        down = keydown.k;
+      }
       if (left) {
         if (this.velX > -this.speed) {
           this.velX--;
@@ -204,7 +207,7 @@ export default class Player {
       }
       //debugger;
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
-      sendData(playerPos);
+      //sendData(playerPos);
       this.setValues('playerMovement');
       //     window.socket.onmessage = function (message) {
 
