@@ -112,14 +112,21 @@ export default class OtherPlayer extends Player {
           // }
           console.log(`Player object is ${playerObj}`);
           console.log(`Player name is ${playerObj.playerName}\nWindow player name is ${window.player.name}`);
-          if (playerObj.playerName == 'Player 2' && window.player.name == playerObj.playerName) { // this player is launched as player 2 
-            this.x = playerObj.x;
-            this.y = playerObj.y;
-            console.log(`Player 2 x: ${this.x}\nPlayer 2 y: ${this.y}`)
-          } else if (playerObj.playerName == 'Player 3' && window.player.name == playerObj.playerName) { // this player is launched as player 3
-            this.x = playerObj.x;
-            this.y = playerObj.y;
-            console.log(`Player 3 x: ${this.x}\nPlayer 3 y: ${this.y}`)
+
+          const objectifiedPlayerObj = JSON.parse(playerObj);
+          //objectifiedPlayerObj["Player 1"];
+          //objectifiedPlayerObj["Player 2"];
+          //objectifiedPlayerObj["Player 3"];
+          if (objectifiedPlayerObj["Player 2"].playerName) { // this player is launched as player 2 
+            const P2 = window.playerArray.find(p => p.name == "Player 2");
+            P2.x = objectifiedPlayerObj["Player 2"].x;
+            P2.y = objectifiedPlayerObj["Player 2"].y;
+           // console.log(`Player 2 x: ${this.x}\nPlayer 2 y: ${this.y}`)
+          } else if (objectifiedPlayerObj["Player 3"].playerName) { // this player is launched as player 3
+            const P3 = window.playerArray.find(p => p.name == "Player 3");
+            P3.x = objectifiedPlayerObj["Player 3"].x;
+            P3.y = objectifiedPlayerObj["Player 3"].y;
+           // console.log(`Player 3 x: ${this.x}\nPlayer 3 y: ${this.y}`)
           }
 
           resolve(JSON.stringify(playerObj));
