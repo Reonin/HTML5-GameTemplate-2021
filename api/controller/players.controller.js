@@ -1,8 +1,9 @@
 //var Players = new Map();
-var players = require('./game.controller.js');
+const gameController = require('./game.controller.js');
+var players = gameController.getPlayerData();
 
 exports.updatePlayers = (playerData) => {
-        console.log(JSON.stringify(playerData));
+        //console.log(JSON.stringify(playerData));
             player = JSON.parse(playerData);
             for(var i = 0; i < players.length; i++){
             var playerObj = players[i]
@@ -12,26 +13,31 @@ exports.updatePlayers = (playerData) => {
                 playerObj.x = player.x;
                 playerObj.y = player.y;
                 playerObj.isIt = player.isIt;
+                gameController.setPlayerData(playerObj);
             }
             else if(playerObj.playerName == 'Player 2'){
                 playerObj.x = player.x;
                 playerObj.y = player.y;
                 playerObj.isIt = player.isIt;
+                gameController.setPlayerData(playerObj);
             }
             else if(playerObj.playerName == 'Player 3'){
                 playerObj.x = player.x;
                 playerObj.y = player.y;
                 playerObj.isIt = player.isIt;
+                gameController.setPlayerData(playerObj);
             }
         }
+
+       
         // console.log(Players.get('Player 1'))
-        return players;
+        //return players;
         
     };
 
-exports.getPlayersObjects = () => {
-        const players = Object.fromEntries(Players);
-        //console.log(`Player1: ${players}`);
-       // console.log(`Players JSON: ${JSON.stringify(players)}`);
-        return JSON.stringify(players);
-    }
+// exports.getPlayersObjects = () => {
+//         const players = Object.fromEntries(Players);
+//         //console.log(`Player1: ${players}`);
+//        // console.log(`Players JSON: ${JSON.stringify(players)}`);
+//         return JSON.stringify(players);
+//     })

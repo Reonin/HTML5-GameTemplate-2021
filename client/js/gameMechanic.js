@@ -85,10 +85,18 @@ export function colorWheelRoulette(whichPlayer) {
   switch (spin) {
     case 0:
       // REVEALING RED
-      window.cameraFollow = false;
+      //window.cameraFollow = false;
+
+    window.playerArray.forEach(p => {
+      p.revealed = true;
+    })
+
       window.powerMsg = 'RED';
       setTimeout(() => {
-        window.cameraFollow = true;
+        //window.cameraFollow = true;
+        window.playerArray.forEach(p => {
+          p.revealed = false;
+        })
         window.powerMsg = null;
       }, 15000);
       break;
@@ -134,4 +142,8 @@ export function colorWheelRoulette(whichPlayer) {
       }, 15000);
       break;
   }
+  if(whichPlayer.isIt === false){
+    whichPlayer.score(10);
+  }
+
 }

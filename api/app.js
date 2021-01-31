@@ -16,13 +16,14 @@ wsServer.on('connection', socket => {
   // clients.push(connection);
   socket.on('message', message => {//socker is responding to the message it receives, so only will reply to that specific message. If we want to reply to all message listeners on client it must be done outside this message listener using socket.send
     messageObj = JSON.parse(message)
-    console.log(`WebSocket message received ${message} and ${messageObj.type}`);
+    //console.log(`WebSocket message received ${message} and ${messageObj.type}`);
     if(messageObj.type == "playerMovement"){
       //console.log(`In player movement if statement`)
       Player.updatePlayers(message);
       wsServer.clients.forEach(client => {
-        console.log(`Player movement sending back ${message}`);
-        client.send(Player.getPlayersObjects());
+        //console.log(`Player movement sending back ${message}`);
+        //console.log(`Player data is ${JSON.stringify(Game.getPlayerData())}`);
+        client.send(JSON.stringify(Game.getPlayerData()));
       });
       // socket.send(Player.getPlayersObjects());
     }
@@ -36,12 +37,24 @@ wsServer.on('connection', socket => {
           client.send(JSON.stringify(playerObj));
       });
       }
+      var allPlayerDataForStart = playerObj + Game.getPlayerData();
+      console.log(`All player data: ${allPlayerDataForStart}`);
       socket.send(JSON.stringify(playerObj));
       console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
     }
-    else if(messageObj.type == "getStartData"){
+    else if(messageObj.type == "getStartData" || messageObj.type == "getPlayerData"){
       var players = Game.getPlayerData();
       socket.send(JSON.stringify(players));
+    }
+    else if(messageObj.type == 'gameStartFirstOpponent'){
+      
+      var player = Game.getFirstOpponent(messageObj);
+      console.log(`First opponent data: ${JSON.stringify(player)}`)
+      socket.send(JSON.stringify(player));
+    }
+    else if(messageObj.type == 'gameStartSecondOpponent'){
+      var player = Game.getSecondOpponent(messageObj);
+      socket.send(JSON.stringify(player));
     }
   }
 )});

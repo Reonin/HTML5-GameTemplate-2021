@@ -93,7 +93,7 @@ export default function draw() { // Draws objects to the canvas
 
     case window.states.END:
 
-      window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ];
+     // window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ];
 
       canvas.fillStyle = '#F00'; // Set color to red
       canvas.font = '25pt Roboto';
@@ -105,19 +105,19 @@ export default function draw() { // Draws objects to the canvas
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
      // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
-      const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].pointScore} points`;
+      const thirdPlace = `${window.winners[0].alias} in Third with ${window.winners[0].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Roboto';
       window.endTextX = canvas.measureText(thirdPlace).width;
       canvas.fillText(thirdPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
-      const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].pointScore} points`;
+      const secondPlace = `${window.winners[1].alias} in Second with ${window.winners[1].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Roboto';
       window.endTextX = canvas.measureText(secondPlace).width;
       canvas.fillText(secondPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 0);
 
-      const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].pointScore} points`;
+      const firstPlace = `${window.winners[2].alias} in First with ${window.winners[2].pointScore} points`;
       const flashingColorWin = Math.random() > 0.5 ? '#F00' : '#FF0';
       canvas.font = '20pt Roboto';
       const winText = canvas.measureText(firstPlace).width; // Centers the text based on length

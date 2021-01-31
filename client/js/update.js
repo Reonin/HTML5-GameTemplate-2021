@@ -36,64 +36,81 @@ export default async function update() { // Updates location and reaction of obj
         // }
         // sendData(startData);
         window.localPlayerSet = true;
-        await window.player.setStartData().then((player) => {
+        await window.playerArray[0].setStartData().then((player) => {
           console.log(`Promise returned: ${player}`);
           // sleep(5000)
           const playerObj = JSON.parse(player);
-          window.player.x = playerObj.x;
-          window.player.y = playerObj.y;
-          console.log(`Player x is now ${window.player.x}`);
+          window.playerArray[0].x = playerObj.x;
+          window.playerArray[0].y = playerObj.y;
+          console.log(`Player x is now ${window.playerArray[0].x}`);
+        }).then(() => {
+          window.playerArray[0].setFirstOpponentStartData().then((player) => {
+            console.log(`Promise returned: ${player}`);
+            // sleep(5000)
+            const playerObj = JSON.parse(player);
+            window.playerArray[1].x = playerObj.x;
+            window.playerArray[1].y = playerObj.y;
+            console.log(`Player x is now ${window.playerArray[1].x}`);
+          });
+        }).then(() => {
+          window.playerArray[0].setSecondOpponentData().then((player) => {
+            console.log(`Promise returned: ${player}`);
+            // sleep(5000)
+            const playerObj = JSON.parse(player);
+            window.playerArray[2].x = playerObj.x;
+            window.playerArray[2].y = playerObj.y;
+            console.log(`Player x is now ${window.playerArray[2].x}`);
+          });
         }).catch((err) => {
-          console.log('Error in lobby start');
-        });
+            console.log('Error in lobby start Finding yourself');
+          });
       }
 
       if (window.localPlayerSet == true) {
         window.socket.onmessage = function (message) {
           console.log(`Message in localplayerset: ${JSON.stringify(message.data)}`);
           const playerObj = JSON.parse(message.data);
-          console.log(`All players set true: ${playerObj.startGame}`);
-          window.allPlayersSet = true;
+          
+          if(playerObj.startGame == true){
+            console.log(`All players set true: ${playerObj.startGame}`);
+            window.allPlayersSet = true;
+          }
         };
       }
-      /***
+      /** *
        * fast pass to game
-       *    
-       * 
-       * */ 
-      // window.currentState = window.states.GAME;
-      // trackScore();
-      /*** */
+       *
+       *
+       * */
+      window.currentState = window.states.GAME;
+      trackScore();
+      globalPickupRefresher();
+      /** * */
 
       if (window.allPlayersSet == true) {
-        var msg = {
-          type : "getStartData"
-        }
+        const msg = {
+          type: 'getStartData',
+        };
         sendData(msg);
-        window.socket.onmessage = function (message){
+        window.socket.onmessage = function (message) {
           const playerObj = JSON.parse(message.data);
-          window.playerArray.forEach(p => {
-            playerObj.forEach(wsPlayer =>{
-              if(wsPlayer.playerName == 'Player 1'){
+          window.playerArray.forEach((p) => {
+            playerObj.forEach((wsPlayer) => {
+              if (wsPlayer.playerName == 'Player 1') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 1 start x is ${p.startingX}`);
-              }
-              else if(wsPlayer.playerName == 'Player 2'){
+              } else if (wsPlayer.playerName == 'Player 2') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 2 start x is ${p.startingX}`);
-              }
-              else if(wsPlayer.playerName == 'Player 3'){
+              } else if (wsPlayer.playerName == 'Player 3') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 3 start x is ${p.startingX}`);
               }
-            })
-            
-            
-          })
+            });
+          });
           window.currentState = window.states.GAME;
           globalPickupRefresher();
-      }
-        
+        };
       }
       break;
 
@@ -102,6 +119,9 @@ export default async function update() { // Updates location and reaction of obj
       window.playerArray.forEach((p) => {
         p.movement();
 
+        if(p.remoteMovement){
+          p.remoteMovement();
+        }
         // AI
         try {
           // p.checkAI();
