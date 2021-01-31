@@ -12,7 +12,7 @@ export default class Player {
     this.socket = window.socket;
     // color: "#00A",
     this.sprite = Sprite(spriteimg);
-    this.hiddensprite = Sprite("WallReference_07");
+    this.hiddensprite = Sprite('WallReference_07');
     this.playerSet = false;
     this.x = startingX;
     this.y = startingY;
@@ -25,8 +25,8 @@ export default class Player {
     this.friction = 0.85;
     this.pointScore = 0;
     this.order = order;
-    this.name = "";
-    this.aka = "";
+    this.name = '';
+    this.aka = '';
     this.color = color;
     this.isMoving = true;
     this.websocket = websocket;
@@ -44,13 +44,11 @@ export default class Player {
     this.draw = function () {
       // canvas.fillStyle = this.color;
       // canvas.fillRect(this.x, this.y, this.width, this.height);
-      if(this.movediffX() < 1 && this.movediffY() < 1){
+      if (this.movediffX() < 1 && this.movediffY() < 1) {
         this.hiddensprite.draw(canvas, this.x, this.y);
-      } 
-      else{
+      } else {
         this.sprite.draw(canvas, this.x, this.y);
       }
-     
     };
     this.drawView = function () {
       const { xView } = window.camera;
@@ -105,11 +103,11 @@ export default class Player {
       this.traveltrail = [];
       // this.trailCap = 20;
 
-      var puddleInterval = setInterval(() => {
+      const puddleInterval = setInterval(() => {
         this.trailMechanics();
       }, 250);
 
-      var oldPuddleRemoval = setInterval(() => {
+      const oldPuddleRemoval = setInterval(() => {
         this.traveltrail.shift();
       }, 1000);
 
@@ -126,21 +124,19 @@ export default class Player {
         this.traveltrail.shift();
       }
     };
-    this.updateStartingXY = function(newX, newY){
+    this.updateStartingXY = function (newX, newY) {
       this.startingX = newX;
       this.startingY = newY;
-    }
+    };
     this.movement = function () {
-      
       let left; let right; let up; let
         down;
       this.isMoving = false;
-   
-        left = keydown.left;
-        right = keydown.right;
-        up = keydown.up;
-        down = keydown.down;
-      
+
+      left = keydown.left;
+      right = keydown.right;
+      up = keydown.up;
+      down = keydown.down;
 
       // if (alias == 'player2') {
       //   left = keydown.a;
@@ -196,96 +192,126 @@ export default class Player {
 
       this.y = this.y.clamp(0, CANVAS_HEIGHT - this.height); // prevents character from going past canvas
       const playerPos = {
-        type: "playerMovement",
+        type: 'playerMovement',
         playerName: this.name,
         x: this.x,
         y: this.y,
-        isIt: this.isIt
+        isIt: this.isIt,
       };
 
-      if(Math.random() > 0.99){
-        //walk_sound.play();
+      if (Math.random() > 0.99) {
+        // walk_sound.play();
       }
 
       const d = this.debounceEvent(() => this.trailMechanics, 2000);
       sendData(playerPos);
       this.setValues('playerMovement');
-  //     window.socket.onmessage = function (message) {
-        
-  // }
-}
-  this.setStartData = function () {
-    const startData = {
-      type: 'gameStart',
+      //     window.socket.onmessage = function (message) {
+
+      // }
     };
-    sendData(startData);
-    return this.setValues('setStartData');
-    
-  };
-
-  this.setValues =  function (type) {
-    return new Promise((resolve, reject) => {
-      window.socket.onmessage = function (message) {
-        if(type === 'setStartData'){
-        console.log(`Message in player: ${JSON.stringify(message.data)}`);
-        const playerObj = JSON.parse(message.data);
-        if (window.player.isSet == false) {
-          console.log(`Player name is: ${playerObj.playerName}`);
-          window.player.name = playerObj.playerName;
-          window.player.startingX = playerObj.x;
-          window.player.startingY = playerObj.y;
-          console.log(`X is now: ${window.player.x}`);
-          window.player.isSet == true;
-
-          //OtherPlayers #1 Set
-          window.playerArray[1].name = playerObj.firstOtherPlayerName;
-          window.playerArray[1].startingX = playerObj.firstOtherPlayerX;
-          window.playerArray[1].startingY = playerObj.firstOtherPlayerY;
-         
-          //Otherplay #2
-          window.playerArray[2].name = playerObj.secondOtherPlayerName;
-          window.playerArray[2].startingX = playerObj.secondOtherPlayerX;
-          window.playerArray[2].startingY = playerObj.secondOtherPlayerY;
-
-
-        } else {
-          window.allPlayersSet = playerObj.startGame;
-        }
-
-        resolve(JSON.stringify(playerObj));
-      
-      
-      }
-      else if(type == 'playerMovement'){
-        console.log(`Message received in player movement ${message.data}`);
-        const playerObj = JSON.parse(message.data);
-        window.playerArray.forEach(p => {
-          playerObj.forEach(wsPlayer =>{
-            if(wsPlayer.playerName == 'Player 1'){
-              p.x =  wsPlayer.x
-              p.y = wsPlayer.y;
-              
-              console.log(`Player 1 start x is ${p.x}`);
-            }
-            // else if(wsPlayer.playerName == 'Player 2'){
-            //   p.x = wsPlayer.x
-            //   p.y = wsPlayer.y;
-            //   console.log(`Player 2 start x is ${p.x}`);
-            // }
-            // else if(wsPlayer.playerName == 'Player 3'){
-            //   p = wsPlayer.x
-            //   p = wsPlayer.y;
-            //   console.log(`Player 3 start x is ${p.x}`);
-            // }
-          })
-      })
-      }
-      
-      }
-      window.socket.onerror = function (err) {
-        reject(err);
+    this.setStartData = function () {
+      const startData = {
+        type: 'gameStart',
       };
-    });
+      sendData(startData);
+      return this.setValues('setStartData');
+    };
+
+    this.setFirstOpponentStartData = function () {
+      const startData = {
+        type: 'gameStartFirstOpponent',
+        whoAmI: window.playerArray[0].name,
+      };
+      sendData(startData);
+      return this.setValues('setFirstOpponentData');
+    };
+
+    this.setSecondOpponentData = function () {
+      const startData = {
+        type: 'gameStartSecondOpponent',
+        whoAmI: window.playerArray[0].name,
+      };
+      sendData(startData);
+      return this.setValues('setSecondOpponentData');
+    };
+
+    this.setValues = function (type) {
+      return new Promise((resolve, reject) => {
+        window.socket.onmessage = function (message) {
+         // debugger;
+          if (type === 'setStartData') {
+            console.log(`Message in player: ${JSON.stringify(message.data)}`);
+            const playerObj = JSON.parse(message.data);
+            if (window.player.isSet[0] == false) {
+              console.log(`Player name is: ${playerObj.playerName}`);
+              window.playerArray[0].name = playerObj.playerName;
+              window.playerArray[0].startingX = playerObj.x;
+              window.playerArray[0].startingY = playerObj.y;
+              // console.log(`X is now: ${window.playerArray[0].x}`);
+              window.player.isSet[0] = true;
+            } else {
+              window.allPlayersSet = playerObj.startGame;
+            }
+
+            resolve(JSON.stringify(playerObj));
+          } else if (type === 'setFirstOpponentData') {
+            console.log(`Message in player: ${JSON.stringify(message.data)}`);
+            const playerObj = JSON.parse(message.data);
+            if (window.player.isSet[1] == false) {
+              // OtherPlayers #1 Set
+              window.playerArray[1].name = playerObj.playerName;
+              window.playerArray[1].startingX = playerObj.x;
+              window.playerArray[1].startingY = playerObj.y;
+              window.player.isSet[1] = true;
+            } else {
+              window.allPlayersSet = playerObj.startGame;
+            }
+
+            resolve(JSON.stringify(playerObj));
+          } else if (type === 'setSecondOpponentData') {
+            console.log(`Message in player: ${JSON.stringify(message.data)}`);
+            const playerObj = JSON.parse(message.data);
+            if (window.player.isSet[2] == false) {
+              // OtherPlayers #1 Set
+              window.playerArray[2].name = playerObj.playerName;
+              window.playerArray[2].startingX = playerObj.x;
+              window.playerArray[2].startingY = playerObj.y;
+              window.player.isSet[2] = true;
+            } else {
+              window.allPlayersSet = playerObj.startGame;
+            }
+
+            resolve(JSON.stringify(playerObj));
+          } else if (type == 'playerMovement') {
+            console.log(`Message received in player movement ${message.data}`);
+            const playerObj = JSON.parse(message.data);
+            window.playerArray.forEach((p) => {
+              playerObj.forEach((wsPlayer) => {
+                if (wsPlayer.playerName == 'Player 1') {
+                  p.x = wsPlayer.x;
+                  p.y = wsPlayer.y;
+
+                  console.log(`Player 1 start x is ${p.x}`);
+                }
+                // else if(wsPlayer.playerName == 'Player 2'){
+                //   p.x = wsPlayer.x
+                //   p.y = wsPlayer.y;
+                //   console.log(`Player 2 start x is ${p.x}`);
+                // }
+                // else if(wsPlayer.playerName == 'Player 3'){
+                //   p = wsPlayer.x
+                //   p = wsPlayer.y;
+                //   console.log(`Player 3 start x is ${p.x}`);
+                // }
+              });
+            });
+          }
+        };
+        window.socket.onerror = function (err) {
+          reject(err);
+        };
+      });
+    };
   }
-}
 }

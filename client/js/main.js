@@ -121,7 +121,7 @@ window.playerMissiles = [];
 
 window.enemies = [];
 window.pickups = [];
-window.player.isSet = false;
+window.player.isSet = [false,false,false];
 
 window.panVal = [9, 9];
 window.cameraFollow = true;

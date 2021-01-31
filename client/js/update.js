@@ -44,8 +44,31 @@ export default async function update() { // Updates location and reaction of obj
           window.player.y = playerObj.y;
           console.log(`Player x is now ${window.player.x}`);
         }).catch((err) => {
-          console.log('Error in lobby start');
+          console.log('Error in lobby start Finding yourself');
         });
+      
+        await window.player.setFirstOpponentStartData().then((player) => {
+          console.log(`Promise returned: ${player}`);
+          // sleep(5000)
+          const playerObj = JSON.parse(player);
+          window.playerArray[1].x = playerObj.x;
+          window.playerArray[1].y = playerObj.y;
+          console.log(`Player x is now ${window.playerArray[1].x}`);
+        }).catch((err) => {
+          console.log('Error in lobby start Finding Opponent 1');
+        });
+      
+        await window.player.setSecondOpponentData().then((player) => {
+          console.log(`Promise returned: ${player}`);
+          // sleep(5000)
+          const playerObj = JSON.parse(player);
+          window.playerArray[2].x = playerObj.x;
+          window.playerArray[2].y = playerObj.y;
+          console.log(`Player x is now ${window.playerArray[2].x}`);
+        }).catch((err) => {
+          console.log('Error in lobby start Finding Opponent 2');
+        });
+      
       }
 
       if (window.localPlayerSet == true) {
