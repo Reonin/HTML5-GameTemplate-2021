@@ -1,12 +1,15 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
-import { writeMessage, drawImageRotated } from './js/utils/commonCanvasOperations.js';
+import { writeMessage, drawImageRotated, drawStrokedText } from './js/utils/commonCanvasOperations.js';
 import drawTrail from './js/drawTrails.js';
 import drawTagMsg from './js/drawTagMsg.js';
 import drawPowerMsg from './js/drawPowerMsg.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
+
+const brushIcon = new Image();
+brushIcon.src = 'images/paintbucket.png';
 
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
@@ -22,24 +25,22 @@ export default function draw() { // Draws objects to the canvas
 
       break;
     case window.states.TITLE:
-      canvas.fillStyle = '#000'; // Set color to black
-      canvas.font = 'bold 40pt Calibri';
+      
+      const flashingColor = Math.random() > 0.5 ? '#F00' : '#FF0';
+      canvas.font = 'bold 90pt Roboto';
       const GAME_NAME_TEXT = 'Brush it Off';
       const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) - 3, CANVAS_HEIGHT / 3);
-      // The next two create a special text effect
-      canvas.fillStyle = '#F00';
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2), CANVAS_HEIGHT / 3);
+      drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 2, flashingColor);
+     
 
-      canvas.fillStyle = '00F';
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) + 3, CANVAS_HEIGHT / 3);
+      drawImageRotated(brushIcon, CANVAS_WIDTH / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 2 + 100, 0 );
 
-      canvas.fillStyle = '#F00';
-      canvas.font = 'bold 20pt Calibri';
+      canvas.font = 'bold 50pt Roboto';
       const SPACEBAR_TEXT = 'Press Space to Continue';
       const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
-      canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
-
+      drawStrokedText(canvas, SPACEBAR_TEXT, CANVAS_WIDTH / 2 - spaceBarTextx / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 4, "#FFF");
+     
+  
       break;
 
     case window.states.LOBBY:
@@ -54,42 +55,31 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.GAME:
-      
+
       if (window.cameraFollow === false) {
         window.parallax.Draw(); // draw background
-        window.playerArray.forEach((p) => {
-          p.draw();
-        });
-
+        drawTrail();
         tileArray.forEach((tile) => {
           tile.draw();
         });
 
-        
-        drawTrail();
         window.playerArray.forEach((p) => {
-          if (p.isMoving == true) {
             p.draw();
-          }
         });
       } else {
         canvas.translate(-window.player.x, -window.player.y);
-        canvas.scale(2, 2);
+        canvas.scale(2, 2); //zoom in
         window.parallax.Draw(); // draw background
-        playerArray[0].draw();
-
+        drawTrail();
+   
         tileArray.forEach((tile) => {
           tile.draw();
         });
 
-        
-        drawTrail();
         window.playerArray.forEach((p) => {
-          if (p.isMoving == true) {
-            p.draw();
-          }
+          p.draw();
         });
-
+        //zoom back to normal view
         canvas.scale(0.5, 0.5);
         canvas.translate(window.player.x, window.player.y);
       }
@@ -101,22 +91,63 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.END:
+
+      window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ];
+
       canvas.fillStyle = '#F00'; // Set color to red
-      canvas.font = '25pt Calibri';
-      const GameOVER_TEXT = 'Game Over';
+      canvas.font = '25pt Roboto';
+      const GameOVER_TEXT = 'The Final Score is...';
       window.endTextX = canvas.measureText(GameOVER_TEXT).width; // Centers the text based on length
-      
+      window.endTextY = CANVAS_HEIGHT / 2;
+      drawStrokedText(canvas, GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90, "#FFF");
+      // /debugger;
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
-      canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
+     // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
-      canvas.fillStyle = '#000'; // Set color to black
-      canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText('First Firstnameson').width;
-      canvas.fillText('First Firstnameson', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
+      const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].pointScore} points`;
+      canvas.fillStyle = '#FFF'; // Set color to black
+      canvas.font = '20pt Roboto';
+      window.endTextX = canvas.measureText(thirdPlace).width;
+      canvas.fillText(thirdPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
-      canvas.fillStyle = '#000'; // Set color to black
+      const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].pointScore} points`;
+      canvas.fillStyle = '#FFF'; // Set color to black
+      canvas.font = '20pt Roboto';
+      window.endTextX = canvas.measureText(secondPlace).width;
+      canvas.fillText(secondPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 0);
+
+      const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].pointScore} points`;
+      const flashingColorWin = Math.random() > 0.5 ? '#F00' : '#FF0';
+      canvas.font = '20pt Roboto';
+      const winText = canvas.measureText(firstPlace).width; // Centers the text based on length
+      drawStrokedText(canvas, firstPlace, CANVAS_WIDTH / 2 - winText / 2, window.endTextY + 45, flashingColorWin);
+
+      drawStrokedText(canvas, "TEAM", CANVAS_WIDTH / 2 - canvas.measureText("TEAM").width / 2, window.endTextY + 140, "#bada55");
+
+      canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
-      canvas.fillText('Second Secondton', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY);
+      window.endTextX = canvas.measureText('Blake Balick-Screiber - Backend Development').width;
+      canvas.fillText('Blake Balick-Screiber - Backend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 190);
+
+      canvas.fillStyle = '#FFF';
+      canvas.font = '20pt Calibri';
+      window.endTextX = canvas.measureText('Scott Crockett - Art Design').width;
+      canvas.fillText('Scott Crockett - Art Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 235);
+
+      canvas.fillStyle = '#FFF';
+      canvas.font = '20pt Calibri';
+      window.endTextX = canvas.measureText('Humberto Horruitiner - Sound Design').width;
+      canvas.fillText('Humberto Horruitiner - Sound Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 280);
+
+      canvas.fillStyle = '#FFF';
+      canvas.font = '20pt Calibri';
+      window.endTextX = canvas.measureText('Corey Jeffers - Frontend Development').width;
+      canvas.fillText('Corey Jeffers - Frontend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 325);
+
+      const specialThanks = "Special Thanks to Kenny Buhl, Tyler Jackson, Jahmique Desouza, Matt ";
+      window.endTextX = canvas.measureText(specialThanks).width;
+      
+      drawStrokedText(canvas, specialThanks, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 525, "#FFF" );
       break;
   }
 }

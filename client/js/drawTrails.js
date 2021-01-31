@@ -6,13 +6,13 @@ export default function drawTrail(){
         p.traveltrail.forEach( coord => {
             // trailSquare.draw(canvas, coord.x, coord.y, 60, 60);
 
-           if(p.activePuddle){
+          // if(p.activePuddle){
             if(p.isIt){
                 trailPatternB.draw(canvas, coord.x, coord.y);
             }else{
                 trailPatternG.draw(canvas, coord.x, coord.y);
             }
-           } 
+         //  } 
         
             
 

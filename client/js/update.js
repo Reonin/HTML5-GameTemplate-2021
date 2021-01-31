@@ -5,6 +5,7 @@ import { startTimer } from './utils/timer.js';
 import { trackScore, tallyPointTotal } from './utils/scoreKeeper.js';
 import sendData from '../ws.js';
 import Player from './player.js';
+import { globalPickupRefresher } from './gameMechanic.js';
 
 export default async function update() { // Updates location and reaction of objects to the canvas
   switch (window.currentState) {
@@ -55,8 +56,15 @@ export default async function update() { // Updates location and reaction of obj
           window.allPlayersSet = true;
         };
       }
-      // fast pass to game
-      //window.currentState = window.states.GAME;
+      /***
+       * fast pass to game
+       *    
+       * 
+       * */ 
+      // window.currentState = window.states.GAME;
+      // trackScore();
+      /*** */
+
       if (window.allPlayersSet == true) {
         var msg = {
           type : "getStartData"
@@ -83,6 +91,7 @@ export default async function update() { // Updates location and reaction of obj
             
           })
           window.currentState = window.states.GAME;
+          globalPickupRefresher();
       }
         
       }
@@ -117,11 +126,11 @@ export default async function update() { // Updates location and reaction of obj
       break;
 
     case window.states.END:
-      window.endTextY += 1;
+      // window.endTextY += 1;
 
-      if (window.endTextY >= 300) {
-        window.endTextY = 300;
-      }
+      // if (window.endTextY >= 300) {
+      //   window.endTextY = 300;
+      // }
       break;
   }
 }
