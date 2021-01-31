@@ -40,8 +40,8 @@ export default async function update() { // Updates location and reaction of obj
           console.log(`Promise returned: ${player}`);
           // sleep(5000)
           const playerObj = JSON.parse(player);
-          window.player.x = playerObj.x;
-          window.player.y = playerObj.y;
+          window.playerArray[0].x = playerObj.x;
+          window.playerArray[0].y = playerObj.y;
           console.log(`Player x is now ${window.player.x}`);
         }).catch((err) => {
           console.log('Error in lobby start Finding yourself');
