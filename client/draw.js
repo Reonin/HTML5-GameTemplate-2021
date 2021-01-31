@@ -150,7 +150,7 @@ export default function draw() { // Draws objects to the canvas
       window.endTextX = canvas.measureText('Corey Jeffers - Frontend Development').width;
       canvas.fillText('Corey Jeffers - Frontend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 325);
 
-      const specialThanks = "Special Thanks to Kenny Buhl, Tyler Jackson, Jahmique Desouza, Matt ";
+      const specialThanks = "Special Thanks to Kenny Buhl, Tyler Jackson, Jahmique Desouza, Matt Rhodes";
       window.endTextX = canvas.measureText(specialThanks).width;
       
       drawStrokedText(canvas, specialThanks, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 525, "#FFF" );
