@@ -36,39 +36,35 @@ export default async function update() { // Updates location and reaction of obj
         // }
         // sendData(startData);
         window.localPlayerSet = true;
-        await window.player.setStartData().then((player) => {
+        await window.playerArray[0].setStartData().then((player) => {
           console.log(`Promise returned: ${player}`);
           // sleep(5000)
           const playerObj = JSON.parse(player);
-          window.player.x = playerObj.x;
-          window.player.y = playerObj.y;
-          console.log(`Player x is now ${window.player.x}`);
-        }).catch((err) => {
-          console.log('Error in lobby start Finding yourself');
-        });
-      
-        await window.player.setFirstOpponentStartData().then((player) => {
-          console.log(`Promise returned: ${player}`);
-          // sleep(5000)
-          const playerObj = JSON.parse(player);
-          window.playerArray[1].x = playerObj.x;
-          window.playerArray[1].y = playerObj.y;
-          console.log(`Player x is now ${window.playerArray[1].x}`);
-        }).catch((err) => {
-          console.log('Error in lobby start Finding Opponent 1');
-        });
-      
-        await window.player.setSecondOpponentData().then((player) => {
-          console.log(`Promise returned: ${player}`);
-          // sleep(5000)
-          const playerObj = JSON.parse(player);
-          window.playerArray[2].x = playerObj.x;
-          window.playerArray[2].y = playerObj.y;
-          console.log(`Player x is now ${window.playerArray[2].x}`);
-        }).catch((err) => {
-          console.log('Error in lobby start Finding Opponent 2');
-        });
-      
+          window.playerArray[0].x = playerObj.x;
+          window.playerArray[0].y = playerObj.y;
+          console.log(`Player x is now ${window.playerArray[0].x}`);
+        }).then(
+          window.playerArray[0].setFirstOpponentStartData().then((player) => {
+            console.log(`Promise returned: ${player}`);
+            // sleep(5000)
+            const playerObj = JSON.parse(player);
+            window.playerArray[1].x = playerObj.x;
+            window.playerArray[1].y = playerObj.y;
+            console.log(`Player x is now ${window.playerArray[1].x}`);
+          }),
+        ).then(
+          window.playerArray[0].setSecondOpponentData().then((player) => {
+            console.log(`Promise returned: ${player}`);
+            // sleep(5000)
+            const playerObj = JSON.parse(player);
+            window.playerArray[2].x = playerObj.x;
+            window.playerArray[2].y = playerObj.y;
+            console.log(`Player x is now ${window.playerArray[2].x}`);
+          }),
+        )
+          .catch((err) => {
+            console.log('Error in lobby start Finding yourself');
+          });
       }
 
       if (window.localPlayerSet == true) {
@@ -79,44 +75,39 @@ export default async function update() { // Updates location and reaction of obj
           window.allPlayersSet = true;
         };
       }
-      /***
+      /** *
        * fast pass to game
-       *    
-       * 
-       * */ 
+       *
+       *
+       * */
       // window.currentState = window.states.GAME;
       // trackScore();
-      /*** */
+      /** * */
 
       if (window.allPlayersSet == true) {
-        var msg = {
-          type : "getStartData"
-        }
+        const msg = {
+          type: 'getStartData',
+        };
         sendData(msg);
-        window.socket.onmessage = function (message){
+        window.socket.onmessage = function (message) {
           const playerObj = JSON.parse(message.data);
-          window.playerArray.forEach(p => {
-            playerObj.forEach(wsPlayer =>{
-              if(wsPlayer.playerName == 'Player 1'){
+          window.playerArray.forEach((p) => {
+            playerObj.forEach((wsPlayer) => {
+              if (wsPlayer.playerName == 'Player 1') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 1 start x is ${p.startingX}`);
-              }
-              else if(wsPlayer.playerName == 'Player 2'){
+              } else if (wsPlayer.playerName == 'Player 2') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 2 start x is ${p.startingX}`);
-              }
-              else if(wsPlayer.playerName == 'Player 3'){
+              } else if (wsPlayer.playerName == 'Player 3') {
                 p.updateStartingXY(wsPlayer.x, wsPlayer.y);
                 console.log(`Player 3 start x is ${p.startingX}`);
               }
-            })
-            
-            
-          })
+            });
+          });
           window.currentState = window.states.GAME;
           globalPickupRefresher();
-      }
-        
+        };
       }
       break;
 

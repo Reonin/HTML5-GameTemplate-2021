@@ -114,37 +114,36 @@ export default class OtherPlayer extends Player {
           // console.log(`Player name is ${playerObj.playerName}\nWindow player name is ${window.player.name}`);
 
           const objectifiedPlayerObj = JSON.parse(playerObj);
-          //objectifiedPlayerObj["Player 1"];
-          //objectifiedPlayerObj["Player 2"];
-          //objectifiedPlayerObj["Player 3"];
+          // objectifiedPlayerObj["Player 1"];
+          // objectifiedPlayerObj["Player 2"];
+          // objectifiedPlayerObj["Player 3"];
 
-          objectifiedPlayerObj.forEach(po => {
-            console.log(`${JSON.stringify(po)}`)
-            //debugger;
-            if(po.playerName == 'Player 1' && window.playerArray[0].name == "Player 1" ){
-              const P1 = window.playerArray.find(p => p.name == "Player 1");
-              P1.isIt = po.isIt; 
-
+          objectifiedPlayerObj.forEach((po) => {
+            console.log(`${JSON.stringify(po)}`);
+            // debugger;
+            if (po.playerName == 'Player 1' && window.playerArray[0].name == 'Player 1') {
+              const P1 = window.playerArray.find((p) => p.name == 'Player 1');
+              P1.isIt = po.isIt;
             }
-             if(po.playerName == 'Player 2' && window.playerArray[1].name == "Player 2"){
-              const P2 = window.playerArray.find(p => p.name == "Player 2");
+            if (po.playerName == 'Player 2' && window.playerArray[1].name == 'Player 2') {
+              const P2 = window.playerArray.find((p) => p.name == 'Player 2');
               P2.x = po.x;
               P2.y = po.y;
               P2.isIt = po.isIt;
             }
-            if(po.playerName == 'Player 3' && window.playerArray[2].name == "Player 3"){
-              const P3 = window.playerArray.find(p => p.name == "Player 3");
+            if (po.playerName == 'Player 3' && window.playerArray[2].name == 'Player 3') {
+              const P3 = window.playerArray.find((p) => p.name == 'Player 3');
               P3.x = po.x;
               P3.y = po.y;
               P3.isIt = po.isIt;
             }
-          })
+          });
 
-          // if (objectifiedPlayerObj.playerName = 'Player 1') { // this player is launched as player 1 
+          // if (objectifiedPlayerObj.playerName = 'Player 1') { // this player is launched as player 1
           //   const P1 = window.playerArray.find(p => p.name == "Player 1");
           //   P1.isIt = objectifiedPlayerObj["Player 1"].isIt;
           // }
-          // else if (objectifiedPlayerObj.playerName) { // this player is launched as player 2 
+          // else if (objectifiedPlayerObj.playerName) { // this player is launched as player 2
           //   const P2 = window.playerArray.find(p => p.name == "Player 2");
           //   P2.x = objectifiedPlayerObj.x;
           //   P2.y = objectifiedPlayerObj.y;
