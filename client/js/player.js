@@ -117,7 +117,7 @@ export default class Player {
         console.log('TURN OFF trail');
         this.activePuddle = false;
         clearTimeout(puddleInterval);
-        //clearTimeout(oldPuddleRemoval);
+        clearTimeout(oldPuddleRemoval);
       }, 15000);
     };
     this.trailMechanics = function () {

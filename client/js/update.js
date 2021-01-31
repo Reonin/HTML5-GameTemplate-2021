@@ -61,7 +61,10 @@ export default async function update() { // Updates location and reaction of obj
        *    
        * 
        * */ 
-      //  window.currentState = window.states.GAME;
+      // window.currentState = window.states.GAME;
+      // trackScore();
+      /*** */
+
       if (window.allPlayersSet == true) {
         var msg = {
           type : "getStartData"

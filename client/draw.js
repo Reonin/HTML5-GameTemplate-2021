@@ -59,36 +59,27 @@ export default function draw() { // Draws objects to the canvas
       if (window.cameraFollow === false) {
         window.parallax.Draw(); // draw background
         drawTrail();
-        window.playerArray.forEach((p) => {
-          p.draw();
-        });
-
         tileArray.forEach((tile) => {
           tile.draw();
         });
 
         window.playerArray.forEach((p) => {
-          if (p.isMoving == true) {
             p.draw();
-          }
         });
       } else {
         canvas.translate(-window.player.x, -window.player.y);
-        canvas.scale(2, 2);
+        canvas.scale(2, 2); //zoom in
         window.parallax.Draw(); // draw background
         drawTrail();
-        playerArray[0].draw();
-
+   
         tileArray.forEach((tile) => {
           tile.draw();
         });
 
         window.playerArray.forEach((p) => {
-          if (p.isMoving == true) {
-            p.draw();
-          }
+          p.draw();
         });
-
+        //zoom back to normal view
         canvas.scale(0.5, 0.5);
         canvas.translate(window.player.x, window.player.y);
       }
@@ -101,54 +92,62 @@ export default function draw() { // Draws objects to the canvas
 
     case window.states.END:
 
-      //  window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ]
+      window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ];
 
       canvas.fillStyle = '#F00'; // Set color to red
-      canvas.font = '25pt Calibri';
+      canvas.font = '25pt Roboto';
       const GameOVER_TEXT = 'The Final Score is...';
       window.endTextX = canvas.measureText(GameOVER_TEXT).width; // Centers the text based on length
       window.endTextY = CANVAS_HEIGHT / 2;
+      drawStrokedText(canvas, GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90, "#FFF");
       // /debugger;
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
-      canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
+     // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
       const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
-      canvas.font = '20pt Calibri';
+      canvas.font = '20pt Roboto';
       window.endTextX = canvas.measureText(thirdPlace).width;
       canvas.fillText(thirdPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
       const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
-      canvas.font = '20pt Calibri';
+      canvas.font = '20pt Roboto';
       window.endTextX = canvas.measureText(secondPlace).width;
       canvas.fillText(secondPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 0);
 
       const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].pointScore} points`;
-      canvas.fillStyle = '#FFF'; // Set color to black
-      canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText(firstPlace).width;
-      canvas.fillText(firstPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 45);
+      const flashingColorWin = Math.random() > 0.5 ? '#F00' : '#FF0';
+      canvas.font = '20pt Roboto';
+      const winText = canvas.measureText(firstPlace).width; // Centers the text based on length
+      drawStrokedText(canvas, firstPlace, CANVAS_WIDTH / 2 - winText / 2, window.endTextY + 45, flashingColorWin);
+
+      drawStrokedText(canvas, "TEAM", CANVAS_WIDTH / 2 - canvas.measureText("TEAM").width / 2, window.endTextY + 140, "#bada55");
 
       canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText('Blake Balick-Screiber Backend Development').width;
-      canvas.fillText('Blake Balick-Screiber Backend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 90);
+      window.endTextX = canvas.measureText('Blake Balick-Screiber - Backend Development').width;
+      canvas.fillText('Blake Balick-Screiber - Backend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 190);
 
       canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText('Scott Crockett Art Design').width;
-      canvas.fillText('Scott Crockett Art Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 135);
+      window.endTextX = canvas.measureText('Scott Crockett - Art Design').width;
+      canvas.fillText('Scott Crockett - Art Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 235);
 
       canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText('Humberto Horruitiner Sound Design').width;
-      canvas.fillText('Humberto Horruitiner Sound Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 180);
+      window.endTextX = canvas.measureText('Humberto Horruitiner - Sound Design').width;
+      canvas.fillText('Humberto Horruitiner - Sound Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 280);
 
       canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
-      window.endTextX = canvas.measureText('Corey Jeffers Frontend Development').width;
-      canvas.fillText('Corey Jeffers Frontend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 225);
+      window.endTextX = canvas.measureText('Corey Jeffers - Frontend Development').width;
+      canvas.fillText('Corey Jeffers - Frontend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 325);
+
+      const specialThanks = "Special Thanks to Kenny Buhl, Tyler Jackson, Jahmique Desouza, Matt ";
+      window.endTextX = canvas.measureText(specialThanks).width;
+      
+      drawStrokedText(canvas, specialThanks, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 525, "#FFF" );
       break;
   }
 }
