@@ -1,7 +1,7 @@
 import scaletosmallest from './utils/scaletosmallest.js';
 import Player from './player.js';
 import OtherPlayer from './otherPlayer.js';
-import { setUpKeys } from './utils/setUpKeys.js';
+import { setUpKeys } from './utils/setupKeys.js';
 import drawMap from './drawMap.js';
 import draw from '../draw.js';
 import ParallaxScrolling from './parallax.js';

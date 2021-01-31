@@ -21,8 +21,9 @@ wsServer.on('connection', socket => {
       //console.log(`In player movement if statement`)
       Player.updatePlayers(message);
       wsServer.clients.forEach(client => {
-        console.log(`Player movement sending back ${message}`);
-        client.send(Player.getPlayersObjects());
+        //console.log(`Player movement sending back ${message}`);
+        console.log(`Player data is ${JSON.stringify(Game.getPlayerData())}`);
+        client.send(JSON.stringify(Game.getPlayerData()));
       });
       // socket.send(Player.getPlayersObjects());
     }
