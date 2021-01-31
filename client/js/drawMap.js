@@ -35,14 +35,60 @@ export default function drawMap(canvas) {
           type: 'wall',
 
           draw() {
-            // canvas.fillStyle = this.color;
-            // canvas.fillRect(this.x, this.y, this.width, this.height);
             this.tile.draw(canvas, this.x, this.y, 60, 60);
           },
         };
         tileArray.push(newTile);
-        // canvas.drawImage(image2, x*28, y*28);-->
       }
+      else if (parseInt(mapArray[i][j]) == 10) {
+        var newTile = {
+          // color: "#00A",
+          tile: Tile('WallReference_58'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'wall',
+
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
+      }
+      else if (parseInt(mapArray[i][j]) == 11) {
+        var newTile = {
+          // color: "#00A",
+          tile: Tile('WallReference_52'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'wall',
+
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
+      }
+      else if (parseInt(mapArray[i][j]) == 12) {
+        var newTile = {
+          // color: "#00A",
+          tile: Tile('WallReference_61'),
+          x: j * 60,
+          y: i * 60,
+          width: 60,
+          height: 60,
+          type: 'wall',
+
+          draw() {
+            this.tile.draw(canvas, this.x, this.y, 60, 60);
+          },
+        };
+        tileArray.push(newTile);
+      }
+      
     else if (parseInt(mapArray[i][j]) == 2) {
         var newTile = {
           tile: Tile('paintbucket'),

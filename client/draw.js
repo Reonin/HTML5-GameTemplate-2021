@@ -1,12 +1,15 @@
 import { drawTimer } from './js/utils/timer.js';
 import drawPlayerUI from './js/utils/drawPlayerUI.js';
-import { writeMessage, drawImageRotated } from './js/utils/commonCanvasOperations.js';
+import { writeMessage, drawImageRotated, drawStrokedText } from './js/utils/commonCanvasOperations.js';
 import drawTrail from './js/drawTrails.js';
 import drawTagMsg from './js/drawTagMsg.js';
 import drawPowerMsg from './js/drawPowerMsg.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
+
+const brushIcon = new Image();
+brushIcon.src = 'images/paintbucket.png';
 
 export default function draw() { // Draws objects to the canvas
   const canvas = document.getElementById('GameCanvasScreen').getContext('2d');
@@ -22,24 +25,22 @@ export default function draw() { // Draws objects to the canvas
 
       break;
     case window.states.TITLE:
-      canvas.fillStyle = '#000'; // Set color to black
-      canvas.font = 'bold 40pt Calibri';
+      
+      const flashingColor = Math.random() > 0.5 ? '#F00' : '#FF0';
+      canvas.font = 'bold 90pt Roboto';
       const GAME_NAME_TEXT = 'Brush it Off';
       const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) - 3, CANVAS_HEIGHT / 3);
-      // The next two create a special text effect
-      canvas.fillStyle = '#F00';
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2), CANVAS_HEIGHT / 3);
+      drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 2, flashingColor);
+     
 
-      canvas.fillStyle = '00F';
-      canvas.fillText(GAME_NAME_TEXT, (CANVAS_WIDTH / 2) - (gameTextx / 2) + 3, CANVAS_HEIGHT / 3);
+      drawImageRotated(brushIcon, CANVAS_WIDTH / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 2 + 100, 0 );
 
-      canvas.fillStyle = '#F00';
-      canvas.font = 'bold 20pt Calibri';
+      canvas.font = 'bold 50pt Roboto';
       const SPACEBAR_TEXT = 'Press Space to Continue';
       const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
-      canvas.fillText(SPACEBAR_TEXT, (CANVAS_WIDTH / 2) - (spaceBarTextx / 2), CANVAS_HEIGHT - CANVAS_HEIGHT / 4);
-
+      drawStrokedText(canvas, SPACEBAR_TEXT, CANVAS_WIDTH / 2 - spaceBarTextx / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 4, "#FFF");
+     
+  
       break;
 
     case window.states.LOBBY:
