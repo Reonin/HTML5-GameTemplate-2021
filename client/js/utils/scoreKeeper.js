@@ -18,7 +18,7 @@ if(window.currentState === window.states.GAME){
 export function tallyPointTotal(){
 
     setTimeout(() => {
-        window.winners =  window.playerArray.sort((a, b) => a.score - b.score);
+        window.winners =  window.playerArray.sort((a, b) => a.pointScore - b.pointScore);
 
         window.currentState = window.states.END;
     }, 300000);

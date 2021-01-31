@@ -111,19 +111,19 @@ export default function draw() { // Draws objects to the canvas
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
       canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
-      const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].score} points`;
+      const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(thirdPlace).width;
       canvas.fillText(thirdPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
-      const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].score} points`;
+      const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(secondPlace).width;
       canvas.fillText(secondPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 0);
 
-      const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].score} points`;
+      const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].pointScore} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(firstPlace).width;
