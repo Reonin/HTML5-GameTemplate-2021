@@ -16,3 +16,17 @@ export function drawImageRotated(img, x, y, rot) {
   // and heigth
   context.setTransform(1, 0, 0, 1, 0, 0); // restore default transform
 }
+
+export function drawStrokedText(context, text, x, y, color)
+{
+    context.fillStyle = "rgb(0,0,0)";
+    context.fillText(text, x-1, y-1);
+    context.fillText(text, x+1, y-1);
+    context.fillText(text, x-1, y);
+    context.fillText(text, x+1, y);
+    context.fillText(text, x-1, y+1);
+    context.fillText(text, x+1, y+1);
+
+    context.fillStyle = color;
+    context.fillText(text, x, y);
+};

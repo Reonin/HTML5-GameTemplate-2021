@@ -10,12 +10,12 @@ import Camera from './camera/camera.js';
 import update from './update.js';
 // import { collisionDetection } from './collisionDetection.js';
 window.socket = new WebSocket('ws://localhost:3000');
-//parses the player object data
+// parses the player object data
 window.socket.onmessage = function (event) {
   console.debug('WebSocket message received:', event);
-  var playerData = JSON.parse(event.data); //TODO ensure this isn't a string
-  const playersMap = new Map(Object.entries(playerData)); //then creates a map from it
- // console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
+  const playerData = JSON.parse(event.data); // TODO ensure this isn't a string
+  const playersMap = new Map(Object.entries(playerData)); // then creates a map from it
+  // console.log(playersMap.get('Player 1')); //can pull the x/y values of player here
 };
 
 scaletosmallest(canvasid, ratio);
@@ -58,7 +58,6 @@ window.requestAnimFrame = (() => window.requestAnimationFrame
            })();
 // Mouse Coordinate Positioning
 
-
 function getMousePos(canvas, evt) {
   const rect = canvasid.getBoundingClientRect();
   return {
@@ -83,10 +82,10 @@ window.timer = '5:10';
 // }, false);
 
 setUpKeys();
-let isPaused = false;
+const isPaused = false;
 window.onkeydown = () => {
   if (keydown.p) {
-   // isPaused = !isPaused; // flips the pause state
+    // isPaused = !isPaused; // flips the pause state
   }
 };
 
@@ -129,11 +128,11 @@ window.cameraFollow = true;
 window.localPlayerSet = false;
 window.allPlayersSet = false;
 window.tagState = null;
-window.whoAmI = "";
+window.whoAmI = '';
 window.allPlayersReady = () => {
   // check websocket message of other players
   if (false) {
-    window.whoAmI = "P1"
+    window.whoAmI = 'P1';
     return true;
   }
 

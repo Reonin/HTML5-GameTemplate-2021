@@ -1,3 +1,5 @@
+import {drawStrokedText} from './commonCanvasOperations.js';
+
 export function startTimer() {
   const presentTime = window.timer;
   const timeArray = presentTime.split(/[:]+/);
@@ -18,15 +20,11 @@ function checkSecond(sec) {
 }
 
 export function drawTimer() {
-  canvas.fillStyle = '#fff'; // Set color to black
+
   canvas.font = 'bold 40pt Calibri';
   const GAME_NAME_TEXT = window.timer;
-  const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
-  canvas.fillText(
-    GAME_NAME_TEXT,
-    CANVAS_WIDTH - 100,
-    40,
-  );
+  drawStrokedText(canvas,GAME_NAME_TEXT, CANVAS_WIDTH - 100, 40, '#fff');
+
 }
 
 export function countdownTimer(doTheThing, doItWhen = 5000){

@@ -1,62 +1,48 @@
+
+import {drawStrokedText} from './commonCanvasOperations.js';
+
 export default function drawPlayerUI() {
-  const hudBar2Slide = 680;
-  const hudBar3Slide = 1300;
+  const hudBar2Slide = 400;
+  const hudBar3Slide = 800;
+  var topBarCenter = 45;
+
+  canvas.globalAlpha = 0.5;
+  canvas.fillStyle = "#d8dce2";
+  canvas.fillRect(0, 0, CANVAS_WIDTH, 60);
+ 
+
+  canvas.globalAlpha = 1;
+  canvas.textAlign = "left";
   // Player 1
+  
+  canvas.font = 'regular 24pt Potta One';
+  drawStrokedText(canvas,'Player 1',20,topBarCenter,'#66fc99');
 
-  canvas.fillStyle = '#fff'; // Set color to black
-  canvas.font = 'bold 20pt Calibri';
-  canvas.fillText('Player 1', 20, 25);
 
-  canvas.fillStyle = '#fff'; // Set color to black
-  canvas.font = '20pt Calibri';
-  canvas.fillText(`Score:${player.pointScore}`, 115, 25);
+  canvas.fillStyle = '#000'; // Set color to black
+  canvas.font = 'black 30pt Roboto';
+  canvas.fillText(window.playerArray[0].pointScore, 218, topBarCenter);
+  
 
-  // Life Bar top is pink static background
-  // canvas.strokeRect(20, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#8B8989";
-  // canvas.fillRect(20, 40, 100 * 2, 10);
-
-  // //Second bar is red dynamic one
-  // canvas.strokeRect(20, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#F00";
-  // canvas.fillRect(20, 40, player.life * 2, 10);
 
   // Player 2
 
-  canvas.fillStyle = '#00f'; // Set color to black
-  canvas.font = 'bold 20pt Calibri';
-  canvas.fillText('Player 2', hudBar2Slide, 25);
 
-  canvas.fillStyle = '#fff'; // Set color to black
-  canvas.font = '20pt Calibri';
-  canvas.fillText(`Score:${player2.pointScore}`, hudBar2Slide + 115, 25);
+  canvas.font = 'regular 24pt Potta One';
+  drawStrokedText(canvas,'Player 2',hudBar2Slide,topBarCenter,'#ffcc66');
 
-  // Life Bar top is pink static background
-  // canvas.strokeRect(hudBar2Slide, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#8B8989";
-  // canvas.fillRect(hudBar2Slide, 40, 100 * 2, 10);
+  canvas.fillStyle = '#000'; // Set color to black
+  canvas.font = 'black 30pt Roboto';
+  canvas.fillText(window.playerArray[1].pointScore, hudBar2Slide + 200, topBarCenter);
+  
 
-  // //Second bar is red dynamic one
-  // canvas.strokeRect(hudBar2Slide, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#F00";
-  // canvas.fillRect(hudBar2Slide, 40, player2.life * 2, 10);
 
   // Player 3
-  canvas.fillStyle = '#F00'; // Set color to black
-  canvas.font = 'bold 20pt Calibri';
-  canvas.fillText('Player 3', hudBar3Slide, 25);
+  canvas.font = 'regular 24pt Potta One';
+  drawStrokedText(canvas,'Player 3',hudBar3Slide,topBarCenter,'#fc66ff');
 
-  canvas.fillStyle = '#fff'; // Set color to black
-  canvas.font = '20pt Calibri';
-  canvas.fillText(`Score:${player3.pointScore}`, hudBar3Slide + 115, 25);
+  canvas.fillStyle = '#000'; // Set color to black
+  canvas.font = 'black 30pt Roboto';
+  canvas.fillText(window.playerArray[2].pointScore, hudBar3Slide + 200, topBarCenter);
 
-  // Life Bar top is pink static background
-  // canvas.strokeRect(hudBar3Slide, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#8B8989";
-  // canvas.fillRect(hudBar3Slide, 40, 100 * 2, 10);
-
-  // //Second bar is red dynamic one
-  // canvas.strokeRect(hudBar3Slide, 40, 100 * 2, 10);
-  // canvas.fillStyle = "#F00";
-  // canvas.fillRect(hudBar3Slide, 40, player3.life * 2, 10);
 }
