@@ -243,9 +243,9 @@ export default class Player {
           window.playerArray[1].startingY = playerObj.firstOtherPlayerY;
          
           //Otherplay #2
-          window.playerArray[1].name = playerObj.secondOtherPlayerName;
-          window.playerArray[1].startingX = playerObj.secondOtherPlayerX;
-          window.playerArray[1].startingY = playerObj.secondOtherPlayerY;
+          window.playerArray[2].name = playerObj.secondOtherPlayerName;
+          window.playerArray[2].startingX = playerObj.secondOtherPlayerX;
+          window.playerArray[2].startingY = playerObj.secondOtherPlayerY;
 
 
         } else {
