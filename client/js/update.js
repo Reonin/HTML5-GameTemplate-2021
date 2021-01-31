@@ -43,7 +43,7 @@ export default async function update() { // Updates location and reaction of obj
           window.playerArray[0].x = playerObj.x;
           window.playerArray[0].y = playerObj.y;
           console.log(`Player x is now ${window.playerArray[0].x}`);
-        }).then(
+        }).then(() => {
           window.playerArray[0].setFirstOpponentStartData().then((player) => {
             console.log(`Promise returned: ${player}`);
             // sleep(5000)
@@ -51,8 +51,8 @@ export default async function update() { // Updates location and reaction of obj
             window.playerArray[1].x = playerObj.x;
             window.playerArray[1].y = playerObj.y;
             console.log(`Player x is now ${window.playerArray[1].x}`);
-          }),
-        ).then(
+          });
+        }).then(() => {
           window.playerArray[0].setSecondOpponentData().then((player) => {
             console.log(`Promise returned: ${player}`);
             // sleep(5000)
@@ -60,9 +60,8 @@ export default async function update() { // Updates location and reaction of obj
             window.playerArray[2].x = playerObj.x;
             window.playerArray[2].y = playerObj.y;
             console.log(`Player x is now ${window.playerArray[2].x}`);
-          }),
-        )
-          .catch((err) => {
+          });
+        }).catch((err) => {
             console.log('Error in lobby start Finding yourself');
           });
       }
