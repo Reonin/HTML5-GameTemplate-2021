@@ -4,6 +4,7 @@ import { writeMessage, drawImageRotated, drawStrokedText } from './js/utils/comm
 import drawTrail from './js/drawTrails.js';
 import drawTagMsg from './js/drawTagMsg.js';
 import drawPowerMsg from './js/drawPowerMsg.js';
+import overlayInstructions from './js/drawInstructions.js';
 
 const lobbyIcon = new Image();
 lobbyIcon.src = 'images/lobbyIcon.png';
@@ -36,10 +37,14 @@ export default function draw() { // Draws objects to the canvas
       drawImageRotated(brushIcon, CANVAS_WIDTH / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 2 + 100, 0 );
 
       canvas.font = 'bold 50pt Roboto';
-      const SPACEBAR_TEXT = 'Press Space to Continue';
-      const spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
+      let SPACEBAR_TEXT = 'Press Space to Continue';
+      let spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
       drawStrokedText(canvas, SPACEBAR_TEXT, CANVAS_WIDTH / 2 - spaceBarTextx / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 4, "#FFF");
-     
+
+      SPACEBAR_TEXT = 'Hold Shift for Instructions';
+      spaceBarTextx = canvas.measureText(SPACEBAR_TEXT).width; // Centers the text based on length
+      drawStrokedText(canvas, SPACEBAR_TEXT, CANVAS_WIDTH / 2 - spaceBarTextx / 2, CANVAS_HEIGHT - CANVAS_HEIGHT / 4 + 200, "#FFF");
+      overlayInstructions();
   
       break;
 
@@ -88,7 +93,7 @@ export default function draw() { // Draws objects to the canvas
       drawTimer();
       drawPowerMsg();
       drawTagMsg();
-      overlayInstructions();
+     overlayInstructions();
       break;
 
     case window.states.END:
