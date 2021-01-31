@@ -54,7 +54,7 @@ export default function draw() { // Draws objects to the canvas
       break;
 
     case window.states.GAME:
-      
+
       if (window.cameraFollow === false) {
         window.parallax.Draw(); // draw background
         drawTrail();
@@ -66,8 +66,6 @@ export default function draw() { // Draws objects to the canvas
           tile.draw();
         });
 
-        
-       
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
             p.draw();
@@ -84,8 +82,6 @@ export default function draw() { // Draws objects to the canvas
           tile.draw();
         });
 
-        
-     
         window.playerArray.forEach((p) => {
           if (p.isMoving == true) {
             p.draw();
@@ -104,55 +100,51 @@ export default function draw() { // Draws objects to the canvas
 
     case window.states.END:
 
-      window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ]
-
-
-
+      //  window.winners =  [{name:"thing",score:5},{name:"THING2",score:15},{name:"THING3",score:35} ]
 
       canvas.fillStyle = '#F00'; // Set color to red
       canvas.font = '25pt Calibri';
       const GameOVER_TEXT = 'The Final Score is...';
       window.endTextX = canvas.measureText(GameOVER_TEXT).width; // Centers the text based on length
-      window.endTextY = CANVAS_HEIGHT/2;
+      window.endTextY = CANVAS_HEIGHT / 2;
       // /debugger;
       // canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH/2) - (GameOVER_TEXTx/2) , CANVAS_HEIGHT-CANVAS_HEIGHT/4);
       canvas.fillText(GameOVER_TEXT, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 90);
 
-      const thirdPlace = '' + window.winners[0].name + ' in Third with ' +  window.winners[0].score + ' points';
+      const thirdPlace = `${window.winners[0].name} in Third with ${window.winners[0].score} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(thirdPlace).width;
       canvas.fillText(thirdPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 45);
 
-      const secondPlace = '' + window.winners[1].name + ' in Second with ' +  window.winners[1].score + ' points';
+      const secondPlace = `${window.winners[1].name} in Second with ${window.winners[1].score} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(secondPlace).width;
       canvas.fillText(secondPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY - 0);
 
-
-      const firstPlace = '' + window.winners[2].name + ' in First with ' +  window.winners[2].score + ' points';
+      const firstPlace = `${window.winners[2].name} in First with ${window.winners[2].score} points`;
       canvas.fillStyle = '#FFF'; // Set color to black
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText(firstPlace).width;
       canvas.fillText(firstPlace, (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 45);
 
-      canvas.fillStyle = '#FFF'; 
+      canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText('Blake Balick-Screiber Backend Development').width;
       canvas.fillText('Blake Balick-Screiber Backend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 90);
 
-      canvas.fillStyle = '#FFF'; 
+      canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText('Scott Crockett Art Design').width;
       canvas.fillText('Scott Crockett Art Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 135);
 
-      canvas.fillStyle = '#FFF'; 
+      canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText('Humberto Horruitiner Sound Design').width;
       canvas.fillText('Humberto Horruitiner Sound Design', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 180);
 
-      canvas.fillStyle = '#FFF'; 
+      canvas.fillStyle = '#FFF';
       canvas.font = '20pt Calibri';
       window.endTextX = canvas.measureText('Corey Jeffers Frontend Development').width;
       canvas.fillText('Corey Jeffers Frontend Development', (CANVAS_WIDTH / 2) - (window.endTextX / 2), window.endTextY + 225);
