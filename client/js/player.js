@@ -240,7 +240,7 @@ export default class Player {
     this.setValues = function (type) {
       return new Promise((resolve, reject) => {
         window.socket.onmessage = function (message) {
-         // debugger;
+          // debugger;
           if (type === 'setStartData') {
             console.log(`Message in player: ${JSON.stringify(message.data)}`);
             const playerObj = JSON.parse(message.data);
