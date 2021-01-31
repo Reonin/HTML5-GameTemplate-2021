@@ -71,7 +71,7 @@ window.player2 = new OtherPlayer('brush4', 'Player 2', 'player2', 2, '#0000FF', 
 window.player3 = new OtherPlayer('Brush5', 'Player 3', 'player3', 3, '#FF0000', 'reload3()', 1098, 445, socket);
 // Extend PLayer class to OtherPLayer that receives X/Y data from server
 
-window.playerBullets = [];
+// window.playerBullets = [];
 
 window.timer = '5:10';
 

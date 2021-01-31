@@ -1,7 +1,7 @@
 import { shoot_sound, explosion_sound, walk_sound } from './utils/initAudio.js';
 
-import Bullet from './projectile/Bullet.js';
-import Missile from './projectile/Missile.js';
+// import Bullet from './projectile/Bullet.js';
+// import Missile from './projectile/Missile.js';
 import sendData from '../ws.js';
 
 /**
@@ -64,12 +64,12 @@ export default class Player {
 
       // this.sprite.draw(canvas, window.camera.xView, window.camera.yView);
     };
-    this.shoot = function () {
-      const bulletPosition = this.midpoint();
-      shoot_sound.play();
+    // this.shoot = function () {
+    //   const bulletPosition = this.midpoint();
+    //   shoot_sound.play();
 
-      window.playerBullets.push(new Bullet(5, bulletPosition.x, bulletPosition.y));
-    };
+    //   window.playerBullets.push(new Bullet(5, bulletPosition.x, bulletPosition.y));
+    // };
     this.launch = function () {
       const missilePostition = this.midpoint();
       console.log(Missile.width);
@@ -200,6 +200,7 @@ export default class Player {
         playerName: this.name,
         x: this.x,
         y: this.y,
+        isIt: this.isIt
       };
 
       if(Math.random() > 0.99){
@@ -241,9 +242,7 @@ export default class Player {
 
         resolve(JSON.stringify(playerObj));
       
-      window.socket.onerror = function (err) {
-        reject(err);
-      };
+      
       }
       else if(type == 'playerMovement'){
         console.log(`Message received in player movement ${message.data}`);
@@ -253,23 +252,27 @@ export default class Player {
             if(wsPlayer.playerName == 'Player 1'){
               p.x =  wsPlayer.x
               p.y = wsPlayer.y;
+              
               console.log(`Player 1 start x is ${p.x}`);
             }
-            else if(wsPlayer.playerName == 'Player 2'){
-              p.x = wsPlayer.x
-              p.y = wsPlayer.y;
-              console.log(`Player 2 start x is ${p.x}`);
-            }
-            else if(wsPlayer.playerName == 'Player 3'){
-              p = wsPlayer.x
-              p = wsPlayer.y;
-              console.log(`Player 3 start x is ${p.x}`);
-            }
+            // else if(wsPlayer.playerName == 'Player 2'){
+            //   p.x = wsPlayer.x
+            //   p.y = wsPlayer.y;
+            //   console.log(`Player 2 start x is ${p.x}`);
+            // }
+            // else if(wsPlayer.playerName == 'Player 3'){
+            //   p = wsPlayer.x
+            //   p = wsPlayer.y;
+            //   console.log(`Player 3 start x is ${p.x}`);
+            // }
           })
       })
       }
       
       }
+      window.socket.onerror = function (err) {
+        reject(err);
+      };
     });
   }
 }

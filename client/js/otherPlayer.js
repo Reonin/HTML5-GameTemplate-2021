@@ -117,15 +117,21 @@ export default class OtherPlayer extends Player {
           //objectifiedPlayerObj["Player 1"];
           //objectifiedPlayerObj["Player 2"];
           //objectifiedPlayerObj["Player 3"];
-          if (objectifiedPlayerObj["Player 2"].playerName) { // this player is launched as player 2 
+          if (objectifiedPlayerObj["Player 1"].playerName) { // this player is launched as player 1 
+            const P1 = window.playerArray.find(p => p.name == "Player 1");
+            P1.isIt = objectifiedPlayerObj["Player 1"].isIt;
+          }
+          else if (objectifiedPlayerObj["Player 2"].playerName) { // this player is launched as player 2 
             const P2 = window.playerArray.find(p => p.name == "Player 2");
             P2.x = objectifiedPlayerObj["Player 2"].x;
             P2.y = objectifiedPlayerObj["Player 2"].y;
+            P2.isIt = objectifiedPlayerObj["Player 2"].isIt;
            // console.log(`Player 2 x: ${this.x}\nPlayer 2 y: ${this.y}`)
           } else if (objectifiedPlayerObj["Player 3"].playerName) { // this player is launched as player 3
             const P3 = window.playerArray.find(p => p.name == "Player 3");
             P3.x = objectifiedPlayerObj["Player 3"].x;
             P3.y = objectifiedPlayerObj["Player 3"].y;
+            P3.isIt = objectifiedPlayerObj["Player 3"].isIt;
            // console.log(`Player 3 x: ${this.x}\nPlayer 3 y: ${this.y}`)
           }
 

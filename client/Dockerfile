@@ -18,4 +18,4 @@ EXPOSE 8081
 COPY . .
 
 # Run the specified command within the container.
-CMD [ "npm", "start" ]
+CMD [ "npx", "http-server" ]

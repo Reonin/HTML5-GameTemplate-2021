@@ -40,7 +40,7 @@ wsServer.on('connection', socket => {
       console.log(`Message sent gamestart: ${JSON.stringify(playerObj)}`)
     }
     else if(messageObj.type == "getStartData"){
-      var players = Game.getPlayerStartData();
+      var players = Game.getPlayerData();
       socket.send(JSON.stringify(players));
     }
   }
