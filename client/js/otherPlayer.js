@@ -123,7 +123,7 @@ export default class OtherPlayer extends Player {
             debugger;
             if(po.playerName == 'Player 1' && window.playerArray[0].name == "Player 1" ){
               const P1 = window.playerArray.find(p => p.name == "Player 1");
-              P1.isIt = po.isIt;
+              P1.isIt = po.isIt; 
 
             }
              if(po.playerName == 'Player 2' && window.playerArray[1].name == "Player 2"){

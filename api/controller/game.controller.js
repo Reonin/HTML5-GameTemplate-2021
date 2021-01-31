@@ -72,6 +72,32 @@ module.exports = {
             }
 
         }
+    },
+
+    getFirstOpponent: function(data){
+        for(var i = 0; i <players.length; i++){
+            var player = players[i]
+            if(data.whoAmI == 'Player 1' && player.playerName == 'Player 2'){
+                return player;
+            }else if(data.whoAmI == 'Player 2' && player.playerName == 'Player 1'){
+                return player;
+            }else if(data.whoAmI == 'Player 3' && player.playerName == 'Player 1'){
+                return player;
+            }
+        }
+    },
+
+    getSecondOpponent: function(data){
+        for(var i = 0; i <players.length; i++){
+            var player = players[i]
+            if(data.whoAmI == 'Player 1' && player.playerName == 'Player 3'){
+                return player;
+            }else if(data.whoAmI == 'Player 2' && player.playerName == 'Player 3'){
+                return player;
+            }else if(data.whoAmI == 'Player 3' && player.playerName == 'Player 2'){
+                return player;
+            }
+        }
     }
 };
 
