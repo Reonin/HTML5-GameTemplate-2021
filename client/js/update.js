@@ -119,11 +119,11 @@ export default async function update() { // Updates location and reaction of obj
       break;
 
     case window.states.END:
-      window.endTextY += 1;
+      // window.endTextY += 1;
 
-      if (window.endTextY >= 300) {
-        window.endTextY = 300;
-      }
+      // if (window.endTextY >= 300) {
+      //   window.endTextY = 300;
+      // }
       break;
   }
 }

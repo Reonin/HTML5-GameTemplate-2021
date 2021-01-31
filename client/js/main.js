@@ -34,7 +34,7 @@ window.states = Object.freeze({
   END: Symbol(),
 });
 
-window.currentState = window.states.TITLE;
+window.currentState = window.states.END;
 
 const viewPortW = 480;
 const viewPortH = 270;
