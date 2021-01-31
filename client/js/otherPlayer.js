@@ -5,8 +5,8 @@ import sendData from '../ws.js';
  * Creates the enemy Players character that move around a game map
  */
 export default class OtherPlayer extends Player {
-  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket) {
-    super(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket);
+  constructor(spriteimg, order, color, reload, startingX, startingY, websocket) {
+    super(spriteimg, order, color, reload, startingX, startingY, websocket);
 
     this.isIt = false;
     this.checkAI = () => positionCheck(this);
@@ -118,10 +118,12 @@ export default class OtherPlayer extends Player {
           //objectifiedPlayerObj["Player 2"];
           //objectifiedPlayerObj["Player 3"];
 
-          playerObj.forEach(po => {
+          objectifiedPlayerObj.forEach(po => {
+            console.log(`${JSON.stringify(po)}`)
+            
             if(po.playerName == 'Player 1'){
               const P1 = window.playerArray.find(p => p.name == "Player 1");
-              P1.isIt = po["Player 1"].isIt;
+              P1.isIt = po.isIt;
 
             }else if(po.playerName == 'Player 2'){
               const P2 = window.playerArray.find(p => p.name == "Player 2");

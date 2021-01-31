@@ -8,7 +8,7 @@ import sendData from '../ws.js';
  * Creates the player character that the user controls
  */
 export default class Player {
-  constructor(spriteimg, name, alias, order, color, reload, startingX, startingY, websocket) {
+  constructor(spriteimg, order, color, reload, startingX, startingY, websocket) {
     this.socket = window.socket;
     // color: "#00A",
     this.sprite = Sprite(spriteimg);
@@ -25,8 +25,8 @@ export default class Player {
     this.friction = 0.85;
     this.pointScore = 0;
     this.order = order;
-    this.name = name;
-    this.aka = alias;
+    this.name = "";
+    this.aka = "";
     this.color = color;
     this.isMoving = true;
     this.websocket = websocket;
@@ -135,25 +135,25 @@ export default class Player {
       let left; let right; let up; let
         down;
       this.isMoving = false;
-      if (alias == 'player1') {
+   
         left = keydown.left;
         right = keydown.right;
         up = keydown.up;
         down = keydown.down;
-      }
+      
 
-      if (alias == 'player2') {
-        left = keydown.a;
-        right = keydown.d;
-        up = keydown.w;
-        down = keydown.s;
-      }
-      if (alias == 'player3') {
-        left = keydown.j;
-        right = keydown.l;
-        up = keydown.i;
-        down = keydown.k;
-      }
+      // if (alias == 'player2') {
+      //   left = keydown.a;
+      //   right = keydown.d;
+      //   up = keydown.w;
+      //   down = keydown.s;
+      // }
+      // if (alias == 'player3') {
+      //   left = keydown.j;
+      //   right = keydown.l;
+      //   up = keydown.i;
+      //   down = keydown.k;
+      // }
       if (left) {
         if (this.velX > -this.speed) {
           this.velX--;
