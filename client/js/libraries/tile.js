@@ -62,7 +62,7 @@
     return proxy;
   };
 
-  const spriteImagePath = '../images/';
+  const spriteImagePath = '../client/images/';
 
   window.Tile = function (name, callback) {
     return Tile.load(`${spriteImagePath + name}.png`, callback);
