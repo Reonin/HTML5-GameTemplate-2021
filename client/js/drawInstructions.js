@@ -62,7 +62,7 @@ export default function overlayInstructions(){
         drawStrokedText(canvas, GAME_NAME_TEXT, horizontalplacer + 200, CANVAS_HEIGHT / 8 + 220, "#fc66ff");
         
         let vertspacer = 450;
-        GAME_NAME_TEXT = 'Player with the blue ink trail is "IT"';
+        GAME_NAME_TEXT = 'Player with the blue ink trail is "IT"!';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2 , CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
       
@@ -72,7 +72,7 @@ export default function overlayInstructions(){
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
         vertspacer += 50;
-        GAME_NAME_TEXT = 'Whoever gets tagged becomes the new "IT" and is stunned for 5 seconds';
+        GAME_NAME_TEXT = 'Whoever gets tagged becomes the new "IT" and is stunned for 5 seconds.';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
       
@@ -83,7 +83,12 @@ export default function overlayInstructions(){
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
 
         vertspacer += 50;
-        GAME_NAME_TEXT = 'Player with the most amount of points at the end, wins!';
+        GAME_NAME_TEXT = 'Players can blend into the background by standing still.';
+        gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
+        drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
+
+        vertspacer += 50;
+        GAME_NAME_TEXT = 'The player with the most amount of points at the end, wins!';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
   
