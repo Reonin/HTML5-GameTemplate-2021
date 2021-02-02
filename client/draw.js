@@ -29,7 +29,7 @@ export default function draw() { // Draws objects to the canvas
       
       const flashingColor = Math.random() > 0.5 ? '#F00' : '#FF0';
       canvas.font = 'bold 90pt Roboto';
-      const GAME_NAME_TEXT = 'Brush it Off';
+      const GAME_NAME_TEXT = 'Brush It Off';
       const gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
       drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 2, flashingColor);
      

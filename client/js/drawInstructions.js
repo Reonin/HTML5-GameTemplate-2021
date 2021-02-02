@@ -3,6 +3,18 @@ import { drawStrokedText, drawImageRotated} from "./utils/commonCanvasOperations
 const keyboardlayout = new Image();
 keyboardlayout.src = 'images/keyboardlayout.png';
 
+const pbucket = new Image();
+pbucket.src = 'images/paintbucket.png';
+
+const bluetrail = new Image();
+bluetrail.src = 'images/blueCircle.png';
+
+const hiding = new Image();
+hiding.src = 'images/WallReference_07.png';
+
+const brushIcon = new Image();
+brushIcon.src = 'images/Brush2.png';
+
 export default function overlayInstructions(){
 
     if (keydown.shift) {
@@ -61,33 +73,42 @@ export default function overlayInstructions(){
         GAME_NAME_TEXT = '→';
         drawStrokedText(canvas, GAME_NAME_TEXT, horizontalplacer + 200, CANVAS_HEIGHT / 8 + 220, "#fc66ff");
         
-        let vertspacer = 450;
-        GAME_NAME_TEXT = 'Player with the blue ink trail is "IT"!';
+        let vertspacer = 400;
+        GAME_NAME_TEXT = 'Player with the blue paint trail is "IT"!';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2 , CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
       
-        vertspacer += 50;
+        drawImageRotated(bluetrail,CANVAS_WIDTH / 2 - gameTextx / 2 + 280,CANVAS_HEIGHT / 8 + vertspacer + 40,0 );
+        drawImageRotated(bluetrail,CANVAS_WIDTH / 2 - gameTextx / 2 + 340,CANVAS_HEIGHT / 8 + vertspacer + 40,0 );
+        drawImageRotated(brushIcon,CANVAS_WIDTH / 2 - gameTextx / 2 + 400,CANVAS_HEIGHT / 8 + vertspacer + 40,0 );
+        
+
+        vertspacer += 100;
 
         GAME_NAME_TEXT = '"IT" chases other players and tags them for big points.';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
-        vertspacer += 50;
+        vertspacer += 100;
         GAME_NAME_TEXT = 'Whoever gets tagged becomes the new "IT" and is stunned for 5 seconds.';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
       
 
-        vertspacer += 50;
+        vertspacer += 100;
         GAME_NAME_TEXT = 'Other players get points by running, hiding and gathering powerups!';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
 
-        vertspacer += 50;
+        drawImageRotated(pbucket,CANVAS_WIDTH / 2 - gameTextx / 2 + 640,CANVAS_HEIGHT / 8 + vertspacer + 40,0 );
+
+        vertspacer += 100;
         GAME_NAME_TEXT = 'Players can blend into the background by standing still.';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
 
-        vertspacer += 50;
+        drawImageRotated(hiding,CANVAS_WIDTH / 2 - gameTextx / 2 + 520,CANVAS_HEIGHT / 8 + vertspacer + 40,0 );
+
+        vertspacer += 100;
         GAME_NAME_TEXT = 'The player with the most amount of points at the end, wins!';
         gameTextx = canvas.measureText(GAME_NAME_TEXT).width; // Centers the text based on length
         drawStrokedText(canvas, GAME_NAME_TEXT, CANVAS_WIDTH / 2 - gameTextx / 2, CANVAS_HEIGHT / 8 + vertspacer, "#FF0");
