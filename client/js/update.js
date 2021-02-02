@@ -24,6 +24,11 @@ export default async function update() { // Updates location and reaction of obj
         startTimer();
         trackScore();
         tallyPointTotal();
+        
+       window.tagState = 'tagger';
+      setTimeout(() => {
+        window.tagState = null;
+      }, 5000);
       }
       break;
 
